@@ -25,7 +25,8 @@
             <div class="card-body">
                 <h4 class="text-center">Employees</h4>
                 <p class="text-right">
-                    <button type="button" class="btn btn-info waves-effect waves-light" data-toggle="modal" data-target=".bs-example-modal-lg"><i class="fas fa-plus"></i> Add Employee</button>
+                    <button type="button" class="btn btn-info waves-effect waves-light" data-toggle="modal"
+                        data-target=".bs-example-modal-lg"><i class="fas fa-plus"></i> Add Employee</button>
                 </p>
                 <h6 class="text-center">List of all employees</h6>
 
@@ -76,61 +77,142 @@
 
 
     {{-- Employees Add Models Start --}}
-    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myLargeModalLabel">Large modal</h4>
+                    <h4 class="modal-title" id="myLargeModalLabel">Employee Register Form</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form role="form" class="parsley-examples">
+                    <form role="form" class="parsley-examples" id="EmployeeForm" method="POST" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-4 col-form-label">Email<span class="text-danger">*</span></label>
+                            <label for="name" class="col-sm-4 col-form-label">Full Name<span
+                                    class="text-danger">*</span></label>
                             <div class="col-sm-7">
-                                <input type="email" required parsley-type="email" class="form-control"
-                                        id="inputEmail3" placeholder="Email">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="hori-pass1" class="col-sm-4 col-form-label">Password<span class="text-danger">*</span></label>
-                            <div class="col-sm-7">
-                                <input id="hori-pass1" type="password" placeholder="Password" required
-                                        class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="hori-pass2" class="col-sm-4 col-form-label">Confirm Password
-                                <span class="text-danger">*</span></label>
-                            <div class="col-sm-7">
-                                <input data-parsley-equalto="#hori-pass1" type="password" required
-                                        placeholder="Password" class="form-control" id="hori-pass2">
+                                <input type="text" required parsley-type="text" class="form-control" id="name"
+                                    name="name" placeholder="Mr. Jon Rechard">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="webSite" class="col-sm-4 col-form-label">Web Site<span class="text-danger">*</span></label>
+                            <label for="email" class="col-sm-4 col-form-label">Email<span
+                                    class="text-danger">*</span></label>
                             <div class="col-sm-7">
-                                <input type="url" required parsley-type="url" class="form-control"
-                                        id="webSite" placeholder="URL">
+                                <input type="email" required class="form-control" id="email" name="email"
+                                    placeholder="Email">
                             </div>
                         </div>
+
                         <div class="form-group row">
-                            <div class="col-sm-8 offset-sm-4">
-                                <div class="checkbox checkbox-purple">
-                                    <input id="checkbox6" type="checkbox">
-                                    <label for="checkbox6">
-                                        Remember me
-                                    </label>
-                                </div>
+                            <label for="phone" class="col-sm-4 col-form-label">Phone Number<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="phone" required class="form-control" id="phone" name="phone"
+                                    placeholder="Phone Number">
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="gender" class="col-sm-4 col-form-label">Gender<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <select class="form-control" id="gender" required name="gender">
+                                    <option selected disabled>Choose One Option</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="dob" class="col-sm-4 col-form-label">Date of Birth(DOB)<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="date" required class="form-control" id="dob" name="dob">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="join_of_date" class="col-sm-4 col-form-label">Join of Date<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="date" required class="form-control" id="join_of_date" name="join_of_date">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="position" class="col-sm-4 col-form-label">Position<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" required class="form-control" id="position" name="position" placeholder="ex. Lab Assistant">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="salary" class="col-sm-4 col-form-label">Salary<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" required class="form-control" id="salary" name="salary" placeholder="2500.00">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="address" class="col-sm-4 col-form-label">Address<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <textarea class="form-control" required id="address" name="address"
+                                    placeholder="Address"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="salary" class="col-sm-4 col-form-label">Image<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="file" required class="form-control border-0" id="image" name="image" placeholder="2500.00">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="user_type" class="col-sm-4 col-form-label">User Type<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <select class="form-control" id="user_type" required name="user_type">
+                                    <option selected disabled>Choose One Option</option>
+                                    <option value="super_admin">Super Admin</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="employees">Employees</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-sm-4 col-form-label">Password<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <input id="password-pass1" type="password" placeholder="Password" name="password" required
+                                    class="form-control">
+                            </div>
+                        </div>
+                        {{-- <div class="form-group row">
+                            <label for="hori-pass2" class="col-sm-4 col-form-label">Confirm Password
+                                <span class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="password" name="password_confirmation" required id="password-confirm" placeholder="Enter your password" autocomplete="new-password">
+                            </div>
+                        </div> --}}
+
                         <div class="form-group row mb-0">
                             <div class="col-sm-8 offset-sm-4">
                                 <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
                                     Register
                                 </button>
-                                <button type="button"  data-dismiss="modal" class="btn btn-light waves-effect">
+                                <button type="button" data-dismiss="modal" class="btn btn-light waves-effect">
                                     Cancel
                                 </button>
                             </div>
@@ -142,5 +224,34 @@
     </div>
     {{-- Employees Add Models End --}}
 
-
+<script>
+        $('#EmployeeForm').on('submit', function(e) {
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                var myformData = new FormData($('#EmployeeForm')[0]);
+                $.ajax({
+                    type: "post",
+                    url: "/employees/add",
+                    data: myformData,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response);
+                        $("#EmployeeForm").find('input').val('');
+                        $('.bs-example-modal-xl').modal('hide');
+                        location.reload();
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        alert("Data Not Save");
+                    }
+                });
+    });
+</script>
 @endsection

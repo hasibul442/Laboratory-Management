@@ -25,6 +25,7 @@ class CreateEmployeesTable extends Migration
             $table->string('position')->nullable();
             $table->string('join_of_date')->nullable();
             $table->string('salary')->nullable();
+            $table->string('gender')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 

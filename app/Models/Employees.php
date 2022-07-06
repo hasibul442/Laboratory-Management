@@ -19,5 +19,6 @@ class Employees extends Model
         'position',
         'join_of_date',
         'salary',
+        'gender',
     ];
 }

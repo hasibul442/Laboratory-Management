@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employees;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeesController extends Controller
 {
@@ -36,7 +38,28 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->user_type = $request->user_type;
+        $user->user_type = 'Active';
+        $user->save();
+
+        $employee = new Employees;
+        $employee->user_id = $user->id;
+        $employee->employee_id = date('Y')+0+$user->id;
+        $employee->phone_number = $request->phone_number;
+        $employee->address = $request->address;
+        $employee->gender = $request->gender;
+        $employee->dob = $request->dob;
+        $employee->join_of_date = $request->join_of_date;
+        $employee->position = $request->position;
+        $employee->salary = $request->salary;
+        $employee->image = $request->image;
+        $employee->save();
+        return response()->json($employee);
+
     }
 
     /**
