@@ -44,9 +44,12 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @php
+                                $i = 0;
+                            @endphp
                             @foreach ($employees as $item)
                                 <tr>
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ ++$i }}</td>
                                     <td>{{ $item->employee_id }}</td>
                                     <td>{{ $item->users->name }}</td>
                                     <td>{{ $item->users->email }}</td>

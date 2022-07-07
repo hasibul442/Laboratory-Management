@@ -17,7 +17,7 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('user') }}">
                         <i class="dripicons-meter"></i>
                         <span> Users </span>
                     </a>
