@@ -31,10 +31,11 @@
                 <h6 class="text-center">List of all employees</h6>
 
                 <div class="table-responsive">
-                    <table class="table table-hover mb-0 ">
+                    <table class="table table-hover mb-0 datatable">
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Employee Id</th>
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
@@ -43,24 +44,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($employees as $employee)
+                            @foreach ($employees as $item)
                                 <tr>
-                                    <td>{{ $employee->id }}</td>
-                                    <td>{{ $employee->name }}</td>
-                                    <td>{{ $employee->email }}</td>
-                                    <td>{{ $employee->phone }}</td>
-                                    <td>{{ $employee->address }}</td>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->employee_id }}</td>
+                                    <td>{{ $item->users->name }}</td>
+                                    <td>{{ $item->users->email }}</td>
+                                    <td>{{ $item->phone }}</td>
+                                    <td>{{ $item->address }}</td>
                                     <td>
-                                        <a href="{{ route('employees.edit', $employee->id) }}"
-                                            class="btn btn-primary btn-sm">
+                                        <a href="#" class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="{{ route('employees.show', $employee->id) }}"
-                                            class="btn btn-info btn-sm">
+                                        <a href="#" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="{{ route('employees.destroy', $employee->id) }}"
-                                            class="btn btn-danger btn-sm">
+                                        <a href="javascript:void(0);" data-id="{{ $item->id }}"
+                                            class="btn btn-danger btn-sm deletebtn">
                                             <i class="fas fa-trash"></i>
                                         </a>
                                     </td>
@@ -86,7 +86,8 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form role="form" class="parsley-examples" id="EmployeeForm" method="POST" enctype="multipart/form-data">
+                    <form role="form" class="parsley-examples" id="EmployeeForm" method="POST"
+                        enctype="multipart/form-data">
                         @csrf
                         <div class="form-group row">
                             <label for="name" class="col-sm-4 col-form-label">Full Name<span
@@ -140,7 +141,8 @@
                             <label for="join_of_date" class="col-sm-4 col-form-label">Join of Date<span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-7">
-                                <input type="date" required class="form-control" id="join_of_date" name="join_of_date">
+                                <input type="date" required class="form-control" id="join_of_date"
+                                    name="join_of_date">
                             </div>
                         </div>
 
@@ -148,7 +150,8 @@
                             <label for="position" class="col-sm-4 col-form-label">Position<span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-7">
-                                <input type="text" required class="form-control" id="position" name="position" placeholder="ex. Lab Assistant">
+                                <input type="text" required class="form-control" id="position" name="position"
+                                    placeholder="ex. Lab Assistant">
                             </div>
                         </div>
 
@@ -156,7 +159,8 @@
                             <label for="salary" class="col-sm-4 col-form-label">Salary<span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-7">
-                                <input type="text" required class="form-control" id="salary" name="salary" placeholder="2500.00">
+                                <input type="text" required class="form-control" id="salary" name="salary"
+                                    placeholder="2500.00">
                             </div>
                         </div>
 
@@ -164,8 +168,7 @@
                             <label for="address" class="col-sm-4 col-form-label">Address<span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-7">
-                                <textarea class="form-control" required id="address" name="address"
-                                    placeholder="Address"></textarea>
+                                <textarea class="form-control" required id="address" name="address" placeholder="Address"></textarea>
                             </div>
                         </div>
 
@@ -173,7 +176,8 @@
                             <label for="salary" class="col-sm-4 col-form-label">Image<span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-7">
-                                <input type="file" required class="form-control border-0" id="image" name="image" placeholder="2500.00">
+                                <input type="file" required class="form-control border-0" id="image"
+                                    name="image" placeholder="2500.00">
                             </div>
                         </div>
 
@@ -195,7 +199,7 @@
                             <label for="password" class="col-sm-4 col-form-label">Password<span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-7">
-                                <input id="password-pass1" type="password" placeholder="Password" name="password" required
+                                <input id="password" type="password" placeholder="Password" name="password" required
                                     class="form-control">
                             </div>
                         </div>
@@ -224,34 +228,100 @@
     </div>
     {{-- Employees Add Models End --}}
 
-<script>
-        $('#EmployeeForm').on('submit', function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                var myformData = new FormData($('#EmployeeForm')[0]);
-                $.ajax({
-                    type: "post",
-                    url: "/employees/add",
-                    data: myformData,
-                    cache: false,
-                    processData: false,
-                    contentType: false,
-                    dataType: "json",
-                    success: function(response) {
-                        console.log(response);
-                        $("#EmployeeForm").find('input').val('');
-                        $('.bs-example-modal-xl').modal('hide');
-                        location.reload();
-                    },
-                    error: function(error) {
-                        console.log(error);
-                        alert("Data Not Save");
-                    }
-                });
-    });
-</script>
+    <script>
+        $(function() {
+            var table = $('.datatable').DataTable();
+            $('#EmployeeForm').on('submit', function(e) {
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var myformData = new FormData($('#EmployeeForm')[0]);
+            $.ajax({
+                type: "post",
+                url: "/employees/add",
+                data: myformData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                success: function(response) {
+                    console.log(response);
+                    $("#EmployeeForm").find('input').val('');
+                    $('.bs-example-modal-xl').modal('hide');
+                    // $('#medicineaddform')[0].reset();
+                    Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Your work has been saved',
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            timer: 1800
+                        });
+                    // table.draw();
+                    location.reload();
+                },
+                error: function(error) {
+                    console.log(error);
+                    Swal.fire({
+                        title: 'Duplicate Email Recognized',
+                        text: "The Email Address Already Exist",
+                        icon: "warning",
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes'
+                        });
+                }
+            });
+        });
+
+        $('body').on('click', '.deletebtn', function() {
+            var id = $(this).data("id");
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "If You Remove A Employee, This System Also Remove User ID. You Will Not Be Able To Recover It!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.value === true) {
+                    var token = $("meta[name='csrf-token']").attr("content");
+                    $.ajax({
+                        type: "DELETE",
+                        url: "/employees/" + id,
+                        data: {
+                            "id": id,
+                            "_token": token,
+                        },
+                        success: function(data) {
+                            Swal.fire({
+                                title: 'Deleted!',
+                                text: 'Your file has been deleted.',
+                                icon: 'success',
+                                showConfirmButton: false,
+                            });
+                            location.reload();
+                        },
+                        error: function(data) {
+                            Swal.fire({
+                                title: 'Alert!',
+                                text: 'Something Wrong',
+                                icon: 'alert',
+                                showConfirmButton: false,
+                            });
+                            // console.log('Error:', data);
+                        }
+                    })
+
+                }
+            });
+        });
+        });
+
+
+    </script>
 @endsection

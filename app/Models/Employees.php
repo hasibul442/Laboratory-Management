@@ -21,4 +21,7 @@ class Employees extends Model
         'salary',
         'gender',
     ];
+    public function users(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
