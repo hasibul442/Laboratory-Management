@@ -38,7 +38,7 @@ class UserController extends Controller
                 ->addColumn('status', function ($item) {
 
                     // $togolebutton = '<input type="checkbox" name="status" id="status" data-id="' . $item->id . '" data-status="' . $item->status . '" class="toggle-class">';
-                    $togolebutton = '<input  ' .$item->status.' == "Active" ? "checked" : ""   type="checkbox" class="status" id="status"  data-id="'.$item->id.'" />';
+                    $togolebutton = '<input  ' .$item->status.' == "Active" ? "checked" : ""}}   type="checkbox" class="status" id="status"  data-id="'.$item->id.'" />';
                     $togolebutton .= '<script>
                                         $(".status").bootstrapToggle({
                                             on: "Active",
