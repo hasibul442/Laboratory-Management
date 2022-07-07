@@ -38,7 +38,7 @@
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
                         <li>
-                            <a href="{{ route('patients') }}">Patient Register</a>
+                            <a href="#">Patient Register</a>
                         </li>
                         <li>
                             <a href="#">Patient List</a>
