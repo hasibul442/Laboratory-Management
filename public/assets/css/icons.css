@@ -9,8 +9,8 @@ File: Icons Css File
 /* MaterialDesignIcons.com */
 @font-face {
   font-family: "Material Design Icons";
-  src: url("../fonts/materialdesignicons-webfont.eot?v=3.6.95");
-  src: url("../fonts/materialdesignicons-webfont.eot?#iefix&v=3.6.95") format("embedded-opentype"), url("../fonts/materialdesignicons-webfont.woff2?v=3.6.95") format("woff2"), url("../fonts/materialdesignicons-webfont.woff?v=3.6.95") format("woff"), url("../fonts/materialdesignicons-webfont.ttf?v=3.6.95") format("truetype"), url("../fonts/materialdesignicons-webfont.svg?v=3.6.95#materialdesigniconsregular") format("svg");
+  src: url("{{ asset('asset/fonts/materialdesignicons-webfont.eot?v=3.6.95') }}");
+  src: url("{{ asset('assetfonts/materialdesignicons-webfont.eot?#iefix&v=3.6.95') }}") format("embedded-opentype"), url("../fonts/materialdesignicons-webfont.woff2?v=3.6.95") format("woff2"), url("../fonts/materialdesignicons-webfont.woff?v=3.6.95") format("woff"), url("../fonts/materialdesignicons-webfont.ttf?v=3.6.95") format("truetype"), url("../fonts/materialdesignicons-webfont.svg?v=3.6.95#materialdesigniconsregular") format("svg");
   font-weight: normal;
   font-style: normal; }
 

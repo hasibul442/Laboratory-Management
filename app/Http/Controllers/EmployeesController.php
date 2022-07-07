@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employees;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EmployeesController extends Controller
 {
@@ -36,7 +38,35 @@ class EmployeesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $employee_id = Employees::max('employee_id') + 1;
+
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->user_type = $request->user_type;
+        $user->status = 'Active';
+        $user->save();
+
+        $employee = new Employees;
+        $employee->user_id = $user->id;
+        $employee->employee_id = date('Ym').'0'.$employee_id;
+        $employee->phone = $request->phone;
+        $employee->address = $request->address;
+        $employee->gender = $request->gender;
+        $employee->dob = $request->dob;
+        $employee->join_of_date = $request->join_of_date;
+        $employee->position = $request->position;
+        $employee->salary = $request->salary;
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $image_name = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path().'/assets/HMS/employees/',$image_name);
+            $employee->image = $image_name;
+        }
+        $employee->save();
+        return response()->json($employee);
+
     }
 
     /**
@@ -79,8 +109,24 @@ class EmployeesController extends Controller
      * @param  \App\Models\Employees  $employees
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employees $employees)
+    public function destroy($id)
     {
-        //
+        $employees = Employees::find($id);
+        if (!is_null($employees)) {
+            if(!is_null($employees->image)){
+                $image_path = public_path().'/assets/HMS/employees/'.$employees->image;
+                unlink($image_path);
+                $user = User::find($employees->user_id);
+                $employees->delete();
+                $user->delete();
+                return response()->json(['success'=>'Data Delete successfully.']);
+            }
+            else{
+                $user = User::find($employees->user_id);
+                $employees->delete();
+                $user->delete();
+                return response()->json(['success'=>'Data Delete successfully.']);
+            }
+        }
     }
 }

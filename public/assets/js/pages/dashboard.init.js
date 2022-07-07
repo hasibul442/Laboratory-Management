@@ -410,36 +410,37 @@
         }),
         (o.prototype.init = function () {
             l("#datatable").DataTable({
-                pageLength: 5,
-                searching: !1,
-                lengthChange: !1,
-            });
-                // l("#usa").vectorMap({
-                //     map: "usa_en",
-                //     enableZoom: !0,
-                //     showTooltip: !0,
-                //     selectedColor: null,
-                //     hoverColor: null,
-                //     backgroundColor: "#fff",
-                //     color: "#f2f5f7",
-                //     borderColor: "#bcbfc7",
-                //     colors: { mo: "#02c0ce", fl: "#02c0ce", or: "#02c0ce" },
-                //     onRegionClick: function (o, a, r) {
-                //         o.preventDefault();
-                //     },
-                // });
-            var a = this;
-            (a.charts = this.initCharts()),
-                l(window).on("resize", function (o) {
-                    l.each(a.charts, function (o, a) {
-                        try {
-                            a.destroy();
-                        } catch (o) {
-                            console.log(o);
-                        }
-                    }),
-                        (a.charts = a.initCharts());
-                });
+                
+                searching: true,
+                lengthChange: true,
+                "paging": true,
+            })
+            //     $("#usa").vectorMap({
+            //         map: "usa_en",
+            //         enableZoom: !0,
+            //         showTooltip: !0,
+            //         selectedColor: null,
+            //         hoverColor: null,
+            //         backgroundColor: "#fff",
+            //         color: "#f2f5f7",
+            //         borderColor: "#bcbfc7",
+            //         colors: { mo: "#02c0ce", fl: "#02c0ce", or: "#02c0ce" },
+            //         onRegionClick: function (o, a, r) {
+            //             o.preventDefault();
+            //         },
+            //     });
+            // var a = this;
+            // (a.charts = this.initCharts()),
+            //     l(window).on("resize", function (o) {
+            //         l.each(a.charts, function (o, a) {
+            //             try {
+            //                 a.destroy();
+            //             } catch (o) {
+            //                 console.log(o);
+            //             }
+            //         }),
+            //             (a.charts = a.initCharts());
+            //     });
         }),
         (l.Dashboard = new o()),
         (l.Dashboard.Constructor = o);

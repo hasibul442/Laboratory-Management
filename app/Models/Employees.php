@@ -19,5 +19,9 @@ class Employees extends Model
         'position',
         'join_of_date',
         'salary',
+        'gender',
     ];
+    public function users(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
