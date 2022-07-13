@@ -15,13 +15,14 @@
         <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
         <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" />
+        {{-- <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" /> --}}
 
     </head>
 
     <body class="authentication-bg authentication-bg-pattern d-flex align-items-center">
 
         <div class="home-btn d-none d-sm-block">
-            <a href="index.html"><i class="fas fa-home h2 text-white"></i></a>
+            <a href="#"><i class="fas fa-home h2 text-white"></i></a>
         </div>
 
         <div class="account-pages w-100 mt-5 mb-5">
@@ -93,6 +94,7 @@
         <!-- end page -->
 
         <!-- Vendor js -->
+        <script src="{{ asset('js/app.js') }}"></script>
         <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
 
         <!-- App js -->
