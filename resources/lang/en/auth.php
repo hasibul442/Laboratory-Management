@@ -14,6 +14,7 @@ return [
     */
 
     'failed' => 'These credentials do not match our records.',
+    'status' => 'Your Account Is not Approved or Suspend.',
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 

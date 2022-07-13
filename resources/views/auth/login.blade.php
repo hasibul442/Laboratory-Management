@@ -51,9 +51,9 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <a href="auth-recoverpassword.html" class="text-muted float-right"><small>Forgot your password?</small></a>
+                                        <a href="#" class="text-muted float-right"><small>Forgot your password?</small></a>
                                         <label for="password">Password</label>
-                                        <input class="form-control @error('password') is-invalid @enderror" type="password"  id="password" name="password" required autocomplete="current-password">
+                                        <input class="form-control @error('password') is-invalid @enderror" type="password"  id="password" name="password" required autocomplete="current-password" placeholder="Password">
                                         @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
