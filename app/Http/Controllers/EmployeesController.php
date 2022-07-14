@@ -68,12 +68,6 @@ class EmployeesController extends Controller
         $employee->join_of_date = $request->join_of_date;
         $employee->position = $request->position;
         $employee->salary = $request->salary;
-        // if($request->hasFile('image')){
-        //     $image = $request->file('image');
-        //     $image_name = time().'.'.$image->getClientOriginalExtension();
-        //     $image->move(public_path().'/assets/HMS/employees/',$image_name);
-        //     $employee->image = $image_name;
-        // }
         $employee->save();
         return response()->json($employee);
 
@@ -85,9 +79,10 @@ class EmployeesController extends Controller
      * @param  \App\Models\Employees  $employees
      * @return \Illuminate\Http\Response
      */
-    public function show(Employees $employees)
+    public function show($id)
     {
-        //
+        $employee = Employees::find($id);
+        return view('Employees.profile', compact('employee'));
     }
 
     /**
@@ -96,9 +91,10 @@ class EmployeesController extends Controller
      * @param  \App\Models\Employees  $employees
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employees $employees)
+    public function edit($id)
     {
-        //
+        $employee = Employees::find($id);
+        return view('Employees.edit', compact('employee'));
     }
 
     /**

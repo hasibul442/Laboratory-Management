@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -16,11 +18,6 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        // $users = User::all();
-        // return view('user.user', compact('users'));
-
-
-
         if ($request->ajax()) {
             $data = User::all();
             return DataTables::of($data)
@@ -36,16 +33,13 @@ class UserController extends Controller
                         return 'Patient';
                 })
                 ->addColumn('status', function ($item) {
-
-                    // $togolebutton = '<input type="checkbox" name="status" id="status" data-id="' . $item->id . '" data-status="' . $item->status . '" class="toggle-class">';
-                    // $togolebutton = '<input  ' .$item->status.' == "Active" ? "checked" : ""   type="checkbox" class="status" id="status"  data-id="'.$item->id.'" />';
-                    if($item->status == 'Active'){
-                        $togolebutton = '<input type="checkbox" name="status" id="status" data-id="' . $item->id . '" data-status="' . $item->status . '" class="toggle-class status" checked>';
-                    }
-                    else{
-                        $togolebutton = '<input type="checkbox" name="status" id="status" data-id="' . $item->id . '" data-status="' . $item->status . '" class="toggle-class status" >';
-                    }
-                        // $togolebutton = '<input type="checkbox" name="status" id="status" data-id="' . $item->id . '" data-status="' . $item->status . '" class="toggle-class" checked>';
+                    // if($item->status == 'Active'){
+                    //     $togolebutton = '<input type="checkbox" name="status" id="status" data-id="' . $item->id . '" data-status="' . $item->status . '" class="toggle-class status" checked>';
+                    // }
+                    // else{
+                    //     $togolebutton = '<input type="checkbox" name="status" id="status" data-id="' . $item->id . '" data-status="' . $item->status . '" class="toggle-class status" >';
+                    // }
+                    $togolebutton = '<input ' . ($item->status == "Active" ? "checked" : "") .' type="checkbox" class="status" id="status" data-id="'.$item->id.'" />';
                     $togolebutton .= '<script>
                                         $(".status").bootstrapToggle({
                                             on: "Active",
@@ -57,10 +51,10 @@ class UserController extends Controller
                                     </script>';
                     return $togolebutton;
                 })
-                //     return $togolebutton;
-                // })
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="javascript:void(0);" class="btn btn-primary btn-sm" data-id="' . $row->id . '"><i class="fas fa-edit"></i></a>';
+                    $btn = '<a href="javascript:void(0);" class="btn btn-warning btn-sm editbtn" data-id="' . $row->id . '"><i class="fas fa-edit"></i></a>';
+                    $btn .= '&nbsp&nbsp<a href="javascript:void(0);" class="btn btn-info btn-sm passchange" data-id="' . $row->id . '"><i class="fas fa-lock"></i></a>';
+
                     if (Auth::user()->user_type == $row->user_type && Auth::user()->email == $row->email){
                         $btn = $btn . '&nbsp&nbsp<a href="javascript:void(0);" data-id="' . $row->id .'" class="btn btn-danger btn-sm deletebtn disabled"> <i class="fas fa-trash"></i> </a>';
                     }
@@ -134,9 +128,21 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user = User::find($request->id);
+        $user->name = $request->name1;
+        $user->email = $request->email1;
+        $user->user_type = $request->user_type1;
+        $user->update();
+        return response()->json(['success' => 'User updated successfully.']);
+    }
+    public function updatepass(Request $request)
+    {
+        $user = User::find($request->id);
+        $user->password = Hash::make($request->password);
+        $user->update();
+        return response()->json(['success' => 'User updated successfully.']);
     }
 
     /**
@@ -147,6 +153,18 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        if (!is_null($user)) {
+            if(!is_null($user->profile_photo_path)){
+                $image_path = public_path().'/assets/HMS/employees/'.$user->profile_photo_path;
+                unlink($image_path);;
+                $user->delete();
+                return response()->json(['success'=>'Data Delete successfully.']);
+            }
+            else{
+                $user->delete();
+                return response()->json(['success'=>'Data Delete successfully.']);
+            }
+        }
     }
 }

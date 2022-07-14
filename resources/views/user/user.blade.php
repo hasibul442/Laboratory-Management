@@ -38,51 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{-- @php
-                                $i = 0;
-                            @endphp
-                            @foreach ($users as $item)
-                                <tr id="user-{{ $item->id }}">
-                                    <td>{{ ++$i }}</td>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->email }}</td>
-                                    <td>
-                                        @if ($item->user_type == 'super_admin')
-                                            Super Admin
-                                        @elseif ($item->user_type == 'admin')
-                                            Admin
-                                        @elseif ($item->user_type == 'Employee')
-                                            Employee
-                                        @elseif ($item->user_type == 'patient')
-                                            Patient
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" class="status" id="status" data-toggle="toggle"
-                                            data-on="Active" data-off="Pending" data-onstyle="success"
-                                            data-offstyle="danger" data-id="{{ $item->id }}"
-                                            {{ $item->status == 'Active' ? 'checked' : '' }}>
-                                    </td>
-                                    <td>
-                                        <a href="javascript:void(0);" class="btn btn-primary btn-sm"
-                                            onclick="editUsers({{ $item->id }})">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
 
-                                        @if (Auth::user()->user_type == $item->user_type && Auth::user()->email == $item->email)
-                                            <a href="javascript:void(0);" class="btn btn-danger btn-sm disabled ">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        @else
-                                            <a href="javascript:void(0);" data-id="{{ $item->id }}"
-                                                class="btn btn-danger btn-sm deletebtn">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        @endif
-
-                                    </td>
-                                </tr>
-                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>
@@ -97,8 +53,6 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <form class="forms-sample" id="userEditForm" enctype="multipart/form-data">
-
-                        {{-- <ul class="alert alert-warning d-none" id="save_errorList"></ul> --}}
 
                         @csrf
                         <div style=" display:none">
@@ -121,11 +75,10 @@
                                 <option value="admin">Admin</option>
                                 <option value="employee">Employee</option>
                             </select>
-                            {{-- <input class="form-control" type="text" name="user_type" value="Admin"> --}}
                         </div>
 
                         <div class="text-center pb-2">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             <input type="submit" class="btn btn-success" name="submit" id="submit1" value="Submit" />
                         </div>
                     </form>
@@ -135,10 +88,35 @@
     </div>
     {{-- Update User Details End --}}
 
+    {{-- Update User Details Start --}}
+    <div class="modal fade" id="passchangeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <h3 class="text-center">Password Update by Admin</h3>
+                <div class="modal-body">
+                    <form class="forms-sample" id="passchangeForm" enctype="multipart/form-data">
+
+                        @csrf
+                        <div style=" display:none">
+                            <input type="text" name="id" id="id1">
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="password">New Password <small>(minimun 8 letter)</small></label>
+                            <input class="form-control" type="password" id="password" name="password" min="8">
+                        </div>
+                        <div class="text-center pb-2">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <input type="submit" class="btn btn-success" name="submit" id="submit" value="Submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- Update User Details End --}}
+
     <script>
-        // $(document).ready(function() {
-        //     $('.datatable').DataTable();
-        // });
 
         $(function() {
             var table = $('.datatable').DataTable({
@@ -211,17 +189,194 @@
                     }
                 });
             });
+
+            $('body').on('click', '.deletebtn', function() {
+                var id = $(this).attr('data-id');
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "If You Remove A User Account, This System Also Remove Employee ID. You Will Not Be Able To Recover It!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    if (result.value === true) {
+                        var token = $("meta[name='csrf-token']").attr("content");
+                        $.ajax({
+                            type: "DELETE",
+                            url: "/user/" + id,
+                            data: {
+                                "id": id,
+                                "_token": token,
+                            },
+                            success: function(result1) {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'User Deleted',
+                                    text: "The user has been deleted",
+                                    showConfirmButton: false,
+                                    timerProgressBar: true,
+                                    timer: 1800
+                                });
+                                table.ajax.reload();
+                            },
+                            error: function(error) {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: 'We have some error',
+                                    showConfirmButton: false,
+                                    timerProgressBar: true,
+                                    timer: 1800
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+            $('body').on('click','.editbtn',function(){
+                var id = $(this).data('id');
+                $.ajax({
+                    dataType: "json",
+                    url: '/users/edit/' + id,
+                    method: 'get',
+                    success: function(user) {
+                        $('#id').val(user.id);
+                        $('#name1').val(user.name);
+                        $('#email1').val(user.email);
+                        $('#user_type1').val(user.user_type);
+                        $('#userEditModal').modal('show');
+                    },
+                    error: function(error) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'We have some error',
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            timer: 1800
+                        });
+                    }
+                });
+            });
+
+            $('#userEditForm').submit(function(e){
+                e.preventDefault();
+                var id = $('#id').val();
+                var name1 = $('#name1').val();
+                var email1 = $('#email1').val();
+                var user_type1 = $('#user_type1').val();
+                var _token = $('input[name=_token]').val();
+                $.ajax({
+                    type: "PUT",
+                    url: "/users/update",
+                    data: {
+                        "id": id,
+                        "name1": name1,
+                        "email1": email1,
+                        "user_type1": user_type1,
+                        "profile_image": profile_image,
+                        "_token": _token,
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        $('#userEditModal').modal('toggle');
+                        $('#userEditModal').modal('hide');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'User Updated',
+                            text: "The user has been updated",
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            timer: 1800
+                        });
+
+                        table.ajax.reload();
+                        $('#userEditForm')[0].reset();
+                    },
+                    error: function(error) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'We have some error',
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            timer: 1800
+                        });
+                    }
+                });
+            });
+
+            $('body').on('click','.passchange',function(){
+                var id = $(this).data('id');
+                $.ajax({
+                    dataType: "json",
+                    url: '/users/edit/' + id,
+                    method: 'get',
+                    success: function(user) {
+                        $('#id1').val(user.id);
+                        $('#password').val();
+                        $('#passchangeModal').modal('show');
+                    },
+                    error: function(error) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'We have some error',
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            timer: 1800
+                        });
+                    }
+                });
+            });
+            $('#passchangeForm').submit(function(e){
+                e.preventDefault();
+                var id = $('#id1').val();
+                var password = $('#password').val();
+                var _token = $('input[name=_token]').val();
+                $.ajax({
+                    type: "PUT",
+                    url: "/users/pass/update",
+                    data: {
+                        "id": id,
+                        "password": password,
+                        "_token": _token,
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        $('#passchangeModal').modal('toggle');
+                        $('#passchangeModal').modal('hide');
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'User Updated',
+                            text: "The user has been updated",
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            timer: 1800
+                        });
+
+                        table.ajax.reload();
+                        $('#userEditForm')[0].reset();
+                    },
+                    error: function(error) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'We have some error',
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            timer: 1800
+                        });
+                    }
+                });
+            })
         });
 
-        function editUsers(id) {
-            $.get("/users/edit/" + id, function(users) {
-                $('#id').val(users.id);
-                $('#name1').val(users.name);
-                $('#email1').val(users.email);
-                $('#user_type1').val(users.user_type);
-                // $('#balance').val(bank.balance);
-                $('#userEditModal').modal("toggle");
-            });
-        }
     </script>
 @endsection

@@ -61,10 +61,10 @@
                                         data-offstyle="danger" data-id="{{ $item->users->id }}"
                                         {{ $item->users->status == 'Active' ? 'checked' : '' }}></td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-sm">
+                                        <a href="{{ route('employees.edit', $item->id) }}" class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="#" class="btn btn-info btn-sm">
+                                        <a href="{{ route('employees.profile', $item->id) }}" class="btn btn-info btn-sm">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         <a href="javascript:void(0);" data-id="{{ $item->id }}"
