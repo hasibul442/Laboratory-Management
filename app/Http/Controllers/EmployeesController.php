@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\File;
 use App\Models\Employees;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -104,9 +104,32 @@ class EmployeesController extends Controller
      * @param  \App\Models\Employees  $employees
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employees $employees)
+    public function update(Request $request, $id)
     {
-        //
+        $employee = Employees::find($id);
+
+        $user = User::find($employee->user_id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if($request->hasFile('image')){
+            $destination = public_path().'/assets/HMS/employees/'.$user->profile_photo_path;
+            if(File::exists($destination)){
+                File::delete($destination);
+            }
+            $image = $request->file('image');
+            $image_name = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path().'/assets/HMS/employees/',$image_name);
+            $user->profile_photo_path = $image_name;
+        }
+        $employee->phone = $request->phone;
+        $employee->address = $request->address;
+        $employee->dob = $request->dob;
+        $employee->join_of_date = $request->join_of_date;
+        $employee->position = $request->position;
+        $employee->salary = $request->salary;
+        $user->update();
+        $employee->update();
+        return redirect()->route('employees');
     }
 
     /**

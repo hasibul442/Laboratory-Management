@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Patients;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,9 +32,15 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::delete('/user/{id}','App\Http\Controllers\UserController@destroy');
 
             // Employees Route
-            Route::get('employees', 'App\Http\Controllers\EmployeesController@index')->name('employees');
+            Route::get('/employees', 'App\Http\Controllers\EmployeesController@index')->name('employees');
             Route::post('/employees/add','App\Http\Controllers\EmployeesController@store');
             Route::get('/employees/details/{id}/','App\Http\Controllers\EmployeesController@show')->name('employees.profile');
             Route::get('/employees/edit/{id}/','App\Http\Controllers\EmployeesController@edit')->name('employees.edit');
+            Route::put('/employees/edit/{id}/','App\Http\Controllers\EmployeesController@update')->name('employees.update');
             Route::delete('/employees/{id}','App\Http\Controllers\EmployeesController@destroy');
+
+            // Patients ROutes
+            Route::get('/patients', 'App\Http\Controllers\PatientsController@index')->name('patients.list');
+            Route::get('/new/patients', 'App\Http\Controllers\PatientsController@create')->name('patients.create');
+            Route::post('/new/patients/store', 'App\Http\Controllers\PatientsController@store')->name('patients.store');
 });

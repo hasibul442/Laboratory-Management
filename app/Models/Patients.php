@@ -12,12 +12,22 @@ class Patients extends Model
     protected $fillable = [
         'user_id',
         'patient_id',
-        'phone',
+        'home_phone',
+       ' mobile_phone',
+        'lmp',
+        'age',
+        'gender',
         'address',
         'blood_group',
-        'age',
+        'note',
+        'bp',
         'height',
+        'weight',
+        'referred_by',
+        'registerd_by',
         'aprrovel_by',
-        'aprrovel_status',
     ];
+    public function users(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

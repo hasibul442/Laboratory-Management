@@ -11,37 +11,37 @@
 
                 <li>
                     <a href="{{ route('dashboard') }}">
-                        <i class="dripicons-meter"></i>
+                        <i class="fas fa-ball-pile"></i>
                         <span> Dashboard </span>
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('user') }}">
-                        <i class="dripicons-meter"></i>
+                        <i class="fas fa-users"></i>
                         <span> Users </span>
                     </a>
                 </li>
 
                 <li>
                     <a href="{{ route('employees') }}">
-                        <i class="dripicons-meter"></i>
+                        <i class="fas fa-user-friends"></i>
                         <span> Employee </span>
                     </a>
                 </li>
 
                 <li>
                     <a href="javascript: void(0);">
-                        <i class="dripicons-mail"></i>
+                        <i class="fas fa-user-injured"></i>
                         <span> Patient </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
                         <li>
-                            <a href="#">Patient Register</a>
+                            <a href="{{ route('patients.create') }}">Patient Register</a>
                         </li>
                         <li>
-                            <a href="#">Patient List</a>
+                            <a href="{{ route('patients.list') }}">Patient List</a>
                         </li>
                         {{-- <li>
                             <a href="#">Compose Email</a>
@@ -50,13 +50,13 @@
                 </li>
                 <li>
                     <a href="#">
-                        <i class="dripicons-meter"></i>
-                        <span> LAB Test Category </span>
+                        <i class="fas fa-vial"></i>
+                        <span> Test Category </span>
                     </a>
                 </li>
                 <li>
                     <a href="#">
-                        <i class="dripicons-meter"></i>
+                        <i class="fas fa-money-bill"></i>
                         <span> Patient Billing System </span>
                     </a>
                 </li>
@@ -70,7 +70,7 @@
                 <li>
                     <a href="javascript: void(0);">
                         <i class="dripicons-mail"></i>
-                        <span> Financial Record Management </span>
+                        <span> Financial Management </span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">

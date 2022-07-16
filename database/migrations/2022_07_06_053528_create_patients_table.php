@@ -17,13 +17,20 @@ class CreatePatientsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->string('patient_id')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('home_phone')->nullable();
+            $table->string('mobile_phone')->nullable();
+            $table->string('lmp')->nullable();
+            $table->string('age')->nullable();
+            $table->string('gender')->nullable();
             $table->string('address')->nullable();
             $table->string('blood_group')->nullable();
-            $table->string('age')->nullable();
+            $table->longText('note')->nullable();
+            $table->string('bp')->nullable();
             $table->string('height')->nullable();
+            $table->string('weight')->nullable();
+            $table->string('referred_by')->nullable();
+            $table->string('registerd_by')->nullable();
             $table->string('aprrovel_by')->nullable();
-            $table->string('aprrovel_status')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
