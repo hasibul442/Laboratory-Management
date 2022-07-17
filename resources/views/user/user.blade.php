@@ -73,7 +73,7 @@
                             <select class="form-control" name="user_type1" id="user_type1">
                                 <option value="super_admin">Super Admin</option>
                                 <option value="admin">Admin</option>
-                                <option value="employees">Employee</option>
+                                <option value="employees">Employees</option>
                             </select>
                         </div>
 
