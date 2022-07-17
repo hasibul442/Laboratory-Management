@@ -107,7 +107,7 @@
                     <a href="{{ route('employees') }}" class="btn btn-primary">Back</a>
                     <button onclick="window.print()" class="btn btn-success float-right">Print</button>
                 </div>
+            </div>
         </div>
     </div>
-</div>
 @endsection

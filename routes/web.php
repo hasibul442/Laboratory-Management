@@ -43,4 +43,21 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('/patients', 'App\Http\Controllers\PatientsController@index')->name('patients.list');
             Route::get('/new/patients', 'App\Http\Controllers\PatientsController@create')->name('patients.create');
             Route::post('/new/patients/store', 'App\Http\Controllers\PatientsController@store')->name('patients.store');
+            Route::get('/patients/status/{id}/{status}','App\Http\Controllers\PatientsController@statuschange');
+            Route::get('/patients/details/{id}/','App\Http\Controllers\PatientsController@show')->name('patients.profile');
+            Route::delete('/patients/{id}','App\Http\Controllers\PatientsController@destroy');
+
+            // Referrals Route
+            Route::get('/referrals', 'App\Http\Controllers\ReferralController@index')->name('referrels.list');
+            Route::post('/referrals/add','App\Http\Controllers\ReferralController@store');
+            Route::get('/referrals/edit/{id}', "App\Http\Controllers\ReferralController@edit");
+            Route::put('/referrals/update', "App\Http\Controllers\ReferralController@update");
+            Route::delete('/referrals/{id}','App\Http\Controllers\ReferralController@destroy');
+
+            // labtest Category Route
+            Route::get('labtest', 'App\Http\Controllers\LabTestCatController@index')->name('labtest');
+            Route::post('/labtest/add','App\Http\Controllers\LabTestCatController@store');
+            Route::delete('/labtest/{id}','App\Http\Controllers\LabTestCatController@destroy');
+            Route::get('/labtest/edit/{id}/','App\Http\Controllers\LabTestCatController@edit')->name('labtest.edit');
+            Route::put('/labtest/update','App\Http\Controllers\LabTestCatController@update')->name('labtest.update');
 });

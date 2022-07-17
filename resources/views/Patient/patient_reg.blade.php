@@ -168,9 +168,11 @@
                             <div class="col-sm-7">
                                 <select class="form-control" id="referred_by" required name="referred_by">
                                     <option selected disabled>Choose One Option</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
+                                    <option value="none">None</option>
+                                    @foreach (App\Models\Referrals::get() as $item)
+                                    <option value={{ $item->id }}>{{ $item->name }}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
                         </div>

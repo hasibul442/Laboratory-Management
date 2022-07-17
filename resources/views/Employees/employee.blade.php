@@ -57,9 +57,9 @@
                                     <td>{{ $item->phone }}</td>
                                     <td>{{ $item->address }}</td>
                                     <td><input type="checkbox" class="status" id="status" data-toggle="toggle"
-                                        data-on="Active" data-off="Pending" data-onstyle="success"
-                                        data-offstyle="danger" data-id="{{ $item->users->id }}"
-                                        {{ $item->users->status == 'Active' ? 'checked' : '' }}></td>
+                                            data-on="Active" data-off="Pending" data-onstyle="success"
+                                            data-offstyle="danger" data-id="{{ $item->users->id }}"
+                                            {{ $item->users->status == 'Active' ? 'checked' : '' }}></td>
                                     <td>
                                         <a href="{{ route('employees.edit', $item->id) }}" class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i>
@@ -240,27 +240,27 @@
         $(function() {
             var table = $('.datatable').DataTable();
             $('#EmployeeForm').on('submit', function(e) {
-            e.preventDefault();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            var myformData = new FormData($('#EmployeeForm')[0]);
-            $.ajax({
-                type: "post",
-                url: "/employees/add",
-                data: myformData,
-                cache: false,
-                processData: false,
-                contentType: false,
-                dataType: "json",
-                success: function(response) {
-                    console.log(response);
-                    $("#EmployeeForm").find('input').val('');
-                    $('.bs-example-modal-xl').modal('hide');
-                    // $('#medicineaddform')[0].reset();
-                    Swal.fire({
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                var myformData = new FormData($('#EmployeeForm')[0]);
+                $.ajax({
+                    type: "post",
+                    url: "/employees/add",
+                    data: myformData,
+                    cache: false,
+                    processData: false,
+                    contentType: false,
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response);
+                        $("#EmployeeForm").find('input').val('');
+                        $('.bs-example-modal-xl').modal('hide');
+                        // $('#medicineaddform')[0].reset();
+                        Swal.fire({
                             position: 'top-end',
                             icon: 'success',
                             title: 'Your work has been saved',
@@ -268,104 +268,102 @@
                             timerProgressBar: true,
                             timer: 1800
                         });
-                    // table.draw();
-                    location.reload();
-                },
-                error: function(error) {
-                    console.log(error);
-                    Swal.fire({
-                        title: 'Duplicate Email Recognized',
-                        text: "The Email Address Already Exist",
-                        icon: "warning",
-                        showCancelButton: false,
-                        confirmButtonColor: '#3085d6',
-                        confirmButtonText: 'Yes'
-                        });
-                }
-            });
-        });
-
-        $('body').on('click', '.deletebtn', function() {
-            var id = $(this).data("id");
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "If You Remove A Employee, This System Also Remove User ID. You Will Not Be Able To Recover It!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes'
-            }).then((result) => {
-                if (result.value === true) {
-                    var token = $("meta[name='csrf-token']").attr("content");
-                    $.ajax({
-                        type: "DELETE",
-                        url: "/employees/" + id,
-                        data: {
-                            "id": id,
-                            "_token": token,
-                        },
-                        success: function(data) {
-                            Swal.fire({
-                                title: 'Deleted!',
-                                text: 'Your file has been deleted.',
-                                icon: 'success',
-                                showConfirmButton: false,
-                            });
-                            location.reload();
-                        },
-                        error: function(data) {
-                            Swal.fire({
-                                title: 'Alert!',
-                                text: 'Something Wrong',
-                                icon: 'alert',
-                                showConfirmButton: false,
-                            });
-                            // console.log('Error:', data);
-                        }
-                    })
-
-                }
-            });
-        });
-        });
-        $(document).on('change', '#status', function() {
-                var id = $(this).attr('data-id');
-                if (this.checked) {
-                    var catstatus = 'Active';
-                } else {
-                    var catstatus = 'Pending';
-                }
-                $.ajax({
-                    dataType: "json",
-                    url: '/users/status/' + id + '/' + catstatus,
-                    method: 'get',
-                    success: function(result1) {
-                        // console.log(result1);
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: catstatus,
-                            text: "The user's status has been updated",
-                            showConfirmButton: false,
-                            timerProgressBar: true,
-                            timer: 1800
-                        });
+                        // table.draw();
+                        location.reload();
                     },
                     error: function(error) {
-                        // alert(catstatus);
+                        console.log(error);
                         Swal.fire({
-                            position: 'top-end',
-                            icon: 'error',
-                            title: 'We have some error',
-                            showConfirmButton: false,
-                            timerProgressBar: true,
-                            timer: 1800
+                            title: 'Duplicate Email Recognized',
+                            text: "The Email Address Already Exist",
+                            icon: "warning",
+                            showCancelButton: false,
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'Yes'
                         });
                     }
                 });
             });
 
+            $('body').on('click', '.deletebtn', function() {
+                var id = $(this).data("id");
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "If You Remove A Employee, This System Also Remove User ID. You Will Not Be Able To Recover It!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes'
+                }).then((result) => {
+                    if (result.value === true) {
+                        var token = $("meta[name='csrf-token']").attr("content");
+                        $.ajax({
+                            type: "DELETE",
+                            url: "/employees/" + id,
+                            data: {
+                                "id": id,
+                                "_token": token,
+                            },
+                            success: function(data) {
+                                Swal.fire({
+                                    title: 'Deleted!',
+                                    text: 'Your file has been deleted.',
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                });
+                                location.reload();
+                            },
+                            error: function(data) {
+                                Swal.fire({
+                                    title: 'Alert!',
+                                    text: 'Something Wrong',
+                                    icon: 'alert',
+                                    showConfirmButton: false,
+                                });
+                                // console.log('Error:', data);
+                            }
+                        })
 
+                    }
+                });
+            });
+        });
+        $(document).on('change', '#status', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = 'Active';
+            } else {
+                var catstatus = 'Pending';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/status/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    // console.log(result1);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: catstatus,
+                        text: "The user's status has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    // alert(catstatus);
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
     </script>
 @endsection

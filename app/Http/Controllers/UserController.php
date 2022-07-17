@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         if ($request->ajax()) {
             $data = User::whereIn('user_type',['super_admin' , 'admin', 'employees'])->get();
-            return DataTables::of($data) 
+            return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('user_type', function ($item) {
                     if ($item->user_type == 'super_admin')

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Referrals;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ReferralController extends Controller
 {
@@ -12,9 +13,22 @@ class ReferralController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->ajax()){
+            $data = Referrals::all();
+            return DataTables::of($data)
+                ->addIndexColumn()
+
+                ->addColumn('action', function ($row) {
+                    $btn = '<a href="javascript:void(0);" class="btn btn-warning btn-sm editbtn" data-id="' . $row->id . '"><i class="fas fa-edit"></i></a>';
+                    $btn = $btn . '&nbsp&nbsp<a href="javascript:void(0);" data-id="' . $row->id .'" class="btn btn-danger btn-sm deletebtn"> <i class="fas fa-trash"></i> </a>';
+                    return $btn;
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return view('referrel.referrel');
     }
 
     /**
@@ -35,7 +49,13 @@ class ReferralController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $referral = new Referrals;
+        $referral->name = $request->name;
+        $referral->email = $request->email;
+        $referral->phone = $request->phone;
+        $referral->address = $request->address;
+        $referral->save();
+        return response()->json($referral);
     }
 
     /**
@@ -55,9 +75,10 @@ class ReferralController extends Controller
      * @param  \App\Models\Referrals  $referrals
      * @return \Illuminate\Http\Response
      */
-    public function edit(Referrals $referrals)
+    public function edit($id)
     {
-        //
+        $referral = Referrals::find($id);
+        return response()->json($referral);
     }
 
     /**
@@ -67,9 +88,15 @@ class ReferralController extends Controller
      * @param  \App\Models\Referrals  $referrals
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Referrals $referrals)
+    public function update(Request $request)
     {
-        //
+        $referral = Referrals::find($request->id);
+        $referral->name = $request->name1;
+        $referral->email = $request->email1;
+        $referral->phone = $request->phone1;
+        $referral->address = $request->address1;
+        $referral->update();
+        return response()->json($referral);
     }
 
     /**
@@ -78,8 +105,10 @@ class ReferralController extends Controller
      * @param  \App\Models\Referrals  $referrals
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Referrals $referrals)
+    public function destroy($id)
     {
-        //
+        $referral = Referrals::find($id);
+        $referral->delete();
+        return response()->json(['success' => 'Referral deleted successfully.']);
     }
 }

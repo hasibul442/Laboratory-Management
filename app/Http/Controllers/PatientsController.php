@@ -36,7 +36,7 @@ class PatientsController extends Controller
                     return $home_phone;
                 })
                 ->addColumn('status', function ($item) {
-                    $togolebutton = '<input ' . ($item->status == "Active" ? "checked" : "") .' type="checkbox" class="status" id="status" data-id="'.$item->id.'" />';
+                    $togolebutton = '<input ' . ($item->users->status == "Active" ? "checked" : "") .' type="checkbox" class="status" id="status" data-id="'.$item->user_id.'" />';
                     $togolebutton .= '<script>
                                         $(".status").bootstrapToggle({
                                             on: "Active",
@@ -50,7 +50,7 @@ class PatientsController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0);" class="btn btn-warning btn-sm editbtn" data-id="' . $row->id . '"><i class="fas fa-edit"></i></a>';
-                    $btn .= '&nbsp&nbsp<a href="javascript:void(0);" class="btn btn-info btn-sm passchange" data-id="' . $row->id . '"><i class="fas fa-lock"></i></a>';
+                    $btn .= '&nbsp&nbsp<a href='.(route("patients.profile", $row->id)).' class="btn btn-info btn-sm detailsview" data-id="' . $row->id . '"><i class="fas fa-eye"></i></a>';
                     $btn = $btn . '&nbsp&nbsp<a href="javascript:void(0);" data-id="' . $row->id .'" class="btn btn-danger btn-sm deletebtn"> <i class="fas fa-trash"></i> </a>';
                     return $btn;
                 })
@@ -113,15 +113,26 @@ class PatientsController extends Controller
 
     }
 
+    public function statuschange($id, $status)
+    {
+        $user = User::find($id);
+        $user->status = $status;
+        // $patient = Patients::find($user_id);
+        // $user->patient->aprrovel_by = Auth::user()->name;
+        // $patient->update();
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
     /**
      * Display the specified resource.
      *
      * @param  \App\Models\Patients  $patients
      * @return \Illuminate\Http\Response
      */
-    public function show(Patients $patients)
+    public function show($id)
     {
-        //
+        $patient = Patients::find($id);
+        return view('Patient.patient_details',compact('patient'));
     }
 
     /**
@@ -153,8 +164,25 @@ class PatientsController extends Controller
      * @param  \App\Models\Patients  $patients
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patients $patients)
+    public function destroy($id)
     {
-        //
+        $employees = Patients::find($id);
+        $user = User::find($employees->user_id);
+        if (!is_null($user)) {
+            if(!is_null($user->profile_photo_path)){
+                $image_path = public_path().'/assets/HMS/patient/'.$user->profile_photo_path;
+                unlink($image_path);
+                // $user = User::find($employees->user_id);
+                $employees->delete();
+                $user->delete();
+                return response()->json(['success'=>'Data Delete successfully.']);
+            }
+            else{
+                // $user = User::find($employees->user_id);
+                $employees->delete();
+                $user->delete();
+                return response()->json(['success'=>'Data Delete successfully.']);
+            }
+        }
     }
 }

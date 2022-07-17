@@ -49,9 +49,15 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('labtest') }}">
                         <i class="fas fa-vial"></i>
                         <span> Test Category </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('referrels.list') }}">
+                        <i class="fad fa-asterisk"></i>
+                        <span> Referrel </span>
                     </a>
                 </li>
                 <li>
