@@ -63,4 +63,6 @@ Route::middleware(['auth:sanctum', 'verified'])
 
             // Billing System Route
             Route::get('/billing', 'App\Http\Controllers\BillsController@index')->name('billing');
+            Route::get('/allbilling', 'App\Http\Controllers\BillsController@allbills')->name('allbills');
+            Route::post('/billing/add','App\Http\Controllers\BillsController@store');
 });

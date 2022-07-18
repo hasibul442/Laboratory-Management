@@ -81,7 +81,7 @@
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
                         <li>
-                            <a href="#">Patient Billing System</a>
+                            <a href="{{ route('allbills') }}">Billing History</a>
                         </li>
                         <li>
                             <a href="#">Payment Records</a>

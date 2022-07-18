@@ -17,7 +17,7 @@ class CreateBillsTable extends Migration
             $table->increments('id');
             $table->string('bill_no')->unique();
             $table->string('patient_id')->nullable();
-            $table->string('all_test')->nullable();
+            $table->json('all_test')->nullable();
             $table->string('net_price')->nullable();
             $table->string('discount')->nullable();
             $table->string('total_price')->nullable();
