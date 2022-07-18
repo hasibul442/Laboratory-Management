@@ -60,4 +60,7 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::delete('/labtest/{id}','App\Http\Controllers\LabTestCatController@destroy');
             Route::get('/labtest/edit/{id}/','App\Http\Controllers\LabTestCatController@edit')->name('labtest.edit');
             Route::put('/labtest/update','App\Http\Controllers\LabTestCatController@update')->name('labtest.update');
+
+            // Billing System Route
+            Route::get('/billing', 'App\Http\Controllers\BillsController@index')->name('billing');
 });

@@ -61,7 +61,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('billing') }}">
                         <i class="fas fa-money-bill"></i>
                         <span> Patient Billing System </span>
                     </a>

@@ -14,7 +14,7 @@ class LabTestCatController extends Controller
      */
     public function index()
     {
-        $labtest =LabTestCat::all();
+        $labtest = LabTestCat::all();
         return view('LabTest.labtest', compact('labtest'));
     }
 

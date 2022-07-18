@@ -43,15 +43,15 @@
                         <tbody>
                             @foreach ($labtest as $item)
                                 <tr id="labtest{{ $item->id }}">
-                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $loop->iteration }}</td>
                                     <td class="text-wrap">{{ $item->cat_name }}</td>
                                     <td class="text-wrap">{{ $item->price }}</td>
-                                    <td class="text-wrap">
+                                    {{-- <td class="text-wrap"> --}}
                                         {{-- <input name="status" class="status" id="status" type="checkbox"
                                             data-toggle="toggle" data-on="Active" data-off="Deactive" data-size="xs"
                                             data-onstyle="success" data-offstyle="danger" data-id="{{ $item->id }}"
                                             {{ $item->status == 1 ? 'checked' : '' }}> --}}
-                                    </td>
+                                    {{-- </td> --}}
                                     <td>
                                         <a href=".modal-demo2"
                                             class="btn btn-sm btn-outline-purple waves-effect cabin-status-edit"
