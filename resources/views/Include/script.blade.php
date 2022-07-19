@@ -10,7 +10,8 @@
         <!-- Jvector map -->
         {{-- <script src="{{ asset('assets/libs/jqvmap/jquery.vmap.min.js') }}"></script>
         <script src="{{ asset('assets/libs/jqvmap/jquery.vmap.usa.js') }}"></script> --}}
-
+        {{-- <script src="/vendor/datatables/buttons.server-side.js"></script> --}}
+        <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
         <!-- Datatable js -->
         {{-- <script src="{{ asset('assets/libs/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/libs/datatables/dataTables.bootstrap4.min.js') }}"></script>

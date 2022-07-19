@@ -27,7 +27,7 @@
                 <h6 class="text-center">List of all Patients</h6>
 
                 <div class="table-responsive">
-                    <table class="table table-hover mb-0 patitent_datatable">
+                    <table class="table table-hover mb-0 patitent_datatable" id="patients-table">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -93,7 +93,10 @@
                     name: 'action',
                     orderable: true,
                     searchable: true
-                }, ]
+                }, ],
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ]
             });
             $('body').on('click', '.deletebtn', function() {
                 var id = $(this).data("id");
