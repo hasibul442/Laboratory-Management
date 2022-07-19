@@ -84,14 +84,12 @@
                             <a href="{{ route('allbills') }}">Billing History</a>
                         </li>
                         <li>
-                            <a href="#">Payment Records</a>
+                            <a href="{{ route('other.transection') }}">Other Transection</a>
                         </li>
                         <li>
-                            <a href="#">Other Transection</a>
+                            <a href="{{ route('transection.record') }}">Transection History</a>
                         </li>
-                        <li>
-                            <a href="#">Transection History</a>
-                        </li>
+
                     </ul>
                 </li>
                 <li>

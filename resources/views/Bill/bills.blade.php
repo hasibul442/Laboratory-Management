@@ -64,7 +64,7 @@
                             <div class="form-group">
                                 <label for="patient_id">Patient Name</label>
                                 <select class="form-control" id="patient_id" name="patient_id" required>
-                                    <option selected disabled>Choose One</option>
+                                    <option disabled>Choose One</option>
                                     @foreach (App\Models\Patients::get() as $patient)
                                         <option value="{{ $patient->user_id }}">{{ $patient->users->name }}</option>
                                     @endforeach

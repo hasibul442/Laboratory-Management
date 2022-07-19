@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Bills;
 use App\Models\LabTestCat;
+use App\Models\MainCompanys;
+use App\Models\Payments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
 
 class BillsController extends Controller
 {
@@ -17,14 +20,45 @@ class BillsController extends Controller
     public function index()
     {
         $tests = LabTestCat::all();
-        $bills = Bills::all();
-        return view('Bill.bills', compact('bills','tests'));
+        return view('Bill.bills', compact('tests'));
     }
 
-    public function allbills(){
-        $bills = Bills::all();
-        // dd($bills->toArray());
-        return view('Bill.allbills', compact('bills'));
+    public function allbills(Request $request){
+
+        if($request->ajax()){
+            $data = Bills::orderBy('id', 'DESC')->get();
+            return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('patient_id', function ($item) {
+                $patient_id = $item->patients->patient_id;
+                return $patient_id;
+            })
+            ->addColumn('patient_name', function ($item) {
+                $patient_name = $item->users->name;
+                return $patient_name;
+            })
+            ->addColumn('billing_date', function ($item) {
+                $billing_date = $item->created_at->format('d-m-Y');
+                return $billing_date;
+            })
+            ->addColumn('all_test', function ($item) {
+                $all_test = json_decode($item->all_test);
+                foreach($all_test as $test)
+                    {
+                        $all_test_name[] = $test->test_name;
+                    }
+                return $all_test_name;
+            })
+            ->addColumn('action', function ($row) {
+                $btn = '&nbsp&nbsp<a href='.(route("billing.details", $row->id)).' class="btn btn-info btn-sm detailsview" data-id="' . $row->id . '"><i class="fas fa-eye"></i></a>';
+                return $btn;
+            })
+            ->rawColumns(['patient_id','patient_name','all_test','action','billing_date',])
+            ->make(true);
+        }
+
+
+        return view('Bill.allbills');
     }
 
     /**
@@ -47,7 +81,7 @@ class BillsController extends Controller
     {
         $billcount = Bills::get()->count();
         $bills = new Bills;
-        $bills->bill_no = "#".'00000'.$billcount+rand(0,10);
+        $bills->bill_no = "#".'00'.date('Ym').'00'.$billcount;
         $bills->patient_id = $request->patient_id;
         $all_test = [];
         for ($i=0; $i < count($request->id); $i++) {
@@ -57,7 +91,7 @@ class BillsController extends Controller
                 'test_price' => $request->price[$i],
             ];
         }
-        $bills->all_test = $all_test;
+        $bills->all_test = json_encode($all_test);
         $bills->net_price = $request->gtotal;
         $bills->discount = $request->discount;
         $bills->total_price = $request->total_;
@@ -67,6 +101,19 @@ class BillsController extends Controller
         $bills->approved_code = $request->abbroval_code;
         $bills->employee_name = Auth::user()->name;
         $bills->save();
+
+        $payments = new Payments;
+        $payments->type = 'Income';
+        $payments->account_head = $bills->bill_no.'/'.$bills->users->name;
+        $payments->amount = $request->pay;
+        $payments->date = date('y-m-d');
+        $payments->employee_name = Auth::user()->name;
+        $payments->save();
+
+        $maincompany = MainCompanys::where('id', 1)->first();
+        $maincompany->banance = $maincompany->banance + $request->pay;
+        $maincompany->update();
+
         return response()->json($bills);
 
     }
@@ -77,9 +124,10 @@ class BillsController extends Controller
      * @param  \App\Models\Bills  $bills
      * @return \Illuminate\Http\Response
      */
-    public function show(Bills $bills)
+    public function show($id)
     {
-        //
+        $bills = Bills::find($id);
+        return view('Bill.billdetails', compact('bills'));
     }
 
     /**

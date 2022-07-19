@@ -20,49 +20,70 @@
 
         <div class="card">
             <div class="card-body">
-                <table class="display table">
+                <table class="table-hover table allbill_datatable">
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Patient Name</th>
+                            <th>Bill No</th>
                             <th>Patient ID</th>
+                            <th>Patient Name</th>
                             <th>All Test</th>
                             <th>Bill Date</th>
-                            <th>Bill Amount</th>
+                            <th>Net Amount</th>
+                            <th>Discount</th>
+                            <th>Total</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {{-- @dd($bills) --}}
-                        @foreach ($bills as $bill)
-                            <tr>
-                                <td>{{ $bill->id }}</td>
-                                <td>{{ $bill->users->name }}</td>
-                                <td>{{ $bill->patient_id }}</td>
-                                <td>
-                                    {{-- {{ json_decode($bill->all_test) }} --}}
-                                    @php
-                                        $all_test = json_decode($bill->all_test);
-                                    @endphp
-                                    {{-- @dump($all_test); --}}
-                                    @foreach ($all_test as $test)
-                                        {{ $test->test_name }}
-                                        <br>
-                                        {{ $test->test_price }}
-                                    @endforeach
-                                </td>
-                                <td>{{ $bill->created_at->format('d-m-Y') }}</td>
-                                <td>{{ $bill->amount }}</td>
-                                <td>
-                                    {{-- <a href="{{ route('bills.show', $bill->id) }}" class="btn btn-primary btn-sm">View</a>
-                            <a href="{{ route('bills.edit', $bill->id) }}" class="btn btn-success btn-sm">Edit</a>
-                            <a href="{{ route('bills.delete', $bill->id) }}" class="btn btn-danger btn-sm">Delete</a> --}}
-                                </td>
-                            </tr>
-                        @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+    <script>
+        $(function(){
+            var table = $('.allbill_datatable').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('allbills') }}",
+                },
+                columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                }, {
+                    data: 'bill_no',
+                    name: 'bill_no'
+                }, {
+                    data: 'patient_id',
+                    name: 'patient_id'
+                }, {
+                    data: 'patient_name',
+                    name: 'patient_name'
+                }, {
+                    data: 'all_test',
+                    name: 'all_test'
+                }, {
+                    data: 'billing_date',
+                    name: 'billing_date'
+                }, {
+                    data: 'net_price',
+                    name: 'net_price'
+                }, {
+                    data: 'discount',
+                    name: 'discount'
+                }, {
+                    data: 'total_price',
+                    name: 'total_price'
+                }, {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                }],
+            });
+        });
+    </script>
 @endsection

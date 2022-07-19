@@ -91,7 +91,7 @@
         </div>
         <!-- end col -->
         <!-- Start col -->
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="card rounded">
                 <a href="#">
                     <div class="card-body rounded dashboard-card-body-3">
@@ -101,9 +101,15 @@
                                     <i class="fas fa-user-md fa-3x dashboard-card-icon"></i>
                                 </div>
                                 <div class="col-sm-9">
-                                    <h4 class="card-title  text-center">Patient </h4>
+                                    <h4 class="card-title  text-center">Company Total Balance </h4>
                                     <div>
-                                        <p class="text-center dashboard-card-text">0</p>
+                                        @php
+                                            $balance = App\Models\MainCompanys::where('id',1)->get();
+                                        @endphp
+                                        <p class="text-center dashboard-card-text">@foreach ($balance as $item)
+                                            {{ $item->banance }}
+
+                                        @endforeach</p>
                                     </div>
                                 </div>
                             </div>
