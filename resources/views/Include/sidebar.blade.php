@@ -67,9 +67,15 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('xrayreport') }}">
                         <i class="dripicons-meter"></i>
                         <span> Test Report </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('reportbooth') }}">
+                        <i class="dripicons-meter"></i>
+                        <span> Report Booth </span>
                     </a>
                 </li>
 
@@ -103,17 +109,17 @@
                             <a href="{{ route('patientreport') }}">Patient List</a>
                         </li>
                         <li>
-                            <a href="{{ route('ledger') }}">Transection History</a>
+                            <a href="{{ route('ledger') }}">Accounts Statement</a>
                         </li>
+                        {{-- <li>
+                            <a href="{{ route('expanseledger') }}">Expenses Record</a>
+                        </li> --}}
                         <li>
-                            <a href="#">Expenses Record</a>
+                            <a href="{{ route('referralreport') }}">Referral Report</a>
                         </li>
-                        <li>
-                            <a href="#">Referral Report</a>
-                        </li>
-                        <li>
-                            <a href="#">Scanning Report</a>
-                        </li>
+                        {{-- <li>
+                            <a href="#">Test Report</a>
+                        </li> --}}
                     </ul>
                 </li>
 

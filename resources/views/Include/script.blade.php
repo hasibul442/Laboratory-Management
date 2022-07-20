@@ -31,8 +31,8 @@
 
         <!-- Dashboard Init JS -->
         <script src="{{ asset('assets/js/pages/dashboard.init.js') }}"></script>
-
-
+        {{-- select2 --}}
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
         <!-- Init js -->
         <script src="{{ asset('assets/js/pages/form-summernote.init.js') }}"></script>

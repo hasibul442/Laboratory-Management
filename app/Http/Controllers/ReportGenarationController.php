@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Patients;
 use App\Models\Payments;
+use App\Models\Referrals;
+use App\Models\XrayReport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -59,6 +61,63 @@ class ReportGenarationController extends Controller
 
         return view('allreport.ledgerdetails', compact('data1','data3','data8','data4','data5' ));
     }
+    public function referrallist(){
+        $referr = Referrals::all();
+        return view('allreport.referrallist', compact('referr'));
+    }
+
+    public function reportbooth(){
+        $xrayreport =XrayReport::where('status','=','Ready For Collection')->get();
+        return view('XrayReport.reportbooth', compact('xrayreport'));
+    }
+    public function report_statuschange($id, $status)
+    {
+        $xrayreport = XrayReport::find($id);
+        $xrayreport->status = $status;
+        $xrayreport->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+    // public function expanseledger()
+    // {
+    //     return view('allreport.expense');
+    // }
+
+    // public function expanseledgerdetails(Request $request)
+    // {
+    //     $data1 = $request->input('from');
+    //     $data2 = $request->input('to');
+
+    //     $data3 = Payments::whereBetween('date', [$data1, $data2])
+    //         ->orderBy('date')->get();
+
+    //     $data4 = Payments::where('type', 'Income')
+    //         ->whereBetween('date', [$data1, $data2])
+    //         ->orderBy('date')
+    //         ->get()
+    //         ->sum('amount');
+
+    //     $data5 = Payments::where('type', 'Expense')
+    //         ->whereBetween('date', [$data1, $data2])
+    //         ->orderBy('date')
+    //         ->get()
+    //         ->sum('amount');
+
+    //     $previousdate = Carbon::createFromDate($request->input('from'))->subDays();
+    //     $data6 = Payments::where('type','Income')
+    //     ->whereBetween('date',['2000-01-01',$previousdate])
+    //     ->get()
+    //     ->sum('amount');
+
+    //     $data7 = Payments::where('type','Expense')
+    //     ->whereBetween('date',['2000-01-01',$previousdate])
+    //     ->orderBy('date')
+    //     ->get()
+    //     ->sum('amount');
+
+    //     $data8 = $data6 - $data7;
+
+    //     return view('allreport.expanseled', compact('data1','data3','data8','data4','data5' ));
+    // }
     /**
      * Show the form for creating a new resource.
      *

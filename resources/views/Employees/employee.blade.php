@@ -56,7 +56,8 @@
                                     <td>{{ $item->users->email }}</td>
                                     <td>{{ $item->phone }}</td>
                                     <td>{{ $item->address }}</td>
-                                    <td><input type="checkbox" class="status" id="status" data-toggle="toggle"
+                                    <td>
+                                        <input type="checkbox" class="status" id="status" data-toggle="toggle"
                                             data-on="Active" data-off="Pending" data-onstyle="success"
                                             data-offstyle="danger" data-id="{{ $item->users->id }}"
                                             {{ $item->users->status == 'Active' ? 'checked' : '' }}></td>

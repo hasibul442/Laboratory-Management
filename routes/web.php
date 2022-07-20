@@ -76,4 +76,16 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('/patientreport', 'App\Http\Controllers\ReportGenarationController@patientindex')->name('patientreport');
             Route::get('/ledger', 'App\Http\Controllers\ReportGenarationController@ledger')->name('ledger');
             Route::get('/ledger/details', 'App\Http\Controllers\ReportGenarationController@ledgerdetails')->name('ledger.details');
+            Route::get('/referralreport', 'App\Http\Controllers\ReportGenarationController@referrallist')->name('referralreport');
+            Route::get('/reportbooth', 'App\Http\Controllers\ReportGenarationController@reportbooth')->name('reportbooth');
+            Route::get('/reportbooth/status/{id}/{status}','App\Http\Controllers\ReportGenarationController@report_statuschange');
+            // Route::get('/expanseledger', 'App\Http\Controllers\ReportGenarationController@expanseledger')->name('expanseledger');
+            // Route::get('/expanseledger/details', 'App\Http\Controllers\ReportGenarationController@expanseledgerdetails')->name('expanseledgerdetails');
+
+
+            Route::get('/xrayreport', 'App\Http\Controllers\XrayReportController@index')->name('xrayreport');
+            Route::post('/xrayreport/add','App\Http\Controllers\XrayReportController@store');
+            Route::delete('/xrayreport/{id}','App\Http\Controllers\XrayReportController@destroy');
+            Route::get('/xrayreport/edit/{id}/','App\Http\Controllers\XrayReportController@edit')->name('xrayreport.edit');
+            Route::put('/xrayreport/update/{id}/','App\Http\Controllers\XrayReportController@update')->name('xrayreport.update');
 });
