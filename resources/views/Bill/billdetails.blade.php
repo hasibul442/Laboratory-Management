@@ -60,12 +60,19 @@
                     </div>
 
                     <div class="col-md-6">
-                        <img src="{{ asset('assets/HMS/patient/'.$bills->users->profile_photo_path) }}" alt="{{ $bills->users->profile_photo_path }}" class="img-fluid rounded-circle" style="width: 200px; height: 200px" >
+                        {{-- <img src="{{ asset('assets/HMS/patient/'.$bills->users->profile_photo_path) }}" alt="{{ $bills->users->profile_photo_path }}" class="img-fluid rounded-circle" style="width: 200px; height: 200px" > --}}
+                        <div class="float-right">
+                            <p>Hospital Logo</p>
+                        <h3>ABCD Lab</h3>
+                        <span>Dhaka, Bangladesh</span><br>
+                        <span>Phone: +880123456789</span><br>
+                        <span>Email: abc@gmail.com</span>
+                        </div>
                     </div>
 
                 </div>
 
-                <div class="container">
+                <div class="container-fluid">
                     <table class="table table-sm">
                         <tbody>
                             @php

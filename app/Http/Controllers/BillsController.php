@@ -60,6 +60,43 @@ class BillsController extends Controller
 
         return view('Bill.allbills');
     }
+    public function allbills1(Request $request){
+
+        if($request->ajax()){
+            $data = Bills::orderBy('id', 'DESC')->get();
+            return DataTables::of($data)
+            ->addIndexColumn()
+            ->addColumn('patient_id', function ($item) {
+                $patient_id = $item->patients->patient_id;
+                return $patient_id;
+            })
+            ->addColumn('patient_name', function ($item) {
+                $patient_name = $item->users->name;
+                return $patient_name;
+            })
+            ->addColumn('billing_date', function ($item) {
+                $billing_date = $item->created_at->format('d-m-Y');
+                return $billing_date;
+            })
+            ->addColumn('all_test', function ($item) {
+                $all_test = json_decode($item->all_test);
+                foreach($all_test as $test)
+                    {
+                        $all_test_name[] = $test->test_name;
+                    }
+                return $all_test_name;
+            })
+            ->addColumn('action', function ($row) {
+                $btn = '&nbsp&nbsp<a href='.(route("billing.details", $row->id)).' class="btn btn-info btn-sm detailsview" data-id="' . $row->id . '"><i class="fas fa-eye"></i></a>';
+                return $btn;
+            })
+            ->rawColumns(['patient_id','patient_name','all_test','action','billing_date',])
+            ->make(true);
+        }
+
+
+        return view('Bill.allbills');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -79,9 +116,11 @@ class BillsController extends Controller
      */
     public function store(Request $request)
     {
+
+                    
         $billcount = Bills::get()->count();
         $bills = new Bills;
-        $bills->bill_no = "#".'00'.date('Ym').'00'.$billcount;
+        $bills->bill_no = $request->bill_no;
         $bills->patient_id = $request->patient_id;
         $all_test = [];
         for ($i=0; $i < count($request->id); $i++) {

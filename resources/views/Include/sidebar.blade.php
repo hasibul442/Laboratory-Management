@@ -60,11 +60,22 @@
                         <span> Referrel </span>
                     </a>
                 </li>
+
                 <li>
-                    <a href="{{ route('billing') }}">
+                    <a href="javascript: void(0);">
                         <i class="fas fa-money-bill"></i>
                         <span> Patient Billing System </span>
+                        <span class="menu-arrow"></span>
                     </a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('billing') }}">Bill Create</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('allbills') }}">All Bill</a>
+                        </li>
+
+                    </ul>
                 </li>
                 <li>
                     <a href="{{ route('xrayreport') }}">

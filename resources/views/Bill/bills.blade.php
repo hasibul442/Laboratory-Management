@@ -19,7 +19,16 @@
         </div>
         <!-- end page title -->
 
+        @php
+            $latest = App\Models\Bills::latest()->first();
+            if (!$latest) {
+                $nextInvoiceNumber = '#000001';
+            } else {
+                $string = preg_replace('/[^0-9\.]/', '', $latest->bill_no);
+                $nextInvoiceNumber = '#' . str_pad($string + 1, 6, '0', STR_PAD_LEFT);
+            }
 
+        @endphp
 
         <div class="card">
             <div class="card-body">
@@ -28,7 +37,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="text-center">All Test</h5>
@@ -55,12 +64,14 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="text-center">Bills</h5>
                         <form class="insert-form CustomerBillForm" id="CustomerBillForm" method="post">
                             @csrf
+                            <input type="text" style="display: none" value="{{ $nextInvoiceNumber }}" name="bill_no">
+                            {{-- @dump($nextInvoiceNumber); --}}
                             <div class="form-group">
                                 <label for="patient_id">Patient Name</label>
                                 <select class="form-control" id="patient_id" name="patient_id" required>
@@ -167,6 +178,35 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-sm-4 text-dark">
+                <div class="card">
+                    <div class="card-body">
+                        <p>Hospital Logo</p>
+                        <h3>ABCD Lab</h3>
+                        <span>Dhaka, Bangladesh</span><br>
+                        <span>Phone: +880123456789</span><br>
+                        <span>Email: abc@gmail.com</span>
+                        <hr style="color: #000" />
+
+                        <span class="h5">Invoice No: </span><span class="h5">{{ $nextInvoiceNumber }}</span>
+
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th> S/N </th>
+                                    <th> Test Name </th>
+                                    <th style="width: 150px"> Price </th>
+                                    <th> Action </th>
+                                </tr>
+                            </thead>
+                            <tbody id="items1">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -175,6 +215,7 @@
             var labtest_id = $(this).attr('data-id');
             // console.log(labtest_id);
             var n = ($('#items tr').length - 0) + 1;
+            var n = ($('#items1 tr').length - 0) + 1;
             if ($(".item-in-cart").toArray().map(el => el.getAttribute("data-id")).includes(labtest_id)) {
                 Swal.fire({
                     position: 'top-end',
@@ -192,10 +233,17 @@
                         <td>${Number(data.price).toFixed(2)}<input type="hidden" value="${data.price}" class="item-in-cart-cost form-control price border-0 bg-white"  id="price" name="price[]" readonly></td>
                         <td><button name="remove" class="btn btn-danger btn-sm remove" id="remove"><i class="fas fa-eraser"></i> </button></td>'+
                         </tr>`);
-                    cartTotal();
+                        cartTotal();
+                    var tr = $('#items1').append(`<tr class="" data-id="${labtest_id}">
+                        <td>${n}</td>
+                        <td>${data.cat_name}</td>
+                        <td>${Number(data.price).toFixed(2)}</td>
+                        <td><button name="remove" class="btn btn-danger btn-sm remove" id="remove"><i class="fas fa-eraser"></i> </button></td>'+
+                        </tr>`);
+
                 });
             }
-            $("#items").delegate("#remove", "click", function() {
+            $("#items").delegate(".remove", "click", function() {
                 $(this).closest('tr').remove();
                 cartTotal();
 
