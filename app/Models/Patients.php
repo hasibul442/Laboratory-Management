@@ -33,4 +33,7 @@ class Patients extends Model
     public function referral(){
         return $this->belongsTo(Referrals::class, 'referred_by');
     }
+    public function bills(){
+        return $this->belongsTo(Bills::class, 'user_id','patient_id');
+    }
 }

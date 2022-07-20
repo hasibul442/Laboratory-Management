@@ -71,4 +71,9 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('/transection/record', 'App\Http\Controllers\PaymentsController@index')->name('transection.record');
             Route::get('/transection/other', 'App\Http\Controllers\PaymentsController@create')->name('other.transection');
             Route::post('/transection/other/post', 'App\Http\Controllers\PaymentsController@store')->name('other.transection.store');
+
+            //Report Genarate Route
+            Route::get('/patientreport', 'App\Http\Controllers\ReportGenarationController@patientindex')->name('patientreport');
+            Route::get('/ledger', 'App\Http\Controllers\ReportGenarationController@ledger')->name('ledger');
+            Route::get('/ledger/details', 'App\Http\Controllers\ReportGenarationController@ledgerdetails')->name('ledger.details');
 });

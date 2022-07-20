@@ -100,10 +100,10 @@
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
                         <li>
-                            <a href="#">Patient List</a>
+                            <a href="{{ route('patientreport') }}">Patient List</a>
                         </li>
                         <li>
-                            <a href="#">Transection History</a>
+                            <a href="{{ route('ledger') }}">Transection History</a>
                         </li>
                         <li>
                             <a href="#">Expenses Record</a>
