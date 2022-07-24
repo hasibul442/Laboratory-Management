@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'Patient Details')
+@section('title', 'Other Transaction')
 @section('content')
     <div class="container-fluid">
         <!-- start page title -->
@@ -9,10 +9,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Other Transection</li>
+                            <li class="breadcrumb-item active">Other Transaction</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Other Transection</h4>
+                    <h4 class="page-title">Other Transaction</h4>
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
 
         <div class="card">
             <div class="card-body">
-                <h4 class="text-center">Other Transection</h4>
+                <h4 class="text-center">Other Transaction</h4>
                 <form  method="POST" class="mt-5" id="othertrans" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
@@ -89,7 +89,7 @@
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
-                            title: 'Your work has been saved',
+                            title: 'Transaction Done Successfully',
                             showConfirmButton: false,
                             timerProgressBar: true,
                             timer: 1800
@@ -100,8 +100,8 @@
                     error: function(error) {
                         console.log(error);
                         Swal.fire({
-                            title: 'Duplicate Email Recognized',
-                            text: "The Email Address Already Exist",
+                            title: 'Opps...',
+                            text: "Something went wrong! Please try again!",
                             icon: "warning",
                             showCancelButton: false,
                             confirmButtonColor: '#3085d6',

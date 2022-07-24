@@ -9,10 +9,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Transection</li>
+                            <li class="breadcrumb-item active">Transaction</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Transection Lists</h4>
+                    <h4 class="page-title">Transaction Lists</h4>
                 </div>
             </div>
         </div>

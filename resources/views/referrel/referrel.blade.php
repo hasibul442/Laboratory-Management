@@ -9,20 +9,20 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
-                            <li class="breadcrumb-item active">Referrel List</li>
+                            <li class="breadcrumb-item active">Referral List</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Referrel System</h4>
+                    <h4 class="page-title">Referral System</h4>
                 </div>
             </div>
         </div>
 
         <div class="card">
             <div class="card-body">
-                <h4 class="text-center">List of all Referrels</h4>
+                <h4 class="text-center">List of all Referrals</h4>
                 <p class="text-right">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Referrelmodel"><i
-                            class="fas fa-plus"></i> New Referrel</button>
+                            class="fas fa-plus"></i> New Referred</button>
                 </p>
                 {{-- <h6 class="text-center">List of all employees</h6> --}}
 
@@ -32,6 +32,7 @@
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Hospital Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Address</th>
@@ -53,7 +54,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Referrels Add</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Referrals Add</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -68,6 +69,14 @@
                             <div class="col-sm-7">
                                 <input type="text" required parsley-type="text" class="form-control" id="name"
                                     name="name" placeholder="Mr. Jon Rechard">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="hospitalname" class="col-sm-4 col-form-label">Hospital Name</label>
+                            <div class="col-sm-7">
+                                <input type="text" parsley-type="text" class="form-control" id="hospitalname"
+                                    name="hospitalname" placeholder="ex. ABC Hospital">
                             </div>
                         </div>
 
@@ -143,6 +152,14 @@
                         </div>
 
                         <div class="form-group row">
+                            <label for="hospitalname1" class="col-sm-4 col-form-label">Hospital Name</label>
+                            <div class="col-sm-7">
+                                <input type="text" parsley-type="text" class="form-control" id="hospitalname1"
+                                    name="hospitalname1" placeholder="ex. ABC Hospital">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
                             <label for="email" class="col-sm-4 col-form-label">Email<span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-7">
@@ -199,7 +216,11 @@
                 }, {
                     data: 'name',
                     name: 'name'
-                }, {
+                },
+                {
+                    data: 'hospitalname',
+                    name: 'hospitalname'
+                },{
                     data: 'email',
                     name: 'email'
                 }, {
@@ -318,6 +339,7 @@
                     success: function(result) {
                         $('#id').val(result.id);
                         $('#name1').val(result.name);
+                        $('#hospitalname1').val(result.hospitalname);
                         $('#email1').val(result.email);
                         $('#phone1').val(result.phone);
                         $('#address1').val(result.address);
@@ -340,6 +362,7 @@
                 var id = $('#id').val();
                 var email1 = $('#email1').val();
                 var name1 = $('#name1').val();
+                var hospitalname1 = $('#hospitalname1').val();
                 var phone1 = $('#phone1').val();
                 var address1 = $('#address1').val();
                 var _token = $('input[name=_token]').val();
@@ -350,6 +373,7 @@
                         'id': id,
                         'name1': name1,
                         'email1': email1,
+                        'hospitalname1': hospitalname1,
                         'phone1': phone1,
                         'address1': address1,
                         '_token': _token

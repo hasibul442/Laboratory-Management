@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReferralsTable extends Migration
+class CreateInventoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,14 @@ class CreateReferralsTable extends Migration
      */
     public function up()
     {
-        Schema::create('referrals', function (Blueprint $table) {
+        Schema::create('inventories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->string('hospitalname')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('address')->nullable();
-            $table->string('balance')->nullable();
+            $table->string('brandname')->nullable();
+            $table->string('shopname')->nullable();
+            $table->string('quentity')->nullable();
             $table->string('amount')->nullable();
-            $table->string('percentage')->nullable();
+            $table->string('document')->nullable();
             $table->timestamps();
         });
     }
@@ -34,6 +32,6 @@ class CreateReferralsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('referrals');
+        Schema::dropIfExists('inventories');
     }
 }

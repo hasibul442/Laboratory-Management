@@ -51,6 +51,7 @@ class ReferralController extends Controller
     {
         $referral = new Referrals;
         $referral->name = $request->name;
+        $referral->hospitalname = $request->hospitalname;
         $referral->email = $request->email;
         $referral->phone = $request->phone;
         $referral->address = $request->address;
@@ -92,6 +93,7 @@ class ReferralController extends Controller
     {
         $referral = Referrals::find($request->id);
         $referral->name = $request->name1;
+        $referral->hospitalname = $request->hospitalname1;
         $referral->email = $request->email1;
         $referral->phone = $request->phone1;
         $referral->address = $request->address1;

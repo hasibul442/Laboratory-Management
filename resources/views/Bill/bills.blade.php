@@ -55,7 +55,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td><a href="javascript:void(0);" class="labtest" id="labtest" data-id="{{ $test->id }}">{{ $test->cat_name }}</a></td>
-                                <td>{{ $test->price }}</td>
+                                <td>{{ number_format($test->price,2) }}</td>
                             </tr>
                             @endforeach
                     </table>
@@ -96,7 +96,7 @@
                                 <tr>
                                     <td></td>
                                     <td>
-                                        <p class="font-weight-bold">Sub Total (BDT) :</p>
+                                        <p class="font-weight-bold">Sub Total (₦) :</p>
                                     </td>
                                     <td>
                                         <input type="number" class="form-control getsubtotal" name="gtotal" id="grandtotal" readonly>
@@ -105,7 +105,7 @@
                                 <tr>
                                     <td></td>
                                     <td>
-                                        <p class="font-weight-bold">Discount (BDT) :</p>
+                                        <p class="font-weight-bold">Discount (₦) :</p>
                                     </td>
                                     <td>
                                         <input type="text" class="form-control" id="discount" value="0.00" name="discount">
@@ -114,7 +114,7 @@
                                 <tr>
                                     <td></td>
                                     <td>
-                                        <p class="font-weight-bold">Total (BDT) :</p>
+                                        <p class="font-weight-bold">Total (₦) :</p>
                                     </td>
                                     <td>
                                         <input type="text" class="form-control" id="total_" name="total_" readonly>
@@ -136,7 +136,7 @@
                                 <tr>
                                     <td></td>
                                     <td>
-                                        <p class="font-weight-bold">Pay :</p>
+                                        <p class="font-weight-bold">Amount Paid :</p>
                                     </td>
                                     <td>
                                         <input type="text" class="form-control" id="pay_" name="pay">
@@ -174,24 +174,24 @@
             </div>
         </div>
 
-        <div class="col-sm-4 text-dark" style="display: block">
+        <div class="col-sm-2 text-dark" style=" color: #000">
             <div class="card" id="details">
                 <div class="card-body">
-                    <p>Hospital Logo</p>
-                    <h3>ABCD Lab</h3>
-                    <span>Dhaka, Bangladesh</span><br>
-                    <span>Phone: +880123456789</span><br>
-                    <span>Email: abc@gmail.com</span>
+                    <p style="color: #000">Hospital Logo</p>
+                    <h3 style="color: #000">ABCD Lab</h3>
+                    <span style="color: #000">Dhaka, Bangladesh</span><br>
+                    <span style="color: #000">Phone: +880123456789</span><br>
+                    <span style="color: #000">Email: abc@gmail.com</span>
                     <hr style="color: #000" />
 
-                    <span class="h5">Invoice No: </span><span class="h5">{{ $nextInvoiceNumber }}</span>
+                    <span class="h5" style="color: #000">Invoice No: </span><span class="h5" style="color: #000;">{{ $nextInvoiceNumber }}</span>
 
-                    <table class="table table-borderless">
+                    <table class="table table-borderless" style="width: 400px">
                         <thead>
                             <tr>
-                                <th> S/N </th>
-                                <th> Test Name </th>
-                                <th> Price </th>
+                                <th style="color: #000; width:20px"> S/N </th>
+                                <th style="color: #000;"> Test Name </th>
+                                <th style="color: #000;"> Price </th>
                             </tr>
                         </thead>
                         <tbody id="items1" class="items">
@@ -201,28 +201,28 @@
                         <tfoot>
                             <tr>
                                 <th></th>
-                                <th>Sub Total</th>
-                                <td><span class="subtotal" id="subtotal"></span></td>
+                                <th style="color: #000;">Sub Total</th>
+                                <td><span class="subtotal" id="subtotal" style="color: #000;"></span></td>
                             </tr>
                             <tr>
                                 <th></th>
-                                <th>Discount</th>
-                                <td><span class="discount__" id="discount__">0.00</span></td>
+                                <th style="color: #000;">Discount</th>
+                                <td style="color: #000;"><span class="discount__" id="discount__">0.00</span></td>
                             </tr>
                             <tr>
                                 <th></th>
-                                <th>Total</th>
-                                <td><span class="__total__" id="__total__"></span></td>
+                                <th style="color: #000;">Total</th>
+                                <td style="color: #000;"><span class="__total__" id="__total__"></span></td>
                             </tr>
                             <tr>
                                 <th></th>
-                                <th>Pay</th>
-                                <td><span class="pay__" id="pay__"></span></td>
+                                <th style="color: #000;">Pay</th>
+                                <td style="color: #000;"><span class="pay__" id="pay__"></span></td>
                             </tr>
                             <tr>
                                 <th></th>
-                                <th>Return</th>
-                                <td><span class="return__" id="return__"></span></td>
+                                <th style="color: #000;">Return</th>
+                                <td style="color: #000;"><span class="return__" id="return__"></span></td>
                             </tr>
                         </tfoot>
                     </table>
@@ -256,10 +256,10 @@
                         <td><button name="remove" class="btn btn-danger btn-sm remove" id="remove"><i class="fas fa-eraser"></i> </button></td>
                         </tr>`);
                 cartTotal();
-                var tr = $('#items1').append(`<tr class="" data-id="${labtest_id}">
-                        <td>${n1}</td>
-                        <td>${data.cat_name}</td>
-                        <td>${Number(data.price).toFixed(2)}</td>
+                var tr = $('#items1').append(`<tr data-id="${labtest_id}">
+                        <td style="color: #000; width: 10px">${n1}</td>
+                        <td style="color: #000; width: 20px">${data.cat_name}</td>
+                        <td style="color: #000; width: 20px">${Number(data.price).toFixed(2)}</td>
                         </tr>`);
             });
 
@@ -285,6 +285,7 @@
             let totalCost = $(".item-in-cart-cost").toArray().map(el => $(el).val()).reduce((x, y) => Number(x) +
                 Number(y));
             $('#grandtotal').val(Number(totalCost).toFixed(2));
+            // $('#total_').val(Number(totalCost).toFixed(2));
             $('#total_').val(Number(totalCost).toFixed(2));
 
             $('#subtotal').html(Number(totalCost).toFixed(2));

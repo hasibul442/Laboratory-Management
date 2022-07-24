@@ -30,13 +30,15 @@
                     <th>Balance</th>
                 </thead>
                 @php
-                $i=1;
-                $balance=0;
+                    $i=1;
+                    $balance=0;
+                    $originalDate=$data1;
+                    $newDate = date("d/m/Y", strtotime($originalDate));
                 @endphp
                 <tbody>
                     <tr>
                         <td>1</td>
-                        <td>{{ $data1 }}</td>
+                        <td>{{ $newDate }}</td>
                         <td>Opening Balance</td>
                         <td>{{ number_format($data8,2) }}</td>
                         <td>0.00</td>
@@ -51,7 +53,7 @@
                     @foreach ($data3 as $item)
                     <tr>
                         <td>{{++$i}}</td>
-                        <td>{{$item->created_at->format('Y-m-d')}}</td>
+                        <td>{{$item->created_at->format('d/m/Y')}}</td>
                         <td>{{$item->account_head}}</td>
                         <td>
                             @if ($item->type == 'Income')

@@ -21,17 +21,15 @@ class PaymentsController extends Controller
         $data = Payments::orderBy('id', 'DESC')->get();
         return DataTables::of($data)
         ->addIndexColumn()
-        // ->addColumn('type', function ($item) {
-        //     $type1 = $item->type;
-        //     if($type1 == 'Income'){
-        //         $type1 .= '<p class="text-success">'.$item->type.'</p>';
-        //     }elseif($type1 == 'Expense'){
-        //         $type1 .= '<p class="text-danger">'.$item->type.'</p>';
-
-        //     }
-        //     return $type1;
-        // })
-        // ->rowColumns(['type'])
+        ->addColumn('amount', function ($row) {
+            return number_format($row->amount, 2);
+        })
+        ->addColumn('date', function ($row) {
+            $originalDate=$row->date;
+            $newDate = date("d/m/Y", strtotime($originalDate));
+            return $newDate;
+        })
+        ->rawColumns(['amount','date'])
         ->make(true);
        }
          return view('payment.allpayment');

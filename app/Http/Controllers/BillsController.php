@@ -117,8 +117,8 @@ class BillsController extends Controller
     public function store(Request $request)
     {
 
-                    
-        $billcount = Bills::get()->count();
+
+        // $billcount = Bills::get()->count();
         $bills = new Bills;
         $bills->bill_no = $request->bill_no;
         $bills->patient_id = $request->patient_id;

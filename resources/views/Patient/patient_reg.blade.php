@@ -47,10 +47,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="home_phone" class="col-sm-4 col-form-label">Home Phone<span
-                                    class="text-danger">*</span></label>
+                            <label for="home_phone" class="col-sm-4 col-form-label">Home Phone </label>
                             <div class="col-sm-7">
-                                <input type="phone" required parsley-type="text" class="form-control" id="home_phone"
+                                <input type="phone" parsley-type="text" class="form-control" id="home_phone"
                                     name="home_phone" placeholder="Phone Number">
                             </div>
                         </div>
@@ -78,11 +77,10 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="age" class="col-sm-4 col-form-label">Age<span
-                                    class="text-danger">*</span></label>
+                            <label for="age" class="col-sm-4 col-form-label">Date Of Birth</label>
                             <div class="col-sm-7">
-                                <input type="number" required parsley-type="text" class="form-control" id="name"
-                                    name="age" min="0" placeholder="25">
+                                <input type="date" parsley-type="text" class="form-control" id="name"
+                                    name="age">
                             </div>
                         </div>
 
@@ -95,13 +93,18 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="blood_group" class="col-sm-4 col-form-label">Blood Group<span
-                                    class="text-danger">*</span></label>
+                            <label for="blood_group" class="col-sm-4 col-form-label">Blood Group</label>
                             <div class="col-sm-7">
-                                <select class="form-control" id="blood_group" required name="blood_group">
+                                <select class="form-control" id="blood_group" name="blood_group">
                                     <option selected disabled>Choose One Option</option>
                                     <option value="A+">A+</option>
                                     <option value="A-">A-</option>
+                                    <option value="B+">B+</option>
+                                    <option value="B-">B-</option>
+                                    <option value="O+">O+</option>
+                                    <option value="O-">O-</option>
+                                    <option value="AB+">AB+</option>
+                                    <option value="AB-">AB-</option>
                                 </select>
                             </div>
                         </div>
@@ -109,46 +112,41 @@
 
                     <div class="col-sm-6">
                         <div class="form-group row">
-                            <label for="lmp" class="col-sm-4 col-form-label">LMP<span
-                                    class="text-danger">*</span></label>
+                            <label for="lmp" class="col-sm-4 col-form-label">LMP</label>
                             <div class="col-sm-7">
-                                <input type="text" required parsley-type="text" class="form-control" id="lmp"
+                                <input type="text" parsley-type="text" class="form-control" id="lmp"
                                     name="lmp">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="height" class="col-sm-4 col-form-label">Height<span
-                                    class="text-danger">*</span></label>
+                            <label for="height" class="col-sm-4 col-form-label">Height</label>
                             <div class="col-sm-7">
-                                <input type="text" required parsley-type="text" class="form-control" id="lmp"
+                                <input type="text" parsley-type="text" class="form-control" id="lmp"
                                     name="height" placeholder="201.2">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="weight" class="col-sm-4 col-form-label">Weight<span
-                                    class="text-danger">*</span></label>
+                            <label for="weight" class="col-sm-4 col-form-label">Weight</label>
                             <div class="col-sm-7">
-                                <input type="text" required parsley-type="text" class="form-control" id="weight"
+                                <input type="text" parsley-type="text" class="form-control" id="weight"
                                     name="weight" placeholder="170.5">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="bp" class="col-sm-4 col-form-label">Blood pressure<span
-                                    class="text-danger">*</span></label>
+                            <label for="bp" class="col-sm-4 col-form-label">Blood pressure</label>
                             <div class="col-sm-7">
-                                <input type="text" required parsley-type="text" class="form-control" id="bp"
+                                <input type="text" parsley-type="text" class="form-control" id="bp"
                                     name="bp" placeholder="80/120">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="salary" class="col-sm-4 col-form-label">Image<span
-                                    class="text-danger">*</span></label>
+                            <label for="salary" class="col-sm-4 col-form-label">Image</label>
                             <div class="col-sm-7">
-                                <input type="file" required class="form-control border-0" id="image"
+                                <input type="file" class="form-control border-0" id="image"
                                     name="image">
                             </div>
                         </div>
@@ -163,12 +161,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="referred_by" class="col-sm-4 col-form-label">Refrred By<span
+                            <label for="referred_by" class="col-sm-4 col-form-label">Referred By<span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-7">
                                 <select class="form-control" id="referred_by" required name="referred_by">
-                                    <option selected disabled>Choose One Option</option>
-                                    <option value="none">None</option>
+                                    <option selected value="none">None</option>
                                     @foreach (App\Models\Referrals::get() as $item)
                                     <option value={{ $item->id }}>{{ $item->name }}</option>
                                     @endforeach
@@ -178,8 +175,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="address" class="col-sm-4 col-form-label">Note<span
-                                    class="text-danger">*</span></label>
+                            <label for="address" class="col-sm-4 col-form-label">Note</label>
                             <div class="col-sm-7">
                                 <textarea class="form-control"  id="note" name="note"></textarea>
                             </div>

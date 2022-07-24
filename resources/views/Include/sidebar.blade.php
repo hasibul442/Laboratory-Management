@@ -57,7 +57,7 @@
                 <li>
                     <a href="{{ route('referrels.list') }}">
                         <i class="fad fa-asterisk"></i>
-                        <span> Referrel </span>
+                        <span> Referral </span>
                     </a>
                 </li>
 
@@ -101,10 +101,10 @@
                             <a href="{{ route('allbills') }}">Billing History</a>
                         </li>
                         <li>
-                            <a href="{{ route('other.transection') }}">Other Transection</a>
+                            <a href="{{ route('other.transection') }}">Other Transaction</a>
                         </li>
                         <li>
-                            <a href="{{ route('transection.record') }}">Transection History</a>
+                            <a href="{{ route('transection.record') }}">Transaction History</a>
                         </li>
 
                     </ul>

@@ -23,40 +23,12 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-6">
-                        <table class="table table-borderless">
-                            <tbody>
-                                <tr>
-                                    <th>Bill Number</th>
-                                    <td>:</td>
-                                    <td>{{ $bills->bill_no }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Patient Id</th>
-                                    <td>:</td>
-                                    <td>{{ $bills->patients->patient_id }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Patient Name</th>
-                                    <td>:</td>
-                                    <td>{{ $bills->users->name }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Home Number</th>
-                                    <td>:</td>
-                                    <td>{{ $bills->patients->home_phone }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Mobile Number</th>
-                                    <td>:</td>
-                                    <td>{{ $bills->patients->mobile_phone }}</td>
-                                </tr>
-                                <tr>
-                                    <th>Email</th>
-                                    <td>:</td>
-                                    <td>{{ $bills->users->email }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <span class="h4">Invoice Number : {{ $bills->bill_no }}</span><br>
+                        <span class="h6">Patient Id : {{ $bills->patients->patient_id }}</span><br>
+                        <span class="h6">Patient Name : {{ $bills->users->name }}</span><br>
+                        <span class="h6">Mobile Number : {{ $bills->patients->home_phone }}</span><br>
+                        <span class="h6">Patient Name : {{ $bills->users->name }}</span><br>
+                        <span class="h6">Email : {{ $bills->users->email }}</span><br>
                     </div>
 
                     <div class="col-md-6">
@@ -83,7 +55,7 @@
                                 <tr>
                                     <th>{{ $test->test_name }}</th>
                                     <td>:</td>
-                                    <td>{{ $test->test_price }}</td>
+                                    <td>{{ number_format($test->test_price, 2) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

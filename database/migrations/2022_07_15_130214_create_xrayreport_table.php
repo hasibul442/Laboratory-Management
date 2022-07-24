@@ -21,7 +21,7 @@ class CreateXrayreportTable extends Migration
 
             $table->string('image')->nullable();
             $table->string('upload_by')->nullable();
-            $table->tinyInteger('status')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

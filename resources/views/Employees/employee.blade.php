@@ -182,7 +182,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="salary" class="col-sm-4 col-form-label">Image<span
+                            <label for="salary" class="col-sm-4 col-form-label">Picture/Passport<span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-7">
                                 <input type="file" required class="form-control border-0" id="image"
