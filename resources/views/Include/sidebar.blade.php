@@ -55,6 +55,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('inventories') }}">
+                        <i class="fas fa-boxes"></i>
+                        <span> Inventory Management </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('referrels.list') }}">
                         <i class="fad fa-asterisk"></i>
                         <span> Referral </span>
@@ -98,7 +104,7 @@
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
                         <li>
-                            <a href="{{ route('allbills') }}">Billing History</a>
+                            <a href="{{ route('all.bills') }}">Billing History</a>
                         </li>
                         <li>
                             <a href="{{ route('other.transection') }}">Other Transaction</a>

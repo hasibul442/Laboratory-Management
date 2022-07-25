@@ -19,7 +19,7 @@ class PatientsController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Patients::all();
+            $data = Patients::orderBy('id', 'DESC')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('user_name', function ($item) {

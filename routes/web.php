@@ -64,6 +64,7 @@ Route::middleware(['auth:sanctum', 'verified'])
             // Billing System Route
             Route::get('/billing', 'App\Http\Controllers\BillsController@index')->name('billing');
             Route::get('/allbilling', 'App\Http\Controllers\BillsController@allbills')->name('allbills');
+            Route::get('/all/billing', 'App\Http\Controllers\BillsController@allbills')->name('all.bills');
             Route::post('/billing/add','App\Http\Controllers\BillsController@store');
             Route::get('/billing/details/{id}/','App\Http\Controllers\BillsController@show')->name('billing.details');
 
@@ -82,10 +83,15 @@ Route::middleware(['auth:sanctum', 'verified'])
             // Route::get('/expanseledger', 'App\Http\Controllers\ReportGenarationController@expanseledger')->name('expanseledger');
             // Route::get('/expanseledger/details', 'App\Http\Controllers\ReportGenarationController@expanseledgerdetails')->name('expanseledgerdetails');
 
-
+            //tEST Report  Route
             Route::get('/xrayreport', 'App\Http\Controllers\XrayReportController@index')->name('xrayreport');
             Route::post('/xrayreport/add','App\Http\Controllers\XrayReportController@store');
             Route::delete('/xrayreport/{id}','App\Http\Controllers\XrayReportController@destroy');
             Route::get('/xrayreport/edit/{id}/','App\Http\Controllers\XrayReportController@edit')->name('xrayreport.edit');
             Route::put('/xrayreport/update/{id}/','App\Http\Controllers\XrayReportController@update')->name('xrayreport.update');
+
+            //Inventories Route
+            Route::get('/inventories', 'App\Http\Controllers\InventoriesController@index')->name('inventories');
+            Route::post('/inventories/add','App\Http\Controllers\InventoriesController@store');
+            Route::delete('/inventories/{id}','App\Http\Controllers\InventoriesController@destroy');
 });
