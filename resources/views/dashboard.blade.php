@@ -35,7 +35,7 @@
                                 <div class="col-sm-9">
                                     <h4 class="card-title text-center">Active Employees</h4>
                                     <div>
-                                        <p class="text-center dashboard-card-text">10</p>
+                                        <p class="text-center dashboard-card-text">{{ App\Models\Employees::get()->count() }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +81,7 @@
                             <div class="col-sm-9">
                                 <h4 class="card-title  text-center">Patients </h4>
                                 <div>
-                                    <p class="text-center dashboard-card-text">50</p>
+                                    <p class="text-center dashboard-card-text">{{ App\Models\Patients::get()->count() }}</p>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
         <!-- end col -->
 
         <!-- Start col -->
-        <div class="col-sm-4">
+        {{-- <div class="col-sm-4">
             <div class="card rounded">
                 <div class="card-body rounded dashboard-card-body-5">
                     <div class='px-3 py-3 justify-content-between'>
@@ -139,10 +139,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- end col -->
         <!-- Start col -->
-        <div class="col-sm-4">
+        {{-- <div class="col-sm-4">
             <div class="card rounded">
                 <div class="card-body rounded dashboard-card-body-6">
                     <div class='px-3 py-3 justify-content-between'>
@@ -160,10 +160,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- end col -->
         <!-- Start col -->
-        <div class="col-sm-4">
+        {{-- <div class="col-sm-4">
             <div class="card rounded">
                 <div class="card-body rounded dashboard-card-body-6">
                     <div class='px-3 py-3 justify-content-between'>
@@ -181,7 +181,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- end col -->
     </div>
     <!-- end row -->
