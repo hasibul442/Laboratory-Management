@@ -17,6 +17,13 @@
                 </li>
 
                 <li>
+                    <a href="#">
+                        <i class="fas fa-building"></i>
+                        <span> Company Details </span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="{{ route('user') }}">
                         <i class="fas fa-users"></i>
                         <span> Users </span>
