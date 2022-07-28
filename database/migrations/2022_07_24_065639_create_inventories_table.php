@@ -20,6 +20,7 @@ class CreateInventoriesTable extends Migration
             $table->string('shopname')->nullable();
             $table->string('quentity')->nullable();
             $table->string('amount')->nullable();
+            $table->string('dateofpurches')->nullable();
             $table->string('document')->nullable();
             $table->timestamps();
         });
