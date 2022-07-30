@@ -19,7 +19,8 @@ class CreateCompanysTable extends Migration
             $table->string('lab_address')->nullable();
             $table->string('lab_phone')->nullable();
             $table->string('lab_email')->nullable();
-            $table->string('banance')->nullable();
+            $table->string('lab_image')->nullable();
+            $table->string('balance')->nullable();
             $table->timestamps();
         });
     }

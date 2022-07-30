@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'All Test Report')
+@section('title', 'Test Report')
 @section('content')
 
     <div class="container-fluid">
@@ -11,10 +11,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
-                            <li class="breadcrumb-item active">Xray Report</li>
+                            <li class="breadcrumb-item active">Test Report</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Xray Report</h4>
+                    <h4 class="page-title">Test Report</h4>
                 </div>
             </div>
         </div>
@@ -22,12 +22,12 @@
 
         <div class="card">
             <div class="card-body">
-                <h4 class="text-center">X-ray</h4>
+                <h4 class="text-center">Test Report</h4>
                 <p class="text-right">
                     <button type="button" class="btn btn-info waves-effect waves-light" data-toggle="modal"
-                        data-target=".bs-example-modal-lg"><i class="fas fa-plus"></i> Add X-ray Report</button>
+                        data-target=".bs-example-modal-lg"><i class="fas fa-plus"></i> Add Test Report</button>
                 </p>
-                <h6 class="text-center">List of all X-ray Report</h6>
+                <h6 class="text-center">List of all Test Report</h6>
 
                 <div class="table-responsive">
                     <table class="table table-hover mb-0 datatable">
@@ -61,8 +61,7 @@
                                     <td><img class="image" src="{{ asset('/assets/HMS/xrayreport/' . $item->image) }}"
                                             style="width: 50px; height:50px;)"></td>
                                     <td>
-                                        <a href="{{ route('xrayreport.edit', $item->id) }}"
-                                            class="btn btn-primary btn-sm">
+                                        <a href="{{ route('xrayreport.edit', $item->id) }}" class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i>
                                         </a>
 
@@ -139,6 +138,21 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="image" class="col-sm-4 col-form-label">Test Result<span
+                                class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <textarea id="editor" name="editor" required></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="image" class="col-sm-4 col-form-label">Signeture</label>
+                            <div class="col-sm-7">
+                                <input type="file" id="signeture" name="signeture">
+                            </div>
+                        </div>
+
                         <div class="form-group row mb-0">
                             <div class="col-sm-8 offset-sm-4">
                                 <button type="submit" class="btn btn-primary waves-effect waves-light mr-1">
@@ -163,9 +177,6 @@
     </script>
     <script>
         $(function() {
-
-
-
             $('body').on('click', '.deletebtn', function() {
                 var id = $(this).data("id");
                 Swal.fire({
@@ -263,6 +274,10 @@
                 placeholder: 'Select a Patient',
             });
         });
+    </script>
+
+    <script>
+        CKEDITOR.replace( 'editor' );
     </script>
 
 @endsection

@@ -16,12 +16,7 @@ class CreateInventoriesTable extends Migration
         Schema::create('inventories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->string('brandname')->nullable();
-            $table->string('shopname')->nullable();
-            $table->string('quentity')->nullable();
-            $table->string('amount')->nullable();
-            $table->string('dateofpurches')->nullable();
-            $table->string('document')->nullable();
+            $table->string('stock')->nullable();
             $table->timestamps();
         });
     }

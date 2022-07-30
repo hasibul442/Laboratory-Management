@@ -62,10 +62,10 @@ class PaymentsController extends Controller
 
         $maincompany = MainCompanys::where('id', 1)->first();
         if($request->type == 'Income'){
-            $maincompany->banance = $maincompany->banance + $request->amount;
+            $maincompany->balance = $maincompany->balance + $request->amount;
         }
         elseif($request->type == 'Expense'){
-            $maincompany->banance = $maincompany->banance - $request->amount;
+            $maincompany->balance = $maincompany->balance - $request->amount;
         }
 
         $maincompany->update();

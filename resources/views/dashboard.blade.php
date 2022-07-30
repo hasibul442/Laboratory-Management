@@ -107,7 +107,7 @@
                                             $balance = App\Models\MainCompanys::where('id',1)->get();
                                         @endphp
                                         <p class="text-center dashboard-card-text">@foreach ($balance as $item)
-                                            {{ $item->banance }}
+                                            {{ $item->balance }}
 
                                         @endforeach</p>
                                     </div>

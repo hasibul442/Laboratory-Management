@@ -21,8 +21,9 @@ Auth::routes();
 Route::middleware(['auth:sanctum', 'verified'])
         ->group(function () {
             Route::get('/', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
-            Route::get('dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
-
+            Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+            Route::post('/labdetails/add', 'App\Http\Controllers\DashboardController@store')->name('labdetails.add');
+            Route::get('/labdetails/show', 'App\Http\Controllers\DashboardController@details')->name('labdetails.show');
             // Users Route
             Route::get('user', 'App\Http\Controllers\UserController@index')->name('user');
             Route::get('/users/edit/{id}', "App\Http\Controllers\UserController@edit");
@@ -92,6 +93,9 @@ Route::middleware(['auth:sanctum', 'verified'])
 
             //Inventories Route
             Route::get('/inventories', 'App\Http\Controllers\InventoriesController@index')->name('inventories');
+            Route::get('/inventories/history', 'App\Http\Controllers\InventoriesController@getInventories')->name('inventories.history');
             Route::post('/inventories/add','App\Http\Controllers\InventoriesController@store');
+            Route::post('/inventories/update','App\Http\Controllers\InventoriesController@storeinventoryhistory');
             Route::delete('/inventories/{id}','App\Http\Controllers\InventoriesController@destroy');
+            Route::delete('/inventories/history/{id}','App\Http\Controllers\InventoriesController@historydestroy');
 });

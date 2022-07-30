@@ -150,7 +150,7 @@ class BillsController extends Controller
         $payments->save();
 
         $maincompany = MainCompanys::where('id', 1)->first();
-        $maincompany->banance = $maincompany->banance + $request->pay;
+        $maincompany->balance = $maincompany->balance + $request->pay;
         $maincompany->update();
 
         return response()->json($bills);

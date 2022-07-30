@@ -9,6 +9,16 @@
 
                 <li class="menu-title">Home</li>
 
+                @if(App\Models\MainCompanys::get()->count() == 0)
+                    <li>
+                        <a href="{{ route('dashboard') }}" class="waves-effect">
+                            <i class="mdi mdi-account-plus"></i>
+                            <span class="badge badge-pill badge-primary float-right">New</span>
+                            <span>Add Lab Details</span>
+                        </a>
+                    </li>
+                @else
+
                 <li>
                     <a href="{{ route('dashboard') }}">
                         <i class="fas fa-ball-pile"></i>
@@ -17,9 +27,9 @@
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="{{ route('labdetails.show') }}">
                         <i class="fas fa-building"></i>
-                        <span> Company Details </span>
+                        <span> Lab Information </span>
                     </a>
                 </li>
 
@@ -55,18 +65,33 @@
                         </li> --}}
                     </ul>
                 </li>
+
                 <li>
                     <a href="{{ route('labtest') }}">
                         <i class="fas fa-vial"></i>
                         <span> Test Category </span>
                     </a>
                 </li>
+
                 <li>
-                    <a href="{{ route('inventories') }}">
+                    <a href="javascript: void(0);">
                         <i class="fas fa-boxes"></i>
-                        <span> Inventory Management </span>
+                        <span> Inventory Managemen </span>
+                        <span class="menu-arrow"></span>
                     </a>
+                    <ul class="nav-second-level" aria-expanded="false">
+                        <li>
+                            <a href="{{ route('inventories') }}">Inventories</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('inventories.history') }}">Purchase History</a>
+                        </li>
+                        {{-- <li>
+                            <a href="#">Compose Email</a>
+                        </li> --}}
+                    </ul>
                 </li>
+
                 <li>
                     <a href="{{ route('referrels.list') }}">
                         <i class="fad fa-asterisk"></i>
@@ -90,12 +115,14 @@
 
                     </ul>
                 </li>
+
                 <li>
                     <a href="{{ route('xrayreport') }}">
                         <i class="dripicons-meter"></i>
                         <span> Test Report </span>
                     </a>
                 </li>
+
                 <li>
                     <a href="{{ route('reportbooth') }}">
                         <i class="dripicons-meter"></i>
@@ -122,6 +149,7 @@
 
                     </ul>
                 </li>
+
                 <li>
                     <a href="javascript: void(0);">
                         <i class="dripicons-mail"></i>
@@ -146,6 +174,8 @@
                         </li> --}}
                     </ul>
                 </li>
+
+                @endif
 
 
             </ul>

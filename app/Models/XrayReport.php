@@ -13,7 +13,10 @@ class XrayReport extends Model
     'test_id',
     'image',
     'upload_by',
-    'status'];
+    'status',
+    'testresult',
+    'signeture'
+    ];
 
     public function users(){
         return $this->belongsTo(User::class, 'patient_id');

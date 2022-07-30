@@ -59,6 +59,9 @@
     <script src="{{ asset('assets/libs/datatables/buttons.print.min.js') }}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
 
+     <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+
+
 </head>
 
 <body>
