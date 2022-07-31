@@ -21,100 +21,99 @@
 
         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6">
-                        <span class="h4">Invoice Number : {{ $bills->bill_no }}</span><br>
-                        <span class="h6">Patient Id : {{ $bills->patients->patient_id }}</span><br>
-                        <span class="h6">Patient Name : {{ $bills->users->name }}</span><br>
-                        <span class="h6">Mobile Number : {{ $bills->patients->home_phone }}</span><br>
-                        <span class="h6">Patient Name : {{ $bills->users->name }}</span><br>
-                        <span class="h6">Email : {{ $bills->users->email }}</span><br>
+                <div id="printarea">
+                    <div class="text-center mt-3">
+                        @foreach (App\Models\MainCompanys::where('id', 1)->get() as $item)
+                            <img src="{{ asset('/assets/HMS/lablogo/' . $item->lab_image) }}" alt="Lab Logo"
+                                style="width: 80px; height: 80px" class="img-fluid"> <br />
+                        @endforeach
                     </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <span class="h4">Invoice Number : {{ $bills->bill_no }}</span><br>
+                                <span class="h6">Patient Id : {{ $bills->patients->patient_id }}</span><br>
+                                <span class="h6">Patient Name : {{ $bills->users->name }}</span><br>
+                                <span class="h6">Mobile Number : {{ $bills->patients->home_phone }}</span><br>
+                                <span class="h6">Email : {{ $bills->users->email }}</span><br>
+                            </div>
 
-                    <div class="col-md-6">
-                        {{-- <img src="{{ asset('assets/HMS/patient/'.$bills->users->profile_photo_path) }}" alt="{{ $bills->users->profile_photo_path }}" class="img-fluid rounded-circle" style="width: 200px; height: 200px" > --}}
-                        <div class="float-right">
-                            <p>Hospital Logo</p>
-                        <h3>ABCD Lab</h3>
-                        <span>Dhaka, Bangladesh</span><br>
-                        <span>Phone: +880123456789</span><br>
-                        <span>Email: abc@gmail.com</span>
+                            <div class="col-sm-6">
+                                <div class="text-right">
+                                    @foreach (App\Models\MainCompanys::where('id', 1)->get() as $item)
+                                        <span class="h4">{{ $item->lab_name }}</span><br>
+                                        <span class="h6">{{ $item->lab_address }}</span><br>
+                                        <span class="h6">{{ $item->lab_phone }}</span><br>
+                                        <span class="h6">{{ $item->lab_email }}</span><br>
+                                    @endforeach
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
-                </div>
-
-                <div class="container-fluid">
-                    <table class="table table-sm">
-                        <tbody>
-                            @php
-                                $all_test = json_decode($bills->all_test);
-                            @endphp
-
-                            @foreach ($all_test as $test)
+                    <div class="container mt-5">
+                        <table class="table table-sm">
+                            <tbody>
+                                @php
+                                    $all_test = json_decode($bills->all_test);
+                                @endphp
                                 <tr>
-                                    <th>{{ $test->test_name }}</th>
-                                    <td>:</td>
-                                    <td>{{ number_format($test->test_price, 2) }}</td>
+                                    <th>S/N</th>
+                                    <th>Test Name</th>
+                                    <th class="text-right">Price</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Price</th>
-                                <td>:</td>
-                                <td>{{ $bills->net_price }}</td>
-                            </tr>
-                            <tr>
-                                <th>Discount</th>
-                                <td>:</td>
-                                <td>{{ $bills->discount }}</td>
-                            </tr>
 
-                            <tr>
-                                <th>Total Price</th>
-                                <td>:</td>
-                                <td>{{ $bills->total_price }}</td>
-                            </tr>
+                                @foreach ($all_test as $test)
+                                    <tr>
+                                        <td style="width: 50px">{{ $loop->iteration }}</td>
+                                        <td>{{ $test->test_name }}</td>
+                                        <td class="text-right">{{ number_format($test->test_price, 2) }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
 
-                            <tr>
-                                <th>Paid By</th>
-                                <td>:</td>
-                                <td>{{ $bills->payment_type }}</td>
-                            </tr>
+                        </table>
 
-                            <tr>
-                                <th>Paid Amount</th>
-                                <td>:</td>
-                                <td>{{ $bills->paid_amount }}</td>
-                            </tr>
-                            <tr>
-                                <th>Due/Return Amount</th>
-                                <td>:</td>
-                                <td>{{ $bills->due_amount }}</td>
-                            </tr>
-                            <tr>
-                                <th>Approved Code</th>
-                                <td>:</td>
-                                <td>{{ $bills->approved_code }}</td>
-                            </tr>
-                            <tr>
-                                <th>Bill Collected By</th>
-                                <td>:</td>
-                                <td>{{ $bills->employee_name }}</td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                        <div class="d-flex flex-row-reverse bd-highlight">
+                            <div class="p-2 text-right">
+                                <h3 class="text-right">{{ number_format($bills->net_price, 2) }}</h3>
+                                <h4 class="text-right">{{ number_format($bills->discount, 2) }}</h4>
+                                <h3 class="text-right">{{ number_format($bills->total_price, 2) }}</h3>
+                                <h4 class="text-right">{{ $bills->payment_type }}</h4>
+                                <h4 class="text-right">{{ number_format($bills->paid_amount, 2) }}</h4>
+                                <h4 class="text-right">{{ number_format($bills->due_amount, 2) }}</h4>
+                            </div>
+
+                            <div class="p-2">
+                                <h3>Total Amount :</h3>
+                                <h4>Discount :</h4>
+                                <h3>Net Amount :</h3>
+                                <h4>Payment Method :</h4>
+                                <h4>Paid Amount :</h4>
+                                <h4>Due/Return Amount :</h4>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row mt-5">
                     <div class="col-md-12">
-                        <a href="{{ route('allbills') }}" class="btn btn-primary">Back</a>
-                        <button onclick="window.print()" class="btn btn-success float-right">Print</button>
+                        <button onclick="window.history.back()" class="btn btn-primary">Back</button>
+                        <button onclick="myFunction('printarea')" class="btn btn-success float-right">Print</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <script>
+        function myFunction(el) {
+            var getFullContent = document.body.innerHTML;
+            var printsection = document.getElementById(el).innerHTML;
+            document.body.innerHTML = printsection;
+            window.print();
+            document.body.innerHTML = getFullContent;
+        }
+    </script>
 @endsection

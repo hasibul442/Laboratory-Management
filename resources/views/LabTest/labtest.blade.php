@@ -35,8 +35,8 @@
                             <tr>
                                 <th>#</th>
                                 <th>Category List</th>
+                                <th>Department</th>
                                 <th>Test Ptice</th>
-                                {{-- <th>Status</th> --}}
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -45,19 +45,11 @@
                                 <tr id="labtest{{ $item->id }}">
                                     <td>{{ $loop->iteration }}</td>
                                     <td class="text-wrap">{{ $item->cat_name }}</td>
-                                    <td class="text-wrap">{{ $item->price }}</td>
-                                    {{-- <td class="text-wrap"> --}}
-                                        {{-- <input name="status" class="status" id="status" type="checkbox"
-                                            data-toggle="toggle" data-on="Active" data-off="Deactive" data-size="xs"
-                                            data-onstyle="success" data-offstyle="danger" data-id="{{ $item->id }}"
-                                            {{ $item->status == 1 ? 'checked' : '' }}> --}}
-                                    {{-- </td> --}}
+                                    <td class="text-wrap">{{ $item->department }}</td>
+                                    <td class="text-wrap">{{ number_format($item->price, 2) }}</td>
                                     <td>
-                                        <a href=".modal-demo2"
-                                            class="btn btn-sm btn-outline-purple waves-effect cabin-status-edit"
-                                            data-animation="slip" data-plugin="custommodal" data-overlaySpeed="100"
-                                            data-overlayColor="#36404a" onclick="editlabtest({{ $item->id }})"><i
-                                                class="mdi mdi-pencil-outline"></i></a>
+                                        <a href="javascript:void(0);" class="btn btn-warning btn-sm editbtn"
+                                            data-id={{ $item->id }}><i class="fas fa-edit"></i></a>
                                         <a href="javascript:void(0);" data-id="{{ $item->id }}"
                                             class="btn btn-danger btn-sm deletebtn">
                                             <i class="fas fa-trash"></i>
@@ -75,7 +67,7 @@
     </div> <!-- container -->
 
 
-    {{-- Employees Add Models Start --}}
+    {{-- Test Category Add Models Start --}}
     <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
         aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">
@@ -96,6 +88,20 @@
                                     name="cat_name" placeholder="X-Ray">
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="depertment" class="col-sm-4 col-form-label">Department<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <select class="form-control" name="department" id="department">
+                                    <option disabled selected value="">Select Department Name</option>
+                                    <option value="Pathology">Pathology</option>
+                                    <option value="Radiology">Radiology</option>
+                                    <option value="Ultrasonography">Ultrasonography</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group row">
                             <label for="price" class="col-sm-4 col-form-label">Price<span
                                     class="text-danger">*</span></label>
@@ -121,43 +127,63 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
-    {{-- Employees Add Models End --}}
+    {{-- Test Category Add Models End --}}
 
     {{-- Data Edit Model Start --}}
-    <div id="custom-modal" class="modal-demo modal-demo2">
-        <button type="button" class="close" onclick="Custombox.modal.close();">
-            <span>&times;</span><span class="sr-only">Close</span>
-        </button>
-        <h4 class="custom-modal-title">Update Information</h4>
-        <div class="custom-modal-text">
-            <form class="forms-sample" id="LabTesteditForm" enctype="multipart/form-data">
-                @csrf
 
-                {{-- <ul class="alert alert-warning d-none" id="save_errorList"></ul> --}}
-                <input type="hidden" name="id" id="id">
-
-                <div class="form-group row">
-                    <label for="cat_name" class="col-sm-3 col-form-label">Category Name</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="cat_name1" placeholder="Category Name"
-                            name="cat_name1">
-                    </div>
+    <div class="modal fade modal-demo2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
+        style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myLargeModalLabel">Update Details</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
-                <div class="form-group row">
-                    <label for="cat_name" class="col-sm-3 col-form-label">Price</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control" id="price1"
-                            name="price1">
-                    </div>
-                </div>
+                <div class="modal-body">
+                    <form class="forms-sample" id="LabTesteditForm" enctype="multipart/form-data">
+                        @csrf
+
+                        {{-- <ul class="alert alert-warning d-none" id="save_errorList"></ul> --}}
+                        <input type="hidden" name="id" id="id">
+
+                        <div class="form-group row">
+                            <label for="cat_name" class="col-sm-3 col-form-label">Category Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="cat_name1" placeholder="Category Name"
+                                    name="cat_name1">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="depertment" class="col-sm-3 col-form-label">Department<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="department1" id="department1">
+                                    <option value="Pathology">Pathology</option>
+                                    <option value="Radiology">Radiology</option>
+                                    <option value="Ultrasonography">Ultrasonography</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="cat_name" class="col-sm-3 col-form-label">Price</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="price1" name="price1">
+                            </div>
+                        </div>
 
 
-                <div class="text-center pb-2">
-                    <button type="button" class="btn btn-secondary" onclick="Custombox.modal.close()";>Close</button>
-                    <input type="submit" class="btn btn-success" name="submit" id="submit" value="Submit" />
+                        <div class="text-center pb-2">
+                            <button type="button" class="btn btn-secondary"
+                                onclick="Custombox.modal.close()";>Close</button>
+                            <input type="submit" class="btn btn-success" name="submit" id="submit"
+                                value="Submit" />
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
     </div>
 
     {{-- Data Edit Modal End --}}
@@ -205,11 +231,6 @@
             });
 
 
-
-
-
-
-
             $('body').on('click', '.deletebtn', function() {
                 var id = $(this).data("id");
                 Swal.fire({
@@ -253,20 +274,39 @@
                     }
                 });
             });
-        });
 
-        function editlabtest(id) {
-                $.get("/labtest/edit/" + id, function(labtest) {
-                    $('#id').val(labtest.id);
-                    $('#cat_name1').val(labtest.cat_name);
-                    $('#price1').val(labtest.price);
+            $('body').on('click', '.editbtn', function() {
+                var id = $(this).data('id');
+                $.ajax({
+                    dataType: "json",
+                    url: '/labtest/edit/' + id,
+                    method: 'get',
+                    success: function(labtest) {
+                        $('#id').val(labtest.id);
+                        $('#cat_name1').val(labtest.cat_name);
+                        $('#department1').val(labtest.department);
+                        $('#price1').val(labtest.price);
+                        $('.modal-demo2').modal('show');
+                    },
+                    error: function(error) {
+                        Swal.fire({
+                            position: 'top-end',
+                            icon: 'error',
+                            title: 'We have some error',
+                            showConfirmButton: false,
+                            timerProgressBar: true,
+                            timer: 1800
+                        });
+                    }
                 });
-            }
+            });
+
             $('#LabTesteditForm').submit(function(e) {
                 e.preventDefault();
 
                 let id = $('#id').val();
                 let cat_name1 = $('#cat_name1').val();
+                let department1 = $('#department1').val();
                 let price1 = $('#price1').val();
                 let _token = $('input[name=_token]').val();
 
@@ -276,14 +316,15 @@
                     data: {
                         id: id,
                         cat_name1: cat_name1,
+                        department1: department1,
                         price1: price1,
-                        _token:_token,
+                        _token: _token,
                     },
                     dataType: "json",
                     success: function(response) {
-                        $('#labtest' + response.id + 'td:nth-child(1)').text(response.cat_name1);
-                        $('#labtest' + response.id + 'td:nth-child(2)').text(response.price1);
+
                         $('.modal-demo2').modal("toggle");
+                        $('.modal-demo2').modal("hide");
                         Swal.fire({
                             position: 'top-mid',
                             icon: 'success',
@@ -293,21 +334,21 @@
                             timer: 1800
                         });
                         location.reload();
-                        // console.log
                         $('#LabTesteditForm')[0].reset();
 
                     },
-                            error: function(data) {
-                                Swal.fire({
-                                    title: 'Alert!',
-                                    text: 'Something Wrong',
-                                    icon: 'alert',
-                                    showConfirmButton: false,
-                                });
-                                // console.log('Error:', data);
-                            }
+                    error: function(data) {
+                        Swal.fire({
+                            title: 'Alert!',
+                            text: 'Something Wrong',
+                            icon: 'alert',
+                            showConfirmButton: false,
+                        });
+                        // console.log('Error:', data);
+                    }
                 });
 
             });
+        });
     </script>
 @endsection

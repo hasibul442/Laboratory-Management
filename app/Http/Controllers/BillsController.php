@@ -6,6 +6,7 @@ use App\Models\Bills;
 use App\Models\LabTestCat;
 use App\Models\MainCompanys;
 use App\Models\Payments;
+use App\Models\TestReport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
@@ -127,6 +128,7 @@ class BillsController extends Controller
             $all_test[] = [
                 'id' => $request->id[$i],
                 'test_name' => $request->cat_name[$i],
+                'department' => $request->department[$i],
                 'test_price' => $request->price[$i],
             ];
         }
@@ -140,6 +142,15 @@ class BillsController extends Controller
         $bills->approved_code = $request->abbroval_code;
         $bills->employee_name = Auth::user()->name;
         $bills->save();
+
+        for($j=0; $j < count($request->id); $j++){
+            $testreport = new TestReport;
+            $testreport->patient_id = $bills->patient_id;
+            $testreport->invoice_id = $bills->id;
+            $testreport->test_id = $request->id[$j];
+            $testreport->status = 'Pending';
+            $testreport->save();
+        }
 
         $payments = new Payments;
         $payments->type = 'Income';

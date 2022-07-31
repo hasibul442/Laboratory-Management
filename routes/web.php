@@ -85,12 +85,14 @@ Route::middleware(['auth:sanctum', 'verified'])
             // Route::get('/expanseledger/details', 'App\Http\Controllers\ReportGenarationController@expanseledgerdetails')->name('expanseledgerdetails');
 
             //tEST Report  Route
-            Route::get('/xrayreport', 'App\Http\Controllers\XrayReportController@index')->name('xrayreport');
-            Route::post('/xrayreport/add','App\Http\Controllers\XrayReportController@store');
-            Route::delete('/xrayreport/{id}','App\Http\Controllers\XrayReportController@destroy');
-            Route::get('/xrayreport/edit/{id}/','App\Http\Controllers\XrayReportController@edit')->name('xrayreport.edit');
-            Route::put('/xrayreport/update/{id}/','App\Http\Controllers\XrayReportController@update')->name('xrayreport.update');
+            Route::get('/testreport', 'App\Http\Controllers\XrayReportController@index')->name('xrayreport');
+            Route::post('/testreport/add','App\Http\Controllers\XrayReportController@store');
+            Route::delete('/testreport/{id}','App\Http\Controllers\XrayReportController@destroy');
+            Route::get('/testreport/edit/{id}/','App\Http\Controllers\XrayReportController@edit')->name('xrayreport.edit');
+            Route::put('/testreport/update/{id}/','App\Http\Controllers\XrayReportController@update')->name('xrayreport.update');
 
+            Route::get('/pathology', 'App\Http\Controllers\XrayReportController@pathology')->name('pathology');
+            Route::get('/pathology/testresult/{id}/','App\Http\Controllers\XrayReportController@pathologyedit')->name('pathologyedit');
             //Inventories Route
             Route::get('/inventories', 'App\Http\Controllers\InventoriesController@index')->name('inventories');
             Route::get('/inventories/history', 'App\Http\Controllers\InventoriesController@getInventories')->name('inventories.history');

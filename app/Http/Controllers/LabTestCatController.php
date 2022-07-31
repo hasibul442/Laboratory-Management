@@ -38,6 +38,7 @@ class LabTestCatController extends Controller
     {
         $labtest = new LabTestCat;
         $labtest->cat_name =$request->cat_name;
+        $labtest->department =$request->department;
         $labtest->price =$request->price;
         $labtest->status = 1;
         $labtest->save();
@@ -78,6 +79,7 @@ class LabTestCatController extends Controller
     {
         $labtest = LabTestCat::find($request->id);
         $labtest->cat_name = $request->input('cat_name1');
+        $labtest->department = $request->input('department1');
         $labtest->price = $request->input('price1');
         $labtest->update();
         return response()->json($labtest);

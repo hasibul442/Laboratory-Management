@@ -117,6 +117,12 @@
                 </li>
 
                 <li>
+                    <a href="{{ route('pathology') }}">
+                        <i class="dripicons-meter"></i>
+                        <span> Pathology </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('xrayreport') }}">
                         <i class="dripicons-meter"></i>
                         <span> Test Report </span>

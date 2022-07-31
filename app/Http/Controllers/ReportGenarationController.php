@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Patients;
 use App\Models\Payments;
 use App\Models\Referrals;
-use App\Models\XrayReport;
+use App\Models\TestReport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -67,14 +67,14 @@ class ReportGenarationController extends Controller
     }
 
     public function reportbooth(){
-        $xrayreport =XrayReport::where('status','=','Ready For Collection')->get();
-        return view('XrayReport.reportbooth', compact('xrayreport'));
+        $testreport =TestReport::where('status','=','Ready For Collection')->get();
+        return view('XrayReport.reportbooth', compact('testreport'));
     }
     public function report_statuschange($id, $status)
     {
-        $xrayreport = XrayReport::find($id);
-        $xrayreport->status = $status;
-        $xrayreport->update();
+        $testreport = TestReport::find($id);
+        $testreport->status = $status;
+        $testreport->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
     // public function expanseledger()

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateXrayreportTable extends Migration
+class CreateTestreportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateXrayreportTable extends Migration
      */
     public function up()
     {
-        Schema::create('testreport', function (Blueprint $table) {
+        Schema::create('testreports', function (Blueprint $table) {
             $table->increments('id');
             $table->string('patient_id')->nullable();
-            $table->string('order_id')->nullable();
+            $table->string('invoice_id')->nullable();
             $table->string('test_id')->nullable();
 
             $table->string('image')->nullable();
@@ -24,6 +24,7 @@ class CreateXrayreportTable extends Migration
             $table->string('status')->nullable();
             $table->longText('testresult')->nullable();
             $table->string('signeture')->nullable();
+            $table->string('elementuse')->nullable();
             $table->timestamps();
         });
     }
@@ -35,6 +36,6 @@ class CreateXrayreportTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('xrayreport');
+        Schema::dropIfExists('testreports');
     }
 }

@@ -236,8 +236,9 @@
     $(document).on('click', '#labtest', function() {
         var labtest_id = $(this).attr('data-id');
         // console.log(labtest_id);
-        var n = ($('#items tr').length - 0) + 1;
-        var n1 = ($('#items1 tr').length - 0) + 1;
+        let n = ($('#items tr').length - 0) + 1;
+        let n1 = ($('#items1 tr').length - 0) + 1;
+        // console.log(n);
         if ($(".item-in-cart").toArray().map(el => el.getAttribute("data-id")).includes(labtest_id)) {
             Swal.fire({
                 position: 'top-end'
@@ -250,7 +251,7 @@
         } else {
             $.get("/labtest/edit/" + labtest_id, function(data) {
                 var tr = $('#items').append(`<tr class="item-in-cart" data-id="${labtest_id}">
-                        <td>${n}<input type="hidden"  value="${data.id}" class="id" name="id[]" id="id"</td>
+                        <td>${n}<input type="hidden"  value="${data.id}" class="id" name="id[]" id="id"/><input type="hidden"  value="${data.department}" class="department" name="department[]" id="department"/></td>
                         <td>${data.cat_name} <input type="hidden" value="${data.cat_name}" class="form-control cat_name border-0 bg-white" id="cat_name" name="cat_name[]" readonly></td>
                         <td>${Number(data.price).toFixed(2)}<input type="hidden" value="${data.price}" class="item-in-cart-cost form-control price border-0 bg-white"  id="price" name="price[]" readonly></td>
                         <td><button name="remove" class="btn btn-danger btn-sm remove" id="remove"><i class="fas fa-eraser"></i> </button></td>
@@ -263,8 +264,7 @@
                         </tr>`);
             });
 
-        }
-        $('.items').delegate(".remove", "click", function() {
+            $('.items').delegate(".remove", "click", function() {
             // $(this).closest('tr').remove();
             // $(this).closest('tr1').remove();
             var rowIndex = $(this).closest('tr').prop('rowIndex');
@@ -275,12 +275,16 @@
 
         });
 
+        }
+
+
     });
 
 
 
     function cartTotal() {
         let count = $(".item-in-cart-cost").length;
+        // console.log(count);
         if (count > 0) {
             let totalCost = $(".item-in-cart-cost").toArray().map(el => $(el).val()).reduce((x, y) => Number(x) +
                 Number(y));

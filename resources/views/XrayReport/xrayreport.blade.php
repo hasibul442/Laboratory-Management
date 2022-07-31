@@ -192,7 +192,7 @@
                         var token = $("meta[name='csrf-token']").attr("content");
                         $.ajax({
                             type: "DELETE",
-                            url: "/xrayreport/" + id,
+                            url: "/testreport/" + id,
                             data: {
                                 "id": id,
                                 "_token": token,
@@ -232,7 +232,7 @@
             var myformData = new FormData($('#XrayReportForm')[0]);
             $.ajax({
                 type: "post",
-                url: "/xrayreport/add",
+                url: "/testreport/add",
                 data: myformData,
                 cache: false,
                 processData: false,

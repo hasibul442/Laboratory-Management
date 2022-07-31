@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class XrayReport extends Model
+class TestReport extends Model
 {
     use HasFactory;
-    public $table = "testreport";
-    public $fillable = [ 'patient_id','order_id',
+    public $table = "testreports";
+    public $fillable = [ 'patient_id','invoice_id',
     'test_id',
     'image',
     'upload_by',
     'status',
     'testresult',
-    'signeture'
+    'signeture',
+    'elementuse'
     ];
 
     public function users(){
@@ -23,6 +24,9 @@ class XrayReport extends Model
     }
     public function test(){
         return $this->belongsTo(LabTestCat::class, 'test_id');
+    }
+    public function invoice(){
+        return $this->belongsTo(Bills::class, 'invoice_id','id');
     }
     public function patients(){
         return $this->belongsTo(Patients::class, 'patient_id','user_id');
