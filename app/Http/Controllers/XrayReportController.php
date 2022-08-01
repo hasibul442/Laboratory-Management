@@ -65,7 +65,7 @@ class XrayReportController extends Controller
         }
         if($request->hasFile('signeture')){
             $file = $request->file('signeture');
-            $file_name = time().'.'.$file->getClientOriginalExtension();
+            $file_name = $file->getClientOriginalName();
             $file->move(public_path().'/assets/HMS/signature/',$file_name);
             $pathologytest->signeture = $file_name;
         }
