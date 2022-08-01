@@ -24,7 +24,7 @@ class CreateTestreportsTable extends Migration
             $table->string('status')->nullable();
             $table->longText('testresult')->nullable();
             $table->string('signeture')->nullable();
-            $table->string('elementuse')->nullable();
+            $table->json('elementuse')->nullable();
             $table->timestamps();
         });
     }

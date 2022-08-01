@@ -26,29 +26,34 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Patient Name</th>
                         <th>Patient ID</th>
-                        <th>Report Date</th>
-                        <th>Report Time</th>
-                        <th>Report Type</th>
+                        <th>Patient Name</th>
+                        <th>Invoice Number</th>
+                        <th>Test Name</th>
                         <th>Report Status</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($xrayreport as $item)
+                    @foreach ($testreport as $item)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->patients->patient_id }}</td>
                             <td>{{ $item->users->name }}</td>
-                            <td>{{ $item->order_id }}</td>
+                            <td>{{ $item->invoice->bill_no }}</td>
                             <td>{{ $item->test->cat_name }}</td>
-                            <td>{{ $item->upload_by }}</td>
                             <td>
                                 <input type="checkbox" class="status" id="status" data-toggle="toggle"
                                             data-on="Collected" data-off="Ready For Collect" data-onstyle="success"
                                             data-offstyle="danger" data-id="{{ $item->id }}"
                                             {{ $item->status == 'Collected' ? 'checked' : '' }}></td>
                             </td>
+                            <td>
+                                <a href="{{ url('/report/details', $item->id) }}" class="btn btn-info btn-sm">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </td>
+
                         </tr>
                     @endforeach
                 </tbody>

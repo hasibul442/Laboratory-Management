@@ -67,7 +67,7 @@ class ReportGenarationController extends Controller
     }
 
     public function reportbooth(){
-        $testreport =TestReport::where('status','=','Ready For Collection')->get();
+        $testreport =TestReport::where('status','=','Test Complete')->orderBy('updated_at', 'DESC')->get();
         return view('XrayReport.reportbooth', compact('testreport'));
     }
     public function report_statuschange($id, $status)
@@ -76,6 +76,12 @@ class ReportGenarationController extends Controller
         $testreport->status = $status;
         $testreport->update();
         return response()->json(['success' => 'Status changed successfully.']);
+    }
+
+    public function report_details($id)
+    {
+        $testreport = TestReport::find($id);
+        return view('XrayReport.report_details', compact('testreport'));
     }
     // public function expanseledger()
     // {

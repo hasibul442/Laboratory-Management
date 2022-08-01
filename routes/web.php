@@ -81,6 +81,7 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('/referralreport', 'App\Http\Controllers\ReportGenarationController@referrallist')->name('referralreport');
             Route::get('/reportbooth', 'App\Http\Controllers\ReportGenarationController@reportbooth')->name('reportbooth');
             Route::get('/reportbooth/status/{id}/{status}','App\Http\Controllers\ReportGenarationController@report_statuschange');
+            Route::get('/report/details/{id}/','App\Http\Controllers\ReportGenarationController@report_details');
             // Route::get('/expanseledger', 'App\Http\Controllers\ReportGenarationController@expanseledger')->name('expanseledger');
             // Route::get('/expanseledger/details', 'App\Http\Controllers\ReportGenarationController@expanseledgerdetails')->name('expanseledgerdetails');
 
@@ -93,6 +94,9 @@ Route::middleware(['auth:sanctum', 'verified'])
 
             Route::get('/pathology', 'App\Http\Controllers\XrayReportController@pathology')->name('pathology');
             Route::get('/pathology/testresult/{id}/','App\Http\Controllers\XrayReportController@pathologyedit')->name('pathologyedit');
+            Route::get('/pathology/inventory/{id}/','App\Http\Controllers\XrayReportController@pathologyinstrument')->name('pathologyinstrument');
+            Route::put('/pathology/inventory/{id}/','App\Http\Controllers\XrayReportController@pathologyinstrumentupdate');
+            Route::put('/pathology/result/{id}/','App\Http\Controllers\XrayReportController@pathologyreport');
             //Inventories Route
             Route::get('/inventories', 'App\Http\Controllers\InventoriesController@index')->name('inventories');
             Route::get('/inventories/history', 'App\Http\Controllers\InventoriesController@getInventories')->name('inventories.history');

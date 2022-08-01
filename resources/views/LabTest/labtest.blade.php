@@ -341,7 +341,7 @@
                         Swal.fire({
                             title: 'Alert!',
                             text: 'Something Wrong',
-                            icon: 'alert',
+                            icon: 'warning',
                             showConfirmButton: false,
                         });
                         // console.log('Error:', data);

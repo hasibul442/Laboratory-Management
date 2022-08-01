@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LabTestCat;
+use App\Models\Inventories;
 use App\Models\TestReport;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -18,7 +18,7 @@ class XrayReportController extends Controller
      */
     public function index()
     {
-        $xrayreport =TestReport::all();
+        $xrayreport =TestReport::get();
         return view('XrayReport.xrayreport', compact('xrayreport'));
     }
 
@@ -29,6 +29,51 @@ class XrayReportController extends Controller
         $pathologytest = TestReport::find($id);
         return view('Pathology.pathologyreport',compact('pathologytest'));
     }
+
+    public function pathologyinstrument($id){
+        $pathologytest = Inventories::find($id);
+        return response()->json($pathologytest);
+    }
+    public function pathologyinstrumentupdate(Request $request){
+        $pathologytest = TestReport::find($request->testreport_id);
+        $used_instrument = [];
+        for ($i=0; $i < count($request->id_); $i++) {
+            $stock = Inventories::find($request->id_[$i]);
+            $stock->stock -= $request->stock[$i];
+
+            $used_instrument[] = [
+                'id' => $request->id_[$i],
+                'instrument_name' => $request->instrument_name[$i],
+                'quantity_used' => $request->stock[$i],
+            ];
+            $stock->update();
+        }
+        $pathologytest->elementuse = json_encode($used_instrument);
+        $pathologytest->update();
+        return redirect()->back();
+    }
+
+    public function pathologyreport(Request $request){
+        $pathologytest = TestReport::find($request->id);
+        $pathologytest->testresult = $request->testresult;
+        $pathologytest->status = $request->status;
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $file_name = time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path().'/assets/HMS/pathologyreport/',$file_name);
+            $pathologytest->image = $file_name;
+        }
+        if($request->hasFile('signeture')){
+            $file = $request->file('signeture');
+            $file_name = time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path().'/assets/HMS/signature/',$file_name);
+            $pathologytest->signeture = $file_name;
+        }
+        $pathologytest->update();
+        return redirect()->route('pathology');
+    }
+
+
     /**
      * Show the form for creating a new resource.
      *
@@ -122,7 +167,7 @@ class XrayReportController extends Controller
     public function destroy($id)
     {
         $xrayreport = TestReport::find($id);
-         $xrayreport->delete();
-         return response()->json(['success'=>'Data Delete successfully.']);
+        $xrayreport->delete();
+        return response()->json(['success'=>'Data Delete successfully.']);
     }
 }
