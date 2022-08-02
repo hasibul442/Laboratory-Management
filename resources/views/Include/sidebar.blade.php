@@ -118,14 +118,22 @@
 
                 <li>
                     <a href="{{ route('pathology') }}">
-                        <i class="dripicons-meter"></i>
+                        <i class="fas fa-vial"></i>
                         <span> Pathology </span>
                     </a>
                 </li>
+
                 <li>
-                    <a href="{{ route('xrayreport') }}">
-                        <i class="dripicons-meter"></i>
-                        <span> Test Report </span>
+                    <a href="{{ route('radiology') }}">
+                        <i class="fas fa-skeleton"></i>
+                        <span> Radiology </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('ultrasonography') }}">
+                        <i class="fas fa-monitor-heart-rate"></i>
+                        <span> Ultrasonography </span>
                     </a>
                 </li>
 

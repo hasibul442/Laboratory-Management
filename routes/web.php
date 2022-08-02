@@ -35,9 +35,9 @@ Route::middleware(['auth:sanctum', 'verified'])
             // Employees Route
             Route::get('/employees', 'App\Http\Controllers\EmployeesController@index')->name('employees');
             Route::post('/employees/add','App\Http\Controllers\EmployeesController@store');
-            Route::get('/employees/details/{id}/','App\Http\Controllers\EmployeesController@show')->name('employees.profile');
-            Route::get('/employees/edit/{id}/','App\Http\Controllers\EmployeesController@edit')->name('employees.edit');
-            Route::put('/employees/edit/{id}/','App\Http\Controllers\EmployeesController@update')->name('employees.update');
+            Route::get('/employees/details/{id}','App\Http\Controllers\EmployeesController@show')->name('employees.profile');
+            Route::get('/employees/edit/{id}','App\Http\Controllers\EmployeesController@edit')->name('employees.edit');
+            Route::put('/employees/edit/{id}','App\Http\Controllers\EmployeesController@update')->name('employees.update');
             Route::delete('/employees/{id}','App\Http\Controllers\EmployeesController@destroy');
 
             // Patients ROutes
@@ -45,7 +45,7 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('/new/patients', 'App\Http\Controllers\PatientsController@create')->name('patients.create');
             Route::post('/new/patients/store', 'App\Http\Controllers\PatientsController@store')->name('patients.store');
             Route::get('/patients/status/{id}/{status}','App\Http\Controllers\PatientsController@statuschange');
-            Route::get('/patients/details/{id}/','App\Http\Controllers\PatientsController@show')->name('patients.profile');
+            Route::get('/patients/details/{id}','App\Http\Controllers\PatientsController@show')->name('patients.profile');
             Route::delete('/patients/{id}','App\Http\Controllers\PatientsController@destroy');
 
             // Referrals Route
@@ -59,7 +59,7 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('labtest', 'App\Http\Controllers\LabTestCatController@index')->name('labtest');
             Route::post('/labtest/add','App\Http\Controllers\LabTestCatController@store');
             Route::delete('/labtest/{id}','App\Http\Controllers\LabTestCatController@destroy');
-            Route::get('/labtest/edit/{id}/','App\Http\Controllers\LabTestCatController@edit')->name('labtest.edit');
+            Route::get('/labtest/edit/{id}','App\Http\Controllers\LabTestCatController@edit')->name('labtest.edit');
             Route::put('/labtest/update','App\Http\Controllers\LabTestCatController@update')->name('labtest.update');
 
             // Billing System Route
@@ -67,7 +67,7 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('/allbilling', 'App\Http\Controllers\BillsController@allbills')->name('allbills');
             Route::get('/all/billing', 'App\Http\Controllers\BillsController@allbills')->name('all.bills');
             Route::post('/billing/add','App\Http\Controllers\BillsController@store');
-            Route::get('/billing/details/{id}/','App\Http\Controllers\BillsController@show')->name('billing.details');
+            Route::get('/billing/details/{id}','App\Http\Controllers\BillsController@show')->name('billing.details');
 
             // Billing System Route
             Route::get('/transection/record', 'App\Http\Controllers\PaymentsController@index')->name('transection.record');
@@ -81,22 +81,25 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('/referralreport', 'App\Http\Controllers\ReportGenarationController@referrallist')->name('referralreport');
             Route::get('/reportbooth', 'App\Http\Controllers\ReportGenarationController@reportbooth')->name('reportbooth');
             Route::get('/reportbooth/status/{id}/{status}','App\Http\Controllers\ReportGenarationController@report_statuschange');
-            Route::get('/report/details/{id}/','App\Http\Controllers\ReportGenarationController@report_details');
+            Route::get('/report/details/{id}','App\Http\Controllers\ReportGenarationController@report_details');
             // Route::get('/expanseledger', 'App\Http\Controllers\ReportGenarationController@expanseledger')->name('expanseledger');
             // Route::get('/expanseledger/details', 'App\Http\Controllers\ReportGenarationController@expanseledgerdetails')->name('expanseledgerdetails');
 
-            //tEST Report  Route
-            Route::get('/testreport', 'App\Http\Controllers\XrayReportController@index')->name('xrayreport');
-            Route::post('/testreport/add','App\Http\Controllers\XrayReportController@store');
-            Route::delete('/testreport/{id}','App\Http\Controllers\XrayReportController@destroy');
-            Route::get('/testreport/edit/{id}/','App\Http\Controllers\XrayReportController@edit')->name('xrayreport.edit');
-            Route::put('/testreport/update/{id}/','App\Http\Controllers\XrayReportController@update')->name('xrayreport.update');
+            //tEST Report  Rout
 
             Route::get('/pathology', 'App\Http\Controllers\XrayReportController@pathology')->name('pathology');
-            Route::get('/pathology/testresult/{id}/','App\Http\Controllers\XrayReportController@pathologyedit')->name('pathologyedit');
-            Route::get('/pathology/inventory/{id}/','App\Http\Controllers\XrayReportController@pathologyinstrument')->name('pathologyinstrument');
-            Route::put('/pathology/inventory/{id}/','App\Http\Controllers\XrayReportController@pathologyinstrumentupdate');
-            Route::put('/pathology/result/{id}/','App\Http\Controllers\XrayReportController@pathologyreport');
+            Route::get('/pathology/testresult/{id}','App\Http\Controllers\XrayReportController@pathologyedit')->name('pathologyedit');
+            Route::get('/pathology/inventory/{id}','App\Http\Controllers\XrayReportController@pathologyinstrument')->name('pathologyinstrument');
+            Route::put('/pathology/inventory/{id}','App\Http\Controllers\XrayReportController@pathologyinstrumentupdate');
+            Route::put('/pathology/result/{id}','App\Http\Controllers\XrayReportController@pathologyreport');
+
+            Route::get('/radiology', 'App\Http\Controllers\XrayReportController@radiology')->name('radiology');
+            Route::get('/radiology/testresult/{id}','App\Http\Controllers\XrayReportController@radiologyedit')->name('radiologyedit');
+            Route::put('/radiology/result/{id}','App\Http\Controllers\XrayReportController@radiologyreport');
+
+            Route::get('/ultrasonography', 'App\Http\Controllers\XrayReportController@ultrasonography')->name('ultrasonography');
+            Route::get('/ultrasonography/testresult/{id}','App\Http\Controllers\XrayReportController@ultrasonographyedit')->name('ultrasonographyedit');
+            Route::put('/ultrasonography/result/{id}','App\Http\Controllers\XrayReportController@ultrasonographyreport');
             //Inventories Route
             Route::get('/inventories', 'App\Http\Controllers\InventoriesController@index')->name('inventories');
             Route::get('/inventories/history', 'App\Http\Controllers\InventoriesController@getInventories')->name('inventories.history');
@@ -104,4 +107,8 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::post('/inventories/update','App\Http\Controllers\InventoriesController@storeinventoryhistory');
             Route::delete('/inventories/{id}','App\Http\Controllers\InventoriesController@destroy');
             Route::delete('/inventories/history/{id}','App\Http\Controllers\InventoriesController@historydestroy');
+
+            //Attendance Route
+            Route::post('/Attendance/add','App\Http\Controllers\AttendancesController@store');
+            Route::put('/Attendance/update','App\Http\Controllers\AttendancesController@update');
 });

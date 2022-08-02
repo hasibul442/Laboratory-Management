@@ -64,10 +64,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="image" class="col-sm-2 col-form-label">Status<span class="text-danger">*</span></label>
+                                <label for="image" class="col-sm-2 col-form-label">Status<span
+                                        class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <select class="form-control" name="status" id="status">
-                                        <option selected value="{{ $pathologytest->status }}">{{ $pathologytest->status }}</option>
+                                        <option selected value="{{ $pathologytest->status }}">{{ $pathologytest->status }}
+                                        </option>
                                         <option value="Test Complete">Test Complete</option>
                                     </select>
                                 </div>
@@ -108,7 +110,8 @@
                                         @method('PUT')
                                         <input type="hidden" value="{{ $pathologytest->id }}" name="testreport_id"
                                             id="testreport_id">
-                                        <table class="table  nowrap table-borderless table_field table-sm" id="table_field">
+                                        <table class="table  nowrap table-borderless table_field table-sm"
+                                            id="table_field">
                                             <thead>
                                                 <tr>
                                                     <th> S/N </th>
@@ -153,12 +156,19 @@
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td><a href="javascript:void(0);" class="instrument"
                                                                 id="instrument"
-                                                                data-id="{{ $item->id }}">{{ $item->name }}</a></td>
+                                                                data-id="{{ $item->id }}">{{ $item->name }}</a>
+                                                        </td>
                                                         <td>
                                                             @if ($item->stock < 10 && $item->stock > 0)
-                                                                <span class="text-warning font-weight-bold">{{ $item->stock }}</span><span class="badge badge-pill badge-warning float-right">Stock <br>Going Low</span>
+                                                                <span
+                                                                    class="text-warning font-weight-bold">{{ $item->stock }}</span><span
+                                                                    class="badge badge-pill badge-warning float-right">Stock
+                                                                    <br>Going Low</span>
                                                             @elseif ($item->stock == 0)
-                                                                <span class="text-danger font-weight-bold">{{ $item->stock }}</span><span class="badge badge-pill badge-danger float-right">Out of <br>Stock</span>
+                                                                <span
+                                                                    class="text-danger font-weight-bold">{{ $item->stock }}</span><span
+                                                                    class="badge badge-pill badge-danger float-right">Out
+                                                                    of <br>Stock</span>
                                                             @else
                                                                 <span class="font-weight-bold">{{ $item->stock }}</span>
                                                             @endif
@@ -203,7 +213,23 @@
     </div>
 
     <script>
-        CKEDITOR.replace('editor');
+        $(document).ready(function() {
+            $('#editor').summernote({
+                height: 300,
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontname', ['fontname']],
+                    ['fontsize', ['fontsize']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['table', ['table']],
+                    ['height', ['height']],
+                    ['view', ['fullscreen', 'codeview', 'help']],
+                ]
+            });
+        });
     </script>
 
     <script>
@@ -221,7 +247,7 @@
                 });
             } else {
                 $.get("/pathology/inventory/" + instrument_id, function(data) {
-                    if(data.stock == 0){
+                    if (data.stock == 0) {
                         Swal.fire({
                             position: 'top-end',
                             icon: 'warning',
@@ -230,7 +256,7 @@
                             timerProgressBar: true,
                             timer: 1800
                         });
-                    }else{
+                    } else {
                         var tr = $('#items').append(`<tr class="item-in-cart" data-id="${instrument_id}">
                         <td>${n}<input type="hidden" value="${data.id}" class="id_" name="id_[]" id="id_"/></td>
                         <td>${data.name} <input type="hidden" value="${data.name}" class="form-control instrument_name border-0 bg-white" id="instrument_name_" name="instrument_name[]" readonly></td>
@@ -245,54 +271,5 @@
                 $(this).closest('tr').remove();
             });
         });
-
-        // $('#InstrumentForm').submit(function (e) {
-        //     e.preventDefault();
-        //     $.ajaxSetup({
-        //         headers: {
-        //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        //         }
-        //     });
-        //     // let testreport_id = $('#testreport_id').val();
-        //     // let id_ = $('#id_').val();
-        //     // let instrument_name_ = $('#instrument_name_').val();
-        //     // let stock_ = $('#stock_').val();
-        //     // let _token = $('input[name=_token]').val();
-        //     var myformData = new FormData($('#InstrumentForm')[0]);
-
-        //     $.ajax({
-        //         type : "PUT",
-        //         url: "/pathology/inventory/update/",
-        //         data: myformData,
-        //         dataType: 'json',
-        //         cache: false,
-        //         processData: false,
-        //         contentType: false,
-        //         success:function(response){
-        //             console.log(response);
-        //             Swal.fire({
-        //                     position: 'top-mid',
-        //                     icon: 'success',
-        //                     title: 'Update Successfull',
-        //                     showConfirmButton: false,
-        //                     timerProgressBar: true,
-        //                     timer: 1800
-        //                 });
-        //                 location.reload();
-        //                 $('#InstrumentForm')[0].reset();
-        //         },
-        //         error: function(data) {
-        //             console.log(data);
-        //                 Swal.fire({
-        //                     title: 'Alert!',
-        //                     text: 'Something Wrong',
-        //                     icon: 'warning',
-        //                     showConfirmButton: false,
-        //                 });
-        //         }
-
-        //     });
-
-        // });
     </script>
 @endsection

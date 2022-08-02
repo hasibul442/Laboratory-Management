@@ -18,8 +18,6 @@ class XrayReportController extends Controller
      */
     public function index()
     {
-        $xrayreport =TestReport::get();
-        return view('XrayReport.xrayreport', compact('xrayreport'));
     }
 
     public function pathology(){
@@ -29,7 +27,6 @@ class XrayReportController extends Controller
         $pathologytest = TestReport::find($id);
         return view('Pathology.pathologyreport',compact('pathologytest'));
     }
-
     public function pathologyinstrument($id){
         $pathologytest = Inventories::find($id);
         return response()->json($pathologytest);
@@ -52,7 +49,6 @@ class XrayReportController extends Controller
         $pathologytest->update();
         return redirect()->back();
     }
-
     public function pathologyreport(Request $request){
         $pathologytest = TestReport::find($request->id);
         $pathologytest->testresult = $request->testresult;
@@ -60,7 +56,7 @@ class XrayReportController extends Controller
         if($request->hasFile('image')){
             $file = $request->file('image');
             $file_name = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path().'/assets/HMS/pathologyreport/',$file_name);
+            $file->move(public_path().'/assets/HMS/report/',$file_name);
             $pathologytest->image = $file_name;
         }
         if($request->hasFile('signeture')){
@@ -71,6 +67,61 @@ class XrayReportController extends Controller
         }
         $pathologytest->update();
         return redirect()->route('pathology');
+    }
+
+
+    public function radiology(){
+        return view('Radiology.radiology');
+    }
+    public function radiologyedit($id){
+        $radiology = TestReport::find($id);
+        return view('Radiology.update',compact('radiology'));
+    }
+    public function radiologyreport(Request $request){
+        $radiologytest = TestReport::find($request->id);
+        $radiologytest->testresult = $request->testresult;
+        $radiologytest->status = $request->status;
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $file_name = time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path().'/assets/HMS/report/',$file_name);
+            $radiologytest->image = $file_name;
+        }
+        if($request->hasFile('signeture')){
+            $file = $request->file('signeture');
+            $file_name = $file->getClientOriginalName();
+            $file->move(public_path().'/assets/HMS/signature/',$file_name);
+            $radiologytest->signeture = $file_name;
+        }
+        $radiologytest->update();
+        return redirect()->route('radiology');
+    }
+
+    public function ultrasonography(){
+        return view('Ultrasonography.ultrasonography');
+    }
+    public function ultrasonographyedit($id){
+        $ultrasonography = TestReport::find($id);
+        return view('Ultrasonography.update',compact('ultrasonography'));
+    }
+    public function ultrasonographyreport(Request $request){
+        $ultrasonographytest = TestReport::find($request->id);
+        $ultrasonographytest->testresult = $request->testresult;
+        $ultrasonographytest->status = $request->status;
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $file_name = time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path().'/assets/HMS/report/',$file_name);
+            $ultrasonographytest->image = $file_name;
+        }
+        if($request->hasFile('signeture')){
+            $file = $request->file('signeture');
+            $file_name = $file->getClientOriginalName();
+            $file->move(public_path().'/assets/HMS/signature/',$file_name);
+            $ultrasonographytest->signeture = $file_name;
+        }
+        $ultrasonographytest->update();
+        return redirect()->route('ultrasonography');
     }
 
 
@@ -92,20 +143,7 @@ class XrayReportController extends Controller
      */
     public function store(Request $request)
     {
-        $xrayreport = new TestReport;
-        $xrayreport->patient_id =$request->patient_id;
-        $xrayreport->order_id =$request->invoice_number;
-        $xrayreport->test_id =$request->test_type;
-        $xrayreport->upload_by = Auth::user()->name;
-        $xrayreport->status = "Ready For Collection";
-        if($request->hasFile('image')){
-            $file = $request->file('image');
-            $file_name = time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path().'/assets/HMS/xrayreport/',$file_name);
-            $xrayreport->image = $file_name;
-        }
-        $xrayreport->save();
-        return response()->json($xrayreport);
+
     }
 
 
@@ -128,8 +166,7 @@ class XrayReportController extends Controller
      */
     public function edit($id)
     {
-        $xrayreport = TestReport::find($id);
-        return view('xrayreport.edit', compact('xrayreport'));
+
     }
 
     /**
@@ -141,21 +178,7 @@ class XrayReportController extends Controller
      */
     public function update(Request $request)
     {
-        $xrayreport = TestReport::find($request->id);
-        $xrayreport->patient_id = $request->patient_id;
-        $xrayreport->test_type = $request->test_type;
-        if($request->hasFile('image')){
-            $destination = public_path().'/assets/HMS/xrayreport/'.$xrayreport->image;
-            if(File::exists($destination)){
-                File::delete($destination);
-            }
-            $image = $request->file('image');
-            $image_name = time().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path().'/assets/HMS/xrayreport/',$image_name);
-            $xrayreport->image = $image_name;
-        }
-        $xrayreport->update();
-        return redirect()->route('xrayreport');
+
     }
 
     /**
@@ -166,8 +189,6 @@ class XrayReportController extends Controller
      */
     public function destroy($id)
     {
-        $xrayreport = TestReport::find($id);
-        $xrayreport->delete();
-        return response()->json(['success'=>'Data Delete successfully.']);
+
     }
 }

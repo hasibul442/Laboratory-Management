@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'Lab Test Category')
+@section('title', 'Radiology')
 @section('content')
 
     <div class="container-fluid">
@@ -10,10 +10,10 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
-                            <li class="breadcrumb-item active">Pathology</li>
+                            <li class="breadcrumb-item active">Radiology</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Pathology Pending Test</h4>
+                    <h4 class="page-title">Radiology Pending Test</h4>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
 
         <div class="card">
             <div class="card-body">
-                <h1 class="text-center">Today Pending Pathology Test</h1>
+                <h1 class="text-center">Today Pending Radiology Test</h1>
 
                 <div class="table-responsive">
                     <table class="table display  pathelogytest_datatable">
@@ -37,19 +37,23 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            @php
+                                $i = 0;
+                            @endphp
                             @foreach (App\Models\TestReport::orderBy('id', 'DESC')->get() as $item)
 
                                 @if ($item->test->department == 'Radiology' && $item->status == 'Pending')
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ ++$i }}</td>
                                     <td>{{ $item->patients->patient_id }}</td>
                                     <td>{{ $item->users->name }}</td>
                                     <td>{{ $item->invoice->bill_no }}</td>
                                     <td>{{ $item->test->cat_name }}</td>
                                     <td>{{ $item->status }}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-sm">View</a>
+                                        <a href="{{ route('radiologyedit', $item->id) }}" class="btn btn-primary btn-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endif

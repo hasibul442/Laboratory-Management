@@ -37,11 +37,12 @@
 
     <!-- Sweet Alert-->
     <link href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" />
+    {{-- <link href="{{ asset('assets/libs/select2/select2.min.css') }}" rel="stylesheet" type="text/css" /> --}}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.1.2/css/dataTables.dateTime.min.css"/>
     {{-- Select2 --}}
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
+    {{-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> --}}
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="{{ asset('assets/js/vendor.min.js') }}"></script>
@@ -59,8 +60,8 @@
     <script src="{{ asset('assets/libs/datatables/buttons.print.min.js') }}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/datetime/1.1.2/js/dataTables.dateTime.min.js"></script>
 
-     <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
-
+     {{-- <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script> --}}
+     {{-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> --}}
 
 </head>
 

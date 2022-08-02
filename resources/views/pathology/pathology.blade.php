@@ -37,12 +37,14 @@
                             </tr>
                         </thead>
                         <tbody>
-
+                            @php
+                            $i = 0;
+                        @endphp
                             @foreach (App\Models\TestReport::orderBy('id', 'DESC')->get() as $item)
 
                                 @if ($item->test->department == 'Pathology' && $item->status == 'Pending')
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ ++$i }}</td>
                                     <td>{{ $item->patients->patient_id }}</td>
                                     <td>{{ $item->users->name }}</td>
                                     <td>{{ $item->invoice->bill_no }}</td>

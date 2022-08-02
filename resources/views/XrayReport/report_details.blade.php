@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'Teport Collection')
+@section('title', 'Report Collection')
 @section('content')
 
     <div class="container-fluid">
