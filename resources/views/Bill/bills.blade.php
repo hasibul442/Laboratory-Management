@@ -181,8 +181,8 @@
                 </div>
             </div>
 
-            <div class="col-sm-2 text-dark" style=" color: #000" style="display: none">
-                <div class="card" id="details">
+            <div class="text-dark hidden" style=" color: #000" >
+                <div class="card" id="details" style="display: none">
                     <div class="card-body">
                         <p style="color: #000">Hospital Logo</p>
                         <h3 style="color: #000">ABCD Lab</h3>
