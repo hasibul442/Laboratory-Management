@@ -32,6 +32,10 @@ class AttendancesController extends Controller
                     $exits_time = $item->exit_date.'<br/>'.$item->exit_time;
                 return $exits_time;}
             })
+            // ->addColumn('employeesid', function ($item) {
+            //     $employeesid = $item->employees->id;
+            //     return $employeesid;
+            // })
             ->addColumn('user_name', function ($item) {
                 $user_name = $item->users->name;
                 return $user_name;

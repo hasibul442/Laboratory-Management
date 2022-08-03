@@ -1,5 +1,5 @@
 @extends('layout.master')
-@section('title', 'Activities')
+@section('title', 'Attendance')
 @section('content')
 
     <div class="container-fluid">
@@ -9,18 +9,18 @@
                 <div class="page-title-box">
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Activities</a></li>
-                            <li class="breadcrumb-item active">Activities</li>
+                            <li class="breadcrumb-item"><a href="javascript: void(0);">Attendance</a></li>
+                            <li class="breadcrumb-item active">Attendance</li>
                         </ol>
                     </div>
-                    <h4 class="page-title">Activities List</h4>
+                    <h4 class="page-title">Attendance List</h4>
                 </div>
             </div>
         </div>
 
         <div class="card">
             <div class="card-body">
-                <h4 class="text-center">All Activities List</h4>
+                <h4 class="text-center">All Attendance List</h4>
 
                 <div class="table-responsive">
                     <table class="table activities_datatable" id="activities_datatable">
@@ -53,9 +53,9 @@
                 columns: [
                     { data: 'DT_RowIndex', name: 'DT_RowIndex'},
                     { data: 'user_name', name: 'user_name' },
+                    // { data: 'employeesid', name: 'employeesid' },
                     { data: 'enters_time', name: 'enters_time' },
                     { data: 'exits_time', name: 'exits_time' },
-                    // { data: 'employeesid', name: 'employeesid' },
                     // { data: 'activity', name: 'activity' },
                 ]
             });
