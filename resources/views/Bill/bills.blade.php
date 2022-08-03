@@ -37,7 +37,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="text-center">All Test</h5>
@@ -64,7 +64,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="text-center">Bills</h5>
@@ -174,14 +174,14 @@
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <input type="submit" class="btn btn-success" name="submit" id="submit"
                                     value="Submit" />
-                                <button onclick="myFunction('details')" class="btn btn-success float-right">Print</button>
+                                {{-- <button onclick="myFunction('details')" class="btn btn-success float-right">Print</button> --}}
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm-2 text-dark" style=" color: #000">
+            <div class="col-sm-2 text-dark" style=" color: #000" style="display: none">
                 <div class="card" id="details">
                     <div class="card-body">
                         <p style="color: #000">Hospital Logo</p>

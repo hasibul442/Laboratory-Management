@@ -192,7 +192,7 @@
 
 
                         <div class="form-group row">
-                            <label for="user_type" class="col-sm-4 col-form-label">User Type<span
+                            <label for="user_type" class="col-sm-4 col-form-label">User Role<span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-7">
                                 <select class="form-control" id="user_type" required name="user_type">
@@ -200,6 +200,10 @@
                                     <option value="super_admin">Super Admin</option>
                                     <option value="admin">Admin</option>
                                     <option value="employees">Employees</option>
+                                    <option value="accountant">Accountant</option>
+                                    <option value="receptionist">Receptionist</option>
+                                    <option value="labscientist">Lab Scientist</option>
+                                    <option value="Radiographer">Radiographer</option>
                                 </select>
                             </div>
                         </div>
