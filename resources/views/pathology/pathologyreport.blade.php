@@ -56,7 +56,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="image" class="col-sm-2 col-form-label">Test Result<span
+                                <label for="editor" class="col-sm-2 col-form-label">Test Result<span
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <textarea id="editor" name="testresult" required>{{ $pathologytest->testresult }}</textarea>

@@ -109,6 +109,12 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::delete('/inventories/history/{id}','App\Http\Controllers\InventoriesController@historydestroy');
 
             //Attendance Route
+            Route::get('/Attendance','App\Http\Controllers\AttendancesController@index')->name('Attendance');
             Route::post('/Attendance/add','App\Http\Controllers\AttendancesController@store');
             Route::put('/Attendance/update','App\Http\Controllers\AttendancesController@update');
+
+            //Activities Route
+            Route::get('/activities','App\Http\Controllers\DaityActivitiesController@index')->name('activities');
+            Route::post('/activities/add','App\Http\Controllers\DaityActivitiesController@store');
+            Route::put('/activities/update','App\Http\Controllers\DaityActivitiesController@update');
 });

@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Attendances extends Model
+class DailyActivities extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id','enter_date','enter_time','exit_date','exit_time'];
-    protected $table = 'attendances';
-
+    protected $fillable = ['user_id', 'date', 'activity'];
+    protected $table = 'dailyactivities';
     public function users(){
         return $this->belongsTo(User::class, 'user_id','id');
     }

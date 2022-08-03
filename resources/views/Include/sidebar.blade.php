@@ -46,6 +46,19 @@
                         <span> Employee </span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('activities') }}">
+                        <i class="fas fa-user-friends"></i>
+                        <span> Activities </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ route('Attendance') }}">
+                        <i class="fas fa-user-friends"></i>
+                        <span> Attendance </span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="javascript: void(0);">
