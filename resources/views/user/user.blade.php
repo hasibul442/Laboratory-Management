@@ -34,6 +34,7 @@
                                 <th>Email</th>
                                 <th>User Type</th>
                                 <th>Status</th>
+                                <th>Permission</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -71,9 +72,14 @@
                         <div class="form-group mb-3">
                             <label for="user_type1">Admin Roll</label>
                             <select class="form-control" name="user_type1" id="user_type1">
-                                <option value="super_admin">Super Admin</option>
-                                <option value="admin">Admin</option>
-                                <option value="employees">Employees</option>
+                                <option value="Super Admin">Super Admin</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Employees">Employees</option>
+                                <option value="Accountant">Accountant</option>
+                                <option value="Receptionist">Receptionist</option>
+                                <option value="Lab Scientist">Lab Scientist</option>
+                                <option value="Radiographer">Radiographer</option>
+                                <option value="Sonographer">Sonographer</option>
                             </select>
                         </div>
 
@@ -117,7 +123,6 @@
     {{-- Update User Details End --}}
 
     <script>
-
         $(function() {
             var table = $('.datatable').DataTable({
                 processing: true,
@@ -144,6 +149,10 @@
                     {
                         data: 'status',
                         name: 'status'
+                    },
+                    {
+                        data: 'permission',
+                        name: 'permission'
                     },
                     {
                         data: 'action',
@@ -189,6 +198,8 @@
                     }
                 });
             });
+
+
 
             $('body').on('click', '.deletebtn', function() {
                 var id = $(this).attr('data-id');
@@ -237,7 +248,7 @@
                 });
             });
 
-            $('body').on('click','.editbtn',function(){
+            $('body').on('click', '.editbtn', function() {
                 var id = $(this).data('id');
                 $.ajax({
                     dataType: "json",
@@ -263,7 +274,7 @@
                 });
             });
 
-            $('#userEditForm').submit(function(e){
+            $('#userEditForm').submit(function(e) {
                 e.preventDefault();
                 var id = $('#id').val();
                 var name1 = $('#name1').val();
@@ -310,7 +321,7 @@
                 });
             });
 
-            $('body').on('click','.passchange',function(){
+            $('body').on('click', '.passchange', function() {
                 var id = $(this).data('id');
                 $.ajax({
                     dataType: "json",
@@ -333,7 +344,7 @@
                     }
                 });
             });
-            $('#passchangeForm').submit(function(e){
+            $('#passchangeForm').submit(function(e) {
                 e.preventDefault();
                 var id = $('#id1').val();
                 var password = $('#password').val();
@@ -376,6 +387,427 @@
                 });
             })
         });
+    </script>
 
+    <script>
+        $(document).on('change', '#employees', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = '1';
+            } else {
+                var catstatus = '0';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/employees/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Permission Given In Employee',
+                        text: "The user's Permission has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
+
+        $(document).on('change', '#patitents', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = '1';
+            } else {
+                var catstatus = '0';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/patitents/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Permission Given In Patient',
+                        text: "The user's Permission has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
+
+        $(document).on('change', '#testcategory', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = '1';
+            } else {
+                var catstatus = '0';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/testcategory/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Permission Given In Test-Category',
+                        text: "The user's Permission has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
+
+        $(document).on('change', '#referral', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = '1';
+            } else {
+                var catstatus = '0';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/referral/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Permission Given In Referral System',
+                        text: "The user's Permission has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
+
+        $(document).on('change', '#billing', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = '1';
+            } else {
+                var catstatus = '0';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/billing/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Permission Given In Billing System',
+                        text: "The user's Permission has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
+
+        $(document).on('change', '#pathology', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = '1';
+            } else {
+                var catstatus = '0';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/pathology/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Permission Given In Pathology Department',
+                        text: "The user's Permission has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
+
+        $(document).on('change', '#radiology', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = '1';
+            } else {
+                var catstatus = '0';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/radiology/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Permission Given In Radiology Department',
+                        text: "The user's Permission has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
+
+        $(document).on('change', '#ultrasonography', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = '1';
+            } else {
+                var catstatus = '0';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/ultrasonography/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Permission Given In Ultrasonography Department',
+                        text: "The user's Permission has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
+
+        $(document).on('change', '#reportbooth', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = '1';
+            } else {
+                var catstatus = '0';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/reportbooth/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Permission Given In Report Booth',
+                        text: "The user's Permission has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
+
+        $(document).on('change', '#financial', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = '1';
+            } else {
+                var catstatus = '0';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/financial/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Permission Given In Financial Management System',
+                        text: "The user's Permission has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
+
+        $(document).on('change', '#report_g', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = '1';
+            } else {
+                var catstatus = '0';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/report_g/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Permission Given In Report Generator',
+                        text: "The user's Permission has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
+
+        $(document).on('change', '#patitents', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = '1';
+            } else {
+                var catstatus = '0';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/patitents/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Permission Given In Patient',
+                        text: "The user's Permission has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
     </script>
 @endsection

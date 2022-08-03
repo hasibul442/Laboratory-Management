@@ -19,27 +19,11 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::whereIn('user_type',['super_admin' , 'admin', 'employees'])->get();
+            $data = User::whereIn('user_type', ['Admin', 'Employees', 'Super Admin', 'Patient', 'Accountant', 'Receptionist', 'Lab Scientist', 'Radiographer', 'Sonographer'])->get();
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('user_type', function ($item) {
-                    if ($item->user_type == 'super_admin')
-                        return 'Super Admin';
-                    elseif ($item->user_type == 'admin')
-                        return 'Admin';
-                    elseif ($item->user_type == 'employees')
-                        return 'Employee';
-                    elseif ($item->user_type == 'patient')
-                        return 'Patient';
-                })
                 ->addColumn('status', function ($item) {
-                    // if($item->status == 'Active'){
-                    //     $togolebutton = '<input type="checkbox" name="status" id="status" data-id="' . $item->id . '" data-status="' . $item->status . '" class="toggle-class status" checked>';
-                    // }
-                    // else{
-                    //     $togolebutton = '<input type="checkbox" name="status" id="status" data-id="' . $item->id . '" data-status="' . $item->status . '" class="toggle-class status" >';
-                    // }
-                    $togolebutton = '<input ' . ($item->status == "Active" ? "checked" : "") .' type="checkbox" class="status" id="status" data-id="'.$item->id.'" />';
+                    $togolebutton = '<input ' . ($item->status == "Active" ? "checked" : "") . ' type="checkbox" class="status" id="status" data-id="' . $item->id . '" />';
                     $togolebutton .= '<script>
                                         $(".status").bootstrapToggle({
                                             on: "Active",
@@ -51,20 +35,47 @@ class UserController extends Controller
                                     </script>';
                     return $togolebutton;
                 })
+                ->addColumn('permission', function ($item) {
+                    if ($item->user_type == 'Admin' || $item->user_type == 'Super Admin') {
+                        $permission = '<p>Can Access Every Here</p>';
+                        return $permission;
+                    } else {
+                        $togolebutton = '<span class="h5">Employees : </span><input ' . ($item->employees == "1" ? "checked" : "") . ' type="checkbox" class="employees toggolebtn" id="employees" data-id="' . $item->id . '" /><br/><br/>';
+                        $togolebutton .= '<span class="h5">Patients : </span><input ' . ($item->patitents == "1" ? "checked" : "") . ' type="checkbox" class="patitents toggolebtn" id="patitents" data-id="' . $item->id . '" /><br/><br/>';
+                        $togolebutton .= '<span class="h5">Test Category : </span><input ' . ($item->testcategory == "1" ? "checked" : "") . ' type="checkbox" class="testcategory toggolebtn" id="testcategory" data-id="' . $item->id . '" /><br/><br/>';
+                        $togolebutton .= '<span class="h5">Referral : </span><input ' . ($item->referral == "1" ? "checked" : "") . ' type="checkbox" class="referral toggolebtn" id="referral" data-id="' . $item->id . '" /><br/><br/>';
+                        $togolebutton .= '<span class="h5">Billing : </span><input ' . ($item->billing == "1" ? "checked" : "") . ' type="checkbox" class="billing toggolebtn" id="billing" data-id="' . $item->id . '" /><br/><br/>';
+                        $togolebutton .= '<span class="h5">Pathology : </span><input ' . ($item->pathology == "1" ? "checked" : "") . ' type="checkbox" class="pathology toggolebtn" id="pathology" data-id="' . $item->id . '" /><br/><br/>';
+                        $togolebutton .= '<span class="h5">Radiology : </span><input ' . ($item->radiology == "1" ? "checked" : "") . ' type="checkbox" class="radiology toggolebtn" id="radiology" data-id="' . $item->id . '" /><br/><br/>';
+                        $togolebutton .= '<span class="h5">Ultrasonography : </span><input ' . ($item->ultrasonography == "1" ? "checked" : "") . ' type="checkbox" class="ultrasonography toggolebtn" id="ultrasonography" data-id="' . $item->id . '" /><br/><br/>';
+                        $togolebutton .= '<span class="h5">Report Booth : </span><input ' . ($item->reportbooth == "1" ? "checked" : "") . ' type="checkbox" class="reportbooth toggolebtn" id="reportbooth" data-id="' . $item->id . '" /><br/><br/>';
+                        $togolebutton .= '<span class="h5">Financial <br/> Management : </span><input ' . ($item->financial == "1" ? "checked" : "") . ' type="checkbox" class="financial toggolebtn" id="financial" data-id="' . $item->id . '" /><br/><br/>';
+                        $togolebutton .= '<span class="h5">Report <br/> Genaration : </span><input ' . ($item->report_g == "1" ? "checked" : "") . ' type="checkbox" class="report_g toggolebtn" id="report_g" data-id="' . $item->id . '" /><br/><br/>';
+                        // $togolebutton .= '<script>
+                        //                     $(".toggolebtn").bootstrapToggle({
+                        //                         on: "Active",
+                        //                         off: "Pending",
+                        //                         onstyle: "success",
+                        //                         offstyle: "danger",
+                        //                         size: "small"
+                        //                     });
+                        //                 </script>';
+                        return $togolebutton;
+                    }
+                })
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0);" class="btn btn-warning btn-sm editbtn" data-id="' . $row->id . '"><i class="fas fa-edit"></i></a>';
                     $btn .= '&nbsp&nbsp<a href="javascript:void(0);" class="btn btn-info btn-sm passchange" data-id="' . $row->id . '"><i class="fas fa-lock"></i></a>';
 
-                    if (Auth::user()->user_type == $row->user_type && Auth::user()->email == $row->email){
-                        $btn = $btn . '&nbsp&nbsp<a href="javascript:void(0);" data-id="' . $row->id .'" class="btn btn-danger btn-sm deletebtn disabled"> <i class="fas fa-trash"></i> </a>';
-                    }
-                    else{
-                        $btn = $btn . '&nbsp&nbsp<a href="javascript:void(0);" data-id="' . $row->id .'" class="btn btn-danger btn-sm deletebtn"> <i class="fas fa-trash"></i> </a>';
+                    if (Auth::user()->user_type == $row->user_type && Auth::user()->email == $row->email) {
+                        $btn = $btn . '&nbsp&nbsp<a href="javascript:void(0);" data-id="' . $row->id . '" class="btn btn-danger btn-sm deletebtn disabled"> <i class="fas fa-trash"></i> </a>';
+                    } else {
+                        $btn = $btn . '&nbsp&nbsp<a href="javascript:void(0);" data-id="' . $row->id . '" class="btn btn-danger btn-sm deletebtn"> <i class="fas fa-trash"></i> </a>';
                     }
 
                     return $btn;
                 })
-                ->rawColumns(['action','status','user_type'])
+                ->rawColumns(['action', 'status', 'permission'])
                 ->make(true);
         }
         return view('user.user');
@@ -77,6 +88,85 @@ class UserController extends Controller
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
+
+    public function employeeschange($id, $status)
+    {
+        $user = User::find($id);
+        $user->employees = $status;
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+    public function patitentschange($id, $status)
+    {
+        $user = User::find($id);
+        $user->patitents = $status;
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+    public function testcategory($id, $status)
+    {
+        $user = User::find($id);
+        $user->testcategory = $status;
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+    public function referral($id, $status)
+    {
+        $user = User::find($id);
+        $user->referral = $status;
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+    public function billing($id, $status)
+    {
+        $user = User::find($id);
+        $user->billing = $status;
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+    public function pathology($id, $status)
+    {
+        $user = User::find($id);
+        $user->pathology = $status;
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+    public function radiology($id, $status)
+    {
+        $user = User::find($id);
+        $user->radiology = $status;
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+    public function ultrasonography($id, $status)
+    {
+        $user = User::find($id);
+        $user->ultrasonography = $status;
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+    public function reportbooth($id, $status)
+    {
+        $user = User::find($id);
+        $user->reportbooth = $status;
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+    public function financial($id, $status)
+    {
+        $user = User::find($id);
+        $user->financial = $status;
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+    public function report_g($id, $status)
+    {
+        $user = User::find($id);
+        $user->report_g = $status;
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -155,15 +245,14 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if (!is_null($user)) {
-            if(!is_null($user->profile_photo_path)){
-                $image_path = public_path().'/assets/HMS/employees/'.$user->profile_photo_path;
+            if (!is_null($user->profile_photo_path)) {
+                $image_path = public_path() . '/assets/HMS/employees/' . $user->profile_photo_path;
                 unlink($image_path);;
                 $user->delete();
-                return response()->json(['success'=>'Data Delete successfully.']);
-            }
-            else{
+                return response()->json(['success' => 'Data Delete successfully.']);
+            } else {
                 $user->delete();
-                return response()->json(['success'=>'Data Delete successfully.']);
+                return response()->json(['success' => 'Data Delete successfully.']);
             }
         }
     }

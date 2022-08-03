@@ -75,23 +75,7 @@
                             <tr>
                                 <td class="font-weight-bold">User Type</td>
                                 <td class="text-center">:</td>
-                                <td>
-                                    @if($employee->users->user_type == 'admin')
-                                        Admin
-                                    @elseif($employee->users->user_type == 'employee')
-                                        Employee
-                                    @elseif($employee->users->user_type == 'patient')
-                                        Patient
-                                    @elseif($employee->users->user_type == 'accountant')
-                                    Accountant
-                                    @elseif($employee->users->user_type == 'receptionist')
-                                    Receptionist
-                                    @elseif($employee->users->user_type == 'labscientist')
-                                    Lab Scientist
-                                    @elseif($employee->users->user_type == 'super_admin')
-                                        Super Admin
-                                    @endif
-                                </td>
+                                <td>$employee->users->user_type</td>
                             </tr>
                             <tr>
                                 <td class="font-weight-bold">Account Status</td>

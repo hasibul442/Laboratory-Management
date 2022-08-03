@@ -3510,5 +3510,17 @@ body.authentication-bg-pattern {
     font-size: 1.3rem;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   }
+  .clock {
+    /* position: absolute; */
+    /* top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%); */
+    color: #17D4FE;
+    font-size: 80px;
+    font-family: Orbitron;
+    letter-spacing: 7px;
 
+
+
+}
 

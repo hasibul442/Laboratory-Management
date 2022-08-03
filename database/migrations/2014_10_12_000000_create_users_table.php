@@ -21,8 +21,19 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('profile_photo_path', 2048)->nullable();
-            $table->enum('user_type', ['admin', 'employees','super_admin','patient']);
+            $table->enum('user_type', ['Admin', 'Employees','Super Admin','Patient','Accountant','Receptionist','Lab Scientist','Radiographer','Sonographer']);
             $table->enum('status', ['Active', 'Pending']);
+            $table->tinyInteger('employees')->default(0);
+            $table->tinyInteger('patitents')->default(0);
+            $table->tinyInteger('testcategory')->default(0);
+            $table->tinyInteger('referral')->default(0);
+            $table->tinyInteger('billing')->default(0);
+            $table->tinyInteger('pathology')->default(0);
+            $table->tinyInteger('radiology')->default(0);
+            $table->tinyInteger('ultrasonography')->default(0);
+            $table->tinyInteger('reportbooth')->default(0);
+            $table->tinyInteger('financial')->default(0);
+            $table->tinyInteger('report_g')->default(0);
             $table->timestamps();
         });
     }

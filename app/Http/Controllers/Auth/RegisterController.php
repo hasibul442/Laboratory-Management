@@ -68,8 +68,19 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'user_type' =>"super_admin",
-            'status' =>"Active",
+            'user_type' => "Super Admin",
+            'status' => "Active",
+            'employees' => 1,
+            'patitents' => 1,
+            'testcategory' => 1,
+            'referral' => 1,
+            'billing' => 1,
+            'pathology' => 1,
+            'radiology' => 1,
+            'ultrasonography' => 1,
+            'reportbooth' => 1,
+            'financial' => 1,
+            'report_g' => 1,
         ]);
     }
 }

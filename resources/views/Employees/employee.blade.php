@@ -197,13 +197,14 @@
                             <div class="col-sm-7">
                                 <select class="form-control" id="user_type" required name="user_type">
                                     <option selected disabled>Choose One Option</option>
-                                    <option value="super_admin">Super Admin</option>
-                                    <option value="admin">Admin</option>
-                                    <option value="employees">Employees</option>
-                                    <option value="accountant">Accountant</option>
-                                    <option value="receptionist">Receptionist</option>
-                                    <option value="labscientist">Lab Scientist</option>
+                                    <option value="Super Admin">Super Admin</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Employees">Employees</option>
+                                    <option value="Accountant">Accountant</option>
+                                    <option value="Receptionist">Receptionist</option>
+                                    <option value="Lab Scientist">Lab Scientist</option>
                                     <option value="Radiographer">Radiographer</option>
+                                    <option value="Sonographer">Sonographer</option>
                                 </select>
                             </div>
                         </div>

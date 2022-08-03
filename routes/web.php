@@ -32,6 +32,18 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('/users/status/{id}/{status}','App\Http\Controllers\UserController@statuschange');
             Route::delete('/user/{id}','App\Http\Controllers\UserController@destroy');
 
+            Route::get('/users/employees/{id}/{status}','App\Http\Controllers\UserController@employeeschange');
+            Route::get('/users/patitents/{id}/{status}','App\Http\Controllers\UserController@patitentschange');
+            Route::get('/users/testcategory/{id}/{status}','App\Http\Controllers\UserController@testcategory');
+            Route::get('/users/referral/{id}/{status}','App\Http\Controllers\UserController@referral');
+            Route::get('/users/billing/{id}/{status}','App\Http\Controllers\UserController@billing');
+            Route::get('/users/pathology/{id}/{status}','App\Http\Controllers\UserController@pathology');
+            Route::get('/users/radiology/{id}/{status}','App\Http\Controllers\UserController@radiology');
+            Route::get('/users/ultrasonography/{id}/{status}','App\Http\Controllers\UserController@ultrasonography');
+            Route::get('/users/reportbooth/{id}/{status}','App\Http\Controllers\UserController@reportbooth');
+            Route::get('/users/financial/{id}/{status}','App\Http\Controllers\UserController@financial');
+            Route::get('/users/report_g/{id}/{status}','App\Http\Controllers\UserController@report_g');
+
             // Employees Route
             Route::get('/employees', 'App\Http\Controllers\EmployeesController@index')->name('employees');
             Route::post('/employees/add','App\Http\Controllers\EmployeesController@store');
