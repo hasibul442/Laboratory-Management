@@ -19,7 +19,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = User::whereIn('user_type', ['Admin', 'Employees', 'Super Admin', 'Patient', 'Accountant', 'Receptionist', 'Lab Scientist', 'Radiographer', 'Sonographer'])->get();
+            $data = User::whereIn('user_type', ['Admin', 'Employees', 'Super Admin', 'Accountant', 'Receptionist', 'Lab Scientist', 'Radiographer', 'Sonographer'])->get();
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('status', function ($item) {
