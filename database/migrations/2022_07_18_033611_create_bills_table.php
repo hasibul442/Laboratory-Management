@@ -16,7 +16,7 @@ class CreateBillsTable extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->increments('id');
             $table->string('bill_no')->unique();
-            $table->string('patient_id');
+            $table->unsignedInteger('patient_id');
             $table->json('all_test')->nullable();
             $table->string('net_price')->nullable();
             $table->string('discount')->nullable();
@@ -27,6 +27,8 @@ class CreateBillsTable extends Migration
             $table->string('approved_code')->nullable();
             $table->string('barcode')->nullable();
             $table->string('employee_name')->nullable();
+
+            $table->foreign('patient_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

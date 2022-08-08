@@ -98,6 +98,7 @@
                                     <option value="Pathology">Pathology</option>
                                     <option value="Radiology">Radiology</option>
                                     <option value="Ultrasonography">Ultrasonography</option>
+                                    <option value="Electrocardiography">Electrocardiography</option>
                                 </select>
                             </div>
                         </div>

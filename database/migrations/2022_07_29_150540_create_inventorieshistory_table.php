@@ -15,13 +15,14 @@ class CreateInventorieshistoryTable extends Migration
     {
         Schema::create('inventorieshistory', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('inventories_id');
+            $table->unsignedInteger('inventories_id');
             $table->string('brandname')->nullable();
             $table->string('shopname')->nullable();
             $table->string('quentity')->nullable();
             $table->string('amount')->nullable();
             $table->string('dateofpurches')->nullable();
             $table->string('document')->nullable();
+            $table->foreign('inventories_id')->references('id')->on('inventories')->onDelete('cascade');
             $table->timestamps();
         });
     }

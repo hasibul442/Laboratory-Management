@@ -15,9 +15,9 @@ class CreateTestreportsTable extends Migration
     {
         Schema::create('testreports', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('patient_id')->nullable();
-            $table->string('invoice_id')->nullable();
-            $table->string('test_id')->nullable();
+            $table->unsignedInteger('patient_id');
+            $table->unsignedInteger('invoice_id');
+            $table->unsignedInteger('test_id');
 
             $table->string('image')->nullable();
             $table->string('upload_by')->nullable();
@@ -25,6 +25,10 @@ class CreateTestreportsTable extends Migration
             $table->longText('testresult')->nullable();
             $table->string('signeture')->nullable();
             $table->json('elementuse')->nullable();
+
+            $table->foreign('patient_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('invoice_id')->references('id')->on('bills')->onDelete('cascade');
+            $table->foreign('test_id')->references('id')->on('labtest')->onDelete('cascade');
             $table->timestamps();
         });
     }

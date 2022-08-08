@@ -21,7 +21,7 @@ class XrayReportController extends Controller
     }
 
     public function pathology(){
-        return view('Pathology.pathology');
+        return view('pathology.pathology');
     }
     public function pathologyedit($id){
         $pathologytest = TestReport::find($id);
