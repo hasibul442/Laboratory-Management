@@ -36,6 +36,8 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Address</th>
+                                <th>Bank Name</th>
+                                <th>Account Number</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -95,6 +97,24 @@
                             <div class="col-sm-7">
                                 <input type="phone" required class="form-control" id="phone" name="phone"
                                     placeholder="Phone Number">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="bank_name" class="col-sm-4 col-form-label">Bank Name<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" required class="form-control" id="bank_name" name="bank_name"
+                                    placeholder="Bank Name">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="account_number" class="col-sm-4 col-form-label">Account Number<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" required class="form-control" id="account_number" name="account_number"
+                                    placeholder="ex.5052535126">
                             </div>
                         </div>
 
@@ -177,6 +197,22 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="bank_name1" class="col-sm-4 col-form-label">Bank Name<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" required class="form-control" id="bank_name1" name="bank_name1"
+                                    placeholder="Bank Name">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="account_number1" class="col-sm-4 col-form-label">Account Number<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-sm-7">
+                                <input type="text" required class="form-control" id="account_number1" name="account_number1">
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="address" class="col-sm-4 col-form-label">Address<span
@@ -226,6 +262,12 @@
                 }, {
                     data: 'phone',
                     name: 'phone'
+                }, {
+                    data: 'bank_name',
+                    name: 'bank_name'
+                }, {
+                    data: 'account_number',
+                    name: 'account_number'
                 }, {
                     data: 'address',
                     name: 'address'
@@ -342,6 +384,8 @@
                         $('#hospitalname1').val(result.hospitalname);
                         $('#email1').val(result.email);
                         $('#phone1').val(result.phone);
+                        $('#bank_name1').val(result.bank_name);
+                        $('#account_number1').val(result.account_number);
                         $('#address1').val(result.address);
                         $('#ReferrelEditmodel').modal('show');
                     },
@@ -365,6 +409,8 @@
                 var name1 = $('#name1').val();
                 var hospitalname1 = $('#hospitalname1').val();
                 var phone1 = $('#phone1').val();
+                var bank_name1 = $('#bank_name1').val();
+                var account_number1 = $('#account_number1').val();
                 var address1 = $('#address1').val();
                 var _token = $('input[name=_token]').val();
                 $.ajax({
@@ -376,6 +422,8 @@
                         'email1': email1,
                         'hospitalname1': hospitalname1,
                         'phone1': phone1,
+                        'bank_name1': bank_name1,
+                        'account_number1': account_number1,
                         'address1': address1,
                         '_token': _token
                     },

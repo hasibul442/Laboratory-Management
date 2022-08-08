@@ -78,6 +78,7 @@ class RegisterController extends Controller
             'pathology' => 1,
             'radiology' => 1,
             'ultrasonography' => 1,
+            'electrocardiography' => 1,
             'reportbooth' => 1,
             'financial' => 1,
             'report_g' => 1,

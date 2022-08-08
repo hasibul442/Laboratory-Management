@@ -39,6 +39,7 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('/users/billing/{id}/{status}','App\Http\Controllers\UserController@billing');
             Route::get('/users/pathology/{id}/{status}','App\Http\Controllers\UserController@pathology');
             Route::get('/users/radiology/{id}/{status}','App\Http\Controllers\UserController@radiology');
+            Route::get('/users/electrocardiography/{id}/{status}','App\Http\Controllers\UserController@electrocardiography');
             Route::get('/users/ultrasonography/{id}/{status}','App\Http\Controllers\UserController@ultrasonography');
             Route::get('/users/reportbooth/{id}/{status}','App\Http\Controllers\UserController@reportbooth');
             Route::get('/users/financial/{id}/{status}','App\Http\Controllers\UserController@financial');
@@ -112,6 +113,10 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('/ultrasonography', 'App\Http\Controllers\XrayReportController@ultrasonography')->name('ultrasonography');
             Route::get('/ultrasonography/testresult/{id}','App\Http\Controllers\XrayReportController@ultrasonographyedit')->name('ultrasonographyedit');
             Route::put('/ultrasonography/result/{id}','App\Http\Controllers\XrayReportController@ultrasonographyreport');
+
+            Route::get('/Electrocardiography', 'App\Http\Controllers\XrayReportController@Electrocardiography')->name('Electrocardiography');
+            Route::get('/Electrocardiography/testresult/{id}','App\Http\Controllers\XrayReportController@Electrocardiographyedit');
+            Route::put('/Electrocardiography/result/{id}','App\Http\Controllers\XrayReportController@Electrocardiographyreport');
             //Inventories Route
             Route::get('/inventories', 'App\Http\Controllers\InventoriesController@index')->name('inventories');
             Route::get('/inventories/history', 'App\Http\Controllers\InventoriesController@getInventories')->name('inventories.history');

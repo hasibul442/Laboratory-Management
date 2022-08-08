@@ -138,6 +138,13 @@
                         </li>
 
                         <li>
+                            <a href="{{ route('Electrocardiography') }}">
+                                <i class="fas fa-monitor-heart-rate"></i>
+                                <span> Electrocardiography </span>
+                            </a>
+                        </li>
+
+                        <li>
                             <a href="{{ route('ultrasonography') }}">
                                 <i class="fas fa-monitor-heart-rate"></i>
                                 <span> Ultrasonography </span>
@@ -282,6 +289,14 @@
                                 <a href="{{ route('ultrasonography') }}">
                                     <i class="fas fa-monitor-heart-rate"></i>
                                     <span> Ultrasonography </span>
+                                </a>
+                            </li>
+                        @endif
+                        @if (Auth::user()->electrocardiography == 1)
+                            <li>
+                                <a href="{{ route('electrocardiography') }}">
+                                    <i class="fas fa-monitor-heart-rate"></i>
+                                    <span> Electrocardiography </span>
                                 </a>
                             </li>
                         @endif

@@ -48,6 +48,7 @@ class UserController extends Controller
                         $togolebutton .= '<span class="h5">Laboratory : </span><input ' . ($item->pathology == "1" ? "checked" : "") . ' type="checkbox" class="pathology toggolebtn" id="pathology" data-id="' . $item->id . '" /><br/><br/>';
                         $togolebutton .= '<span class="h5">Radiology : </span><input ' . ($item->radiology == "1" ? "checked" : "") . ' type="checkbox" class="radiology toggolebtn" id="radiology" data-id="' . $item->id . '" /><br/><br/>';
                         $togolebutton .= '<span class="h5">Ultrasonography : </span><input ' . ($item->ultrasonography == "1" ? "checked" : "") . ' type="checkbox" class="ultrasonography toggolebtn" id="ultrasonography" data-id="' . $item->id . '" /><br/><br/>';
+                        $togolebutton .= '<span class="h5">Electrocardiography : </span><input ' . ($item->electrocardiography == "1" ? "checked" : "") . ' type="checkbox" class="electrocardiography toggolebtn" id="electrocardiography" data-id="' . $item->id . '" /><br/><br/>';
                         $togolebutton .= '<span class="h5">Report Booth : </span><input ' . ($item->reportbooth == "1" ? "checked" : "") . ' type="checkbox" class="reportbooth toggolebtn" id="reportbooth" data-id="' . $item->id . '" /><br/><br/>';
                         $togolebutton .= '<span class="h5">Financial <br/> Management : </span><input ' . ($item->financial == "1" ? "checked" : "") . ' type="checkbox" class="financial toggolebtn" id="financial" data-id="' . $item->id . '" /><br/><br/>';
                         $togolebutton .= '<span class="h5">Report <br/> Genaration : </span><input ' . ($item->report_g == "1" ? "checked" : "") . ' type="checkbox" class="report_g toggolebtn" id="report_g" data-id="' . $item->id . '" /><br/><br/>';
@@ -135,6 +136,13 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->radiology = $status;
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+    public function electrocardiography($id, $status)
+    {
+        $user = User::find($id);
+        $user->electrocardiography = $status;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }

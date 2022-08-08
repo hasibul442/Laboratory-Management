@@ -95,8 +95,9 @@
                             <div class="col-sm-7">
                                 <select class="form-control" name="department" id="department">
                                     <option disabled selected value="">Select Department Name</option>
-                                    <option value="Pathology">Pathology</option>
+                                    <option value="Laboratory">Laboratory</option>
                                     <option value="Radiology">Radiology</option>
+                                    <option value="Electrocardiography">Electrocardiography</option>
                                     <option value="Ultrasonography">Ultrasonography</option>
                                     <option value="Electrocardiography">Electrocardiography</option>
                                 </select>
