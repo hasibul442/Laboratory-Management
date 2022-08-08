@@ -31,6 +31,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('pathology')->default(0);
             $table->tinyInteger('radiology')->default(0);
             $table->tinyInteger('ultrasonography')->default(0);
+            $table->tinyInteger('electrocardiography')->default(0);
             $table->tinyInteger('reportbooth')->default(0);
             $table->tinyInteger('financial')->default(0);
             $table->tinyInteger('report_g')->default(0);

@@ -55,6 +55,8 @@ class ReferralController extends Controller
         $referral->email = $request->email;
         $referral->phone = $request->phone;
         $referral->address = $request->address;
+        $referral->account_number = $request->account_number;
+        $referral->bank_name = $request->bank_name;
         $referral->save();
         return response()->json($referral);
     }
@@ -97,6 +99,8 @@ class ReferralController extends Controller
         $referral->email = $request->email1;
         $referral->phone = $request->phone1;
         $referral->address = $request->address1;
+        $referral->account_number = $request->account_number1;
+        $referral->bank_name = $request->bank_name1;
         $referral->update();
         return response()->json($referral);
     }

@@ -21,11 +21,11 @@ class XrayReportController extends Controller
     }
 
     public function pathology(){
-        return view('Pathology.pathology');
+        return view('pathology.pathology');
     }
     public function pathologyedit($id){
         $pathologytest = TestReport::find($id);
-        return view('Pathology.pathologyreport',compact('pathologytest'));
+        return view('pathology.pathologyreport',compact('pathologytest'));
     }
     public function pathologyinstrument($id){
         $pathologytest = Inventories::find($id);
@@ -124,6 +124,33 @@ class XrayReportController extends Controller
         return redirect()->route('ultrasonography');
     }
 
+    public function Electrocardiography(){
+        return view('Electrocardiography.Electrocardiography');
+    }
+
+    public function Electrocardiographyedit($id){
+        $Electrocardiography = TestReport::find($id);
+        return view('Electrocardiography.edit',compact('Electrocardiography'));
+    }
+    public function Electrocardiographyreport(Request $request){
+        $Electrocardiography = TestReport::find($request->id);
+        $Electrocardiography->testresult = $request->testresult;
+        $Electrocardiography->status = $request->status;
+        if($request->hasFile('image')){
+            $file = $request->file('image');
+            $file_name = time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path().'/assets/HMS/report/',$file_name);
+            $Electrocardiography->image = $file_name;
+        }
+        if($request->hasFile('signeture')){
+            $file = $request->file('signeture');
+            $file_name = $file->getClientOriginalName();
+            $file->move(public_path().'/assets/HMS/signature/',$file_name);
+            $Electrocardiography->signeture = $file_name;
+        }
+        $Electrocardiography->update();
+        return redirect()->route('Electrocardiography');
+    }
 
     /**
      * Show the form for creating a new resource.

@@ -22,7 +22,8 @@ class CreateReferralsTable extends Migration
             $table->string('address')->nullable();
             $table->string('balance')->nullable();
             $table->string('amount')->nullable();
-            $table->string('percentage')->nullable();
+            $table->string('account_number')->nullable();
+            $table->string('bank_name')->nullable();
             $table->timestamps();
         });
     }

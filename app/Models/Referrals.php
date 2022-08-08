@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Referrals extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'email', 'phone', 'address', 'balance', 'amount', 'percentage', 'hospitalname'];
+    protected $fillable = ['name', 'email', 'phone', 'address', 'balance', 'amount', 'account_number','bank_name', 'hospitalname'];
     protected $table = 'referrals';
 }
