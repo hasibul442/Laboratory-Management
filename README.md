@@ -1,8 +1,6 @@
 <h1 align="center">Laboratory Management System</h1>
 
 
-
-## About Laboratory Management System
 Laboratory Management System is a web application that helps to manage the laboratory. You can manage the laboratory by adding, deleting, updating and viewing the laboratory information. You Can Also Call it as Diagnostic Management System. This web application is developed by using PHP, MySQL, HTML, CSS, JavaScript, JQuery, Bootstrap, Ajax, Laravel, Datatable, Relational Database etc. 
 
 ## Features of Laboratory Management System
@@ -61,12 +59,13 @@ Laboratory Management System is a web application that helps to manage the labor
 - Logout
 - Login with other user
 
-## Want to See Live?
+## Want to See Live👉👉
 - Go To www.lms.evatech.org
 
-## Want to Know More?
-- Email Me;
+## Want to Know More 
+- Email Me
 
-## If Have Any suggetion for Improved This Application Please Email Me at hasibulhasan442@gmail.com
+## If Have Any suggetion for Improved This Application Please Email Me at 
+**hasibulhasan442@gmail.com**
 
 <h2 align="center">Thanks You For Visiting Here</h2>
