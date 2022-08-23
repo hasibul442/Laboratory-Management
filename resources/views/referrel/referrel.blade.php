@@ -26,6 +26,7 @@
                 </p>
                 {{-- <h6 class="text-center">List of all employees</h6> --}}
 
+
                 <div class="table-responsive">
                     <table class="table table-hover mb-0 ref_datatable">
                         <thead>
@@ -242,9 +243,10 @@
         $(function() {
             var table = $('.ref_datatable').DataTable({
                 processing: true,
-                serverSide: true,
+                serverSide: false,
+                // paging:"<? $data->links() ?>",
                 ajax: {
-                    url: "{{ route('referrels.list') }}"
+                    url: "{{ route('referrels.list') }}",
                 },
                 columns: [{
                     data: 'DT_RowIndex',
