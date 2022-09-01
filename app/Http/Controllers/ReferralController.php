@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Referrals;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class ReferralController extends Controller
@@ -15,14 +16,15 @@ class ReferralController extends Controller
      */
     public function index(Request $request)
     {
-        if($request->ajax()){
-            $data = Referrals::all();
+        if ($request->ajax()) {
+            $data = Referrals::get();
+            // $data = ;
             return DataTables::of($data)
                 ->addIndexColumn()
 
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0);" class="btn btn-warning btn-sm editbtn" data-id="' . $row->id . '"><i class="fas fa-edit"></i></a>';
-                    $btn = $btn . '&nbsp&nbsp<a href="javascript:void(0);" data-id="' . $row->id .'" class="btn btn-danger btn-sm deletebtn"> <i class="fas fa-trash"></i> </a>';
+                    $btn = $btn . '&nbsp&nbsp<a href="javascript:void(0);" data-id="' . $row->id . '" class="btn btn-danger btn-sm deletebtn"> <i class="fas fa-trash"></i> </a>';
                     return $btn;
                 })
                 ->rawColumns(['action'])
