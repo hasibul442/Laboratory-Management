@@ -52,6 +52,7 @@ class UserController extends Controller
                         $togolebutton .= '<span class="h5">Report Booth : </span><input ' . ($item->reportbooth == "1" ? "checked" : "") . ' type="checkbox" class="reportbooth toggolebtn" id="reportbooth" data-id="' . $item->id . '" /><br/><br/>';
                         $togolebutton .= '<span class="h5">Financial <br/> Management : </span><input ' . ($item->financial == "1" ? "checked" : "") . ' type="checkbox" class="financial toggolebtn" id="financial" data-id="' . $item->id . '" /><br/><br/>';
                         $togolebutton .= '<span class="h5">Report <br/> Genaration : </span><input ' . ($item->report_g == "1" ? "checked" : "") . ' type="checkbox" class="report_g toggolebtn" id="report_g" data-id="' . $item->id . '" /><br/><br/>';
+                        $togolebutton .= '<span class="h5">Inventory <br/> Genaration : </span><input ' . ($item->inventory == "1" ? "checked" : "") . ' type="checkbox" class="inventory toggolebtn" id="inventory" data-id="' . $item->id . '" /><br/><br/>';
                         // $togolebutton .= '<script>
                         //                     $(".toggolebtn").bootstrapToggle({
                         //                         on: "Active",
@@ -171,6 +172,13 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->report_g = $status;
+        $user->update();
+        return response()->json(['success' => 'Status changed successfully.']);
+    }
+    public function inventory($id, $status)
+    {
+        $user = User::find($id);
+        $user->inventory = $status;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }

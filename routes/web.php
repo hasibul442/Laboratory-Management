@@ -44,6 +44,7 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('/users/reportbooth/{id}/{status}','App\Http\Controllers\UserController@reportbooth');
             Route::get('/users/financial/{id}/{status}','App\Http\Controllers\UserController@financial');
             Route::get('/users/report_g/{id}/{status}','App\Http\Controllers\UserController@report_g');
+            Route::get('/users/inventory/{id}/{status}','App\Http\Controllers\UserController@inventory');
 
             // Employees Route
             Route::get('/employees', 'App\Http\Controllers\EmployeesController@index')->name('employees');

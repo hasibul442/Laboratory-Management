@@ -35,6 +35,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('reportbooth')->default(0);
             $table->tinyInteger('financial')->default(0);
             $table->tinyInteger('report_g')->default(0);
+            $table->tinyInteger('inventory')->default(0);
             $table->timestamps();
         });
     }

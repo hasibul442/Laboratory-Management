@@ -810,6 +810,41 @@
             });
         });
 
+        $(document).on('change', '#inventory', function() {
+            var id = $(this).attr('data-id');
+            if (this.checked) {
+                var catstatus = '1';
+            } else {
+                var catstatus = '0';
+            }
+            $.ajax({
+                dataType: "json",
+                url: '/users/inventory/' + id + '/' + catstatus,
+                method: 'get',
+                success: function(result1) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Permission Given In Inventory',
+                        text: "The user's Permission has been updated",
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                },
+                error: function(error) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'We have some error',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                }
+            });
+        });
+
         $(document).on('change', '#patitents', function() {
             var id = $(this).attr('data-id');
             if (this.checked) {

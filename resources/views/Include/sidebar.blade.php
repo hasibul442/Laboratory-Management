@@ -250,6 +250,23 @@
                                 </a>
                             </li>
                         @endif
+                        @if (Auth::user()->inventory == 1)
+                        <li>
+                            <a href="javascript: void(0);">
+                                <i class="fas fa-boxes"></i>
+                                <span> Inventory Managemen </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <ul class="nav-second-level" aria-expanded="false">
+                                <li>
+                                    <a href="{{ route('inventories') }}">Inventories</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('inventories.history') }}">Purchase History</a>
+                                </li>
+                            </ul>
+                        </li>
+                        @endif
                         @if (Auth::user()->billing == 1)
                             <li>
                                 <a href="javascript: void(0);">
