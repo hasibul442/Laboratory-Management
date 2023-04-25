@@ -113,13 +113,10 @@ class PatientsController extends Controller
 
     }
 
-    public function statuschange($id, $status)
+    public function statuschange($id, Request $request)
     {
         $user = User::find($id);
-        $user->status = $status;
-        // $patient = Patients::find($user_id);
-        // $user->patient->aprrovel_by = Auth::user()->name;
-        // $patient->update();
+        $user->status = $request->status;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }

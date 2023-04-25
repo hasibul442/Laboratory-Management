@@ -113,7 +113,7 @@
                         var token = $("meta[name='csrf-token']").attr("content");
                         $.ajax({
                             type: "DELETE",
-                            url: "/patients/" + id,
+                            url: "{{ URL::route('patients.destroy', '') }}/" + id,
                             data: {
                                 "id": id,
                                 "_token": token,
@@ -152,10 +152,15 @@
             } else {
                 var catstatus = 'Pending';
             }
+            var url = "{{ URL::route('patients.status', '') }}/" + id;
             $.ajax({
                 dataType: "json",
-                url: '/patients/status/' + id + '/' + catstatus,
+                url: url,
                 method: 'get',
+                data: {
+                    'id': id,
+                    'status': catstatus
+                },
                 success: function(result1) {
                     console.log(result1);
                     Swal.fire({

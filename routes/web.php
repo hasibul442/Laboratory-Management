@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Patients;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,57 +23,58 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
             Route::post('/labdetails/add', 'App\Http\Controllers\DashboardController@store')->name('labdetails.add');
             Route::get('/labdetails/show', 'App\Http\Controllers\DashboardController@details')->name('labdetails.show');
-            Route::get('/labdetails/edit/{id}', 'App\Http\Controllers\MainCompanysController@edit');
-            Route::PUT('/labdetails/update', 'App\Http\Controllers\MainCompanysController@update');
+            Route::get('/labdetails/edit/{id}', 'App\Http\Controllers\MainCompanysController@edit')->name('labdetails.edit');
+            Route::PUT('/labdetails/update', 'App\Http\Controllers\MainCompanysController@update')->name('labdetails.update');
+
             // Users Route
             Route::get('user', 'App\Http\Controllers\UserController@index')->name('user');
-            Route::get('/users/edit/{id}', "App\Http\Controllers\UserController@edit");
-            Route::put('/users/update','App\Http\Controllers\UserController@update');
-            Route::put('/users/pass/update','App\Http\Controllers\UserController@updatepass');
-            Route::get('/users/status/{id}/{status}','App\Http\Controllers\UserController@statuschange');
-            Route::delete('/user/{id}','App\Http\Controllers\UserController@destroy');
+            Route::get('/users/edit/{id}', "App\Http\Controllers\UserController@edit")->name('user.edit');
+            Route::put('/users/update','App\Http\Controllers\UserController@update')->name('user.update');
+            Route::put('/users/pass/update','App\Http\Controllers\UserController@updatepass')->name('user.pass.update');
+            Route::get('/users/status/{id}','App\Http\Controllers\UserController@statuschange')->name('user.status');
+            Route::delete('/user/{id}','App\Http\Controllers\UserController@destroy')->name('user.delete');
 
-            Route::get('/users/employees/{id}/{status}','App\Http\Controllers\UserController@employeeschange');
-            Route::get('/users/patitents/{id}/{status}','App\Http\Controllers\UserController@patitentschange');
-            Route::get('/users/testcategory/{id}/{status}','App\Http\Controllers\UserController@testcategory');
-            Route::get('/users/referral/{id}/{status}','App\Http\Controllers\UserController@referral');
-            Route::get('/users/billing/{id}/{status}','App\Http\Controllers\UserController@billing');
-            Route::get('/users/pathology/{id}/{status}','App\Http\Controllers\UserController@pathology');
-            Route::get('/users/radiology/{id}/{status}','App\Http\Controllers\UserController@radiology');
-            Route::get('/users/electrocardiography/{id}/{status}','App\Http\Controllers\UserController@electrocardiography');
-            Route::get('/users/ultrasonography/{id}/{status}','App\Http\Controllers\UserController@ultrasonography');
-            Route::get('/users/reportbooth/{id}/{status}','App\Http\Controllers\UserController@reportbooth');
-            Route::get('/users/financial/{id}/{status}','App\Http\Controllers\UserController@financial');
-            Route::get('/users/report_g/{id}/{status}','App\Http\Controllers\UserController@report_g');
-            Route::get('/users/inventory/{id}/{status}','App\Http\Controllers\UserController@inventory');
+            Route::get('/users/employees/{id}','App\Http\Controllers\UserController@employeeschange')->name('user.employees');
+            Route::get('/users/patitents/{id}','App\Http\Controllers\UserController@patitentschange')->name('user.patitents');
+            Route::get('/users/testcategory/{id}','App\Http\Controllers\UserController@testcategory')->name('user.testcategory');
+            Route::get('/users/referral/{id}','App\Http\Controllers\UserController@referral')->name('user.referral');
+            Route::get('/users/billing/{id}','App\Http\Controllers\UserController@billing')->name('user.billing');
+            Route::get('/users/pathology/{id}','App\Http\Controllers\UserController@pathology')->name('user.pathology');
+            Route::get('/users/radiology/{id}','App\Http\Controllers\UserController@radiology')->name('user.radiology');
+            Route::get('/users/electrocardiography/{id}','App\Http\Controllers\UserController@electrocardiography')->name('user.electrocardiography');
+            Route::get('/users/ultrasonography/{id}','App\Http\Controllers\UserController@ultrasonography')->name('user.ultrasonography');
+            Route::get('/users/reportbooth/{id}','App\Http\Controllers\UserController@reportbooth')->name('user.reportbooth');
+            Route::get('/users/financial/{id}','App\Http\Controllers\UserController@financial')->name('user.financial');
+            Route::get('/users/report_g/{id}','App\Http\Controllers\UserController@report_g')->name('user.report_g');
+            Route::get('/users/inventory/{id}','App\Http\Controllers\UserController@inventory')->name('user.inventory');
 
             // Employees Route
             Route::get('/employees', 'App\Http\Controllers\EmployeesController@index')->name('employees');
-            Route::post('/employees/add','App\Http\Controllers\EmployeesController@store');
+            Route::post('/employees/add','App\Http\Controllers\EmployeesController@store')->name('employees.add');
             Route::get('/employees/details/{id}','App\Http\Controllers\EmployeesController@show')->name('employees.profile');
             Route::get('/employees/edit/{id}','App\Http\Controllers\EmployeesController@edit')->name('employees.edit');
             Route::put('/employees/edit/{id}','App\Http\Controllers\EmployeesController@update')->name('employees.update');
-            Route::delete('/employees/{id}','App\Http\Controllers\EmployeesController@destroy');
+            Route::delete('/employees/{id}','App\Http\Controllers\EmployeesController@destroy')->name('employees.destroy');
 
             // Patients ROutes
             Route::get('/patients', 'App\Http\Controllers\PatientsController@index')->name('patients.list');
             Route::get('/new/patients', 'App\Http\Controllers\PatientsController@create')->name('patients.create');
             Route::post('/new/patients/store', 'App\Http\Controllers\PatientsController@store')->name('patients.store');
-            Route::get('/patients/status/{id}/{status}','App\Http\Controllers\PatientsController@statuschange');
+            Route::get('/patients/status/{id}','App\Http\Controllers\PatientsController@statuschange')->name('patients.status');
             Route::get('/patients/details/{id}','App\Http\Controllers\PatientsController@show')->name('patients.profile');
-            Route::delete('/patients/{id}','App\Http\Controllers\PatientsController@destroy');
+            Route::delete('/patients/{id}','App\Http\Controllers\PatientsController@destroy')->name('patients.destroy');
 
             // Referrals Route
             Route::get('/referrals', 'App\Http\Controllers\ReferralController@index')->name('referrels.list');
-            Route::post('/referrals/add','App\Http\Controllers\ReferralController@store');
-            Route::get('/referrals/edit/{id}', "App\Http\Controllers\ReferralController@edit");
-            Route::put('/referrals/update', "App\Http\Controllers\ReferralController@update");
-            Route::delete('/referrals/{id}','App\Http\Controllers\ReferralController@destroy');
+            Route::post('/referrals/add','App\Http\Controllers\ReferralController@store')->name('referrals.store');
+            Route::get('/referrals/edit/{id}', "App\Http\Controllers\ReferralController@edit")->name('referrals.edit');
+            Route::put('/referrals/update', "App\Http\Controllers\ReferralController@update")->name('referrals.update');
+            Route::delete('/referrals/{id}','App\Http\Controllers\ReferralController@destroy')->name('referrals.destroy');
 
             // labtest Category Route
             Route::get('labtest', 'App\Http\Controllers\LabTestCatController@index')->name('labtest');
-            Route::post('/labtest/add','App\Http\Controllers\LabTestCatController@store');
-            Route::delete('/labtest/{id}','App\Http\Controllers\LabTestCatController@destroy');
+            Route::post('/labtest/add','App\Http\Controllers\LabTestCatController@store')->name('labtest.add');
+            Route::delete('/labtest/{id}','App\Http\Controllers\LabTestCatController@destroy')->name('labtest.destroy');
             Route::get('/labtest/edit/{id}','App\Http\Controllers\LabTestCatController@edit')->name('labtest.edit');
             Route::put('/labtest/update','App\Http\Controllers\LabTestCatController@update')->name('labtest.update');
 

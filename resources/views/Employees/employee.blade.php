@@ -255,7 +255,7 @@
                 var myformData = new FormData($('#EmployeeForm')[0]);
                 $.ajax({
                     type: "post",
-                    url: "/employees/add",
+                    url: "{{ route('employees.add') }}",
                     data: myformData,
                     cache: false,
                     processData: false,
@@ -306,7 +306,7 @@
                         var token = $("meta[name='csrf-token']").attr("content");
                         $.ajax({
                             type: "DELETE",
-                            url: "/employees/" + id,
+                            url: "{{ URL::route('employees.destroy', '') }}/" + id,
                             data: {
                                 "id": id,
                                 "_token": token,
@@ -342,12 +342,16 @@
             } else {
                 var catstatus = 'Pending';
             }
+            var url = "{{ URL::route('user.status', '') }}/" + id;
             $.ajax({
                 dataType: "json",
-                url: '/users/status/' + id + '/' + catstatus,
-                method: 'get',
+                url: url,
+                method: 'get',\
+                data: {
+                    "id": id,
+                    "status": catstatus,
+                },
                 success: function(result1) {
-                    // console.log(result1);
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -359,7 +363,6 @@
                     });
                 },
                 error: function(error) {
-                    // alert(catstatus);
                     Swal.fire({
                         position: 'top-end',
                         icon: 'error',

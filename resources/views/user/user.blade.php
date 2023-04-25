@@ -162,19 +162,26 @@
                     },
                 ]
             });
+
             $(document).on('change', '#status', function() {
                 var id = $(this).attr('data-id');
+
+                console.log(url);
                 if (this.checked) {
                     var catstatus = 'Active';
                 } else {
                     var catstatus = 'Pending';
                 }
+                var url = "{{ URL::route('user.status', '') }}/" + id;
                 $.ajax({
                     dataType: "json",
-                    url: '/users/status/' + id + '/' + catstatus,
+                    url: url,
                     method: 'get',
+                    data: {
+                        id: id,
+                        status: catstatus,
+                    },
                     success: function(result1) {
-                        // console.log(result1);
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
@@ -199,8 +206,6 @@
                 });
             });
 
-
-
             $('body').on('click', '.deletebtn', function() {
                 var id = $(this).attr('data-id');
                 Swal.fire({
@@ -216,7 +221,7 @@
                         var token = $("meta[name='csrf-token']").attr("content");
                         $.ajax({
                             type: "DELETE",
-                            url: "/user/" + id,
+                            url: "{{ URL::route('user.delete', '') }}/" + id,
                             data: {
                                 "id": id,
                                 "_token": token,
@@ -250,9 +255,10 @@
 
             $('body').on('click', '.editbtn', function() {
                 var id = $(this).data('id');
+                var url = "{{ URL::route('user.edit', '') }}/" + id;
                 $.ajax({
                     dataType: "json",
-                    url: '/users/edit/' + id,
+                    url: url,
                     method: 'get',
                     success: function(user) {
                         $('#id').val(user.id);
@@ -283,7 +289,7 @@
                 var _token = $('input[name=_token]').val();
                 $.ajax({
                     type: "PUT",
-                    url: "/users/update",
+                    url: "{{ route('user.update') }}",
                     data: {
                         "id": id,
                         "name1": name1,
@@ -323,9 +329,10 @@
 
             $('body').on('click', '.passchange', function() {
                 var id = $(this).data('id');
+                var url = "{{ URL::route('user.edit', '') }}/" + id;
                 $.ajax({
                     dataType: "json",
-                    url: '/users/edit/' + id,
+                    url: url,
                     method: 'get',
                     success: function(user) {
                         $('#id1').val(user.id);
@@ -344,6 +351,7 @@
                     }
                 });
             });
+
             $('#passchangeForm').submit(function(e) {
                 e.preventDefault();
                 var id = $('#id1').val();
@@ -351,7 +359,7 @@
                 var _token = $('input[name=_token]').val();
                 $.ajax({
                     type: "PUT",
-                    url: "/users/pass/update",
+                    url: "{{ route('user.pass.update') }}",
                     data: {
                         "id": id,
                         "password": password,
@@ -399,8 +407,12 @@
             }
             $.ajax({
                 dataType: "json",
-                url: '/users/employees/' + id + '/' + catstatus,
+                url: "{{ URL::route('user.employees', '') }}/" + id,
                 method: 'get',
+                data: {
+                    "id": id,
+                    "catstatus": catstatus,
+                },
                 success: function(result1) {
                     Swal.fire({
                         position: 'top-end',
@@ -434,8 +446,12 @@
             }
             $.ajax({
                 dataType: "json",
-                url: '/users/patitents/' + id + '/' + catstatus,
+                url: "{{ URL::route('user.patitents', '') }}/" + id,
                 method: 'get',
+                data: {
+                    "id": id,
+                    "catstatus": catstatus,
+                },
                 success: function(result1) {
                     Swal.fire({
                         position: 'top-end',
@@ -469,7 +485,11 @@
             }
             $.ajax({
                 dataType: "json",
-                url: '/users/testcategory/' + id + '/' + catstatus,
+                url: "{{ URL::route('user.testcategory', '') }}/" + id,
+                data: {
+                    "id": id,
+                    "catstatus": catstatus,
+                },
                 method: 'get',
                 success: function(result1) {
                     Swal.fire({
@@ -504,8 +524,12 @@
             }
             $.ajax({
                 dataType: "json",
-                url: '/users/referral/' + id + '/' + catstatus,
+                url: "{{ URL::route('user.referral', '') }}/" + id,
                 method: 'get',
+                data: {
+                    "id": id,
+                    "catstatus": catstatus,
+                },
                 success: function(result1) {
                     Swal.fire({
                         position: 'top-end',
@@ -539,8 +563,12 @@
             }
             $.ajax({
                 dataType: "json",
-                url: '/users/billing/' + id + '/' + catstatus,
+                url: "{{ URL::route('user.billing', '') }}/" + id,
                 method: 'get',
+                data: {
+                    "id": id,
+                    "catstatus": catstatus,
+                },
                 success: function(result1) {
                     Swal.fire({
                         position: 'top-end',
@@ -574,8 +602,12 @@
             }
             $.ajax({
                 dataType: "json",
-                url: '/users/pathology/' + id + '/' + catstatus,
+                url: "{{ URL::route('user.pathology', '') }}/" + id,
                 method: 'get',
+                data: {
+                    "id": id,
+                    "catstatus": catstatus,
+                },
                 success: function(result1) {
                     Swal.fire({
                         position: 'top-end',
@@ -609,8 +641,12 @@
             }
             $.ajax({
                 dataType: "json",
-                url: '/users/radiology/' + id + '/' + catstatus,
+                url: "{{ URL::route('user.radiology', '') }}/" + id,
                 method: 'get',
+                data: {
+                    "id": id,
+                    "catstatus": catstatus,
+                },
                 success: function(result1) {
                     Swal.fire({
                         position: 'top-end',
@@ -644,8 +680,12 @@
             }
             $.ajax({
                 dataType: "json",
-                url: '/users/electrocardiography/' + id + '/' + catstatus,
+                url: "{{ URL::route('user.electrocardiography', '') }}/" + id,
                 method: 'get',
+                data: {
+                    "id": id,
+                    "catstatus": catstatus,
+                },
                 success: function(result1) {
                     Swal.fire({
                         position: 'top-end',
@@ -679,8 +719,12 @@
             }
             $.ajax({
                 dataType: "json",
-                url: '/users/ultrasonography/' + id + '/' + catstatus,
+                url: "{{ URL::route('user.ultrasonography', '') }}/" + id,
                 method: 'get',
+                data: {
+                    "id": id,
+                    "catstatus": catstatus,
+                },
                 success: function(result1) {
                     Swal.fire({
                         position: 'top-end',
@@ -714,8 +758,12 @@
             }
             $.ajax({
                 dataType: "json",
-                url: '/users/reportbooth/' + id + '/' + catstatus,
+                url: "{{ URL::route('user.reportbooth', '') }}/" + id,
                 method: 'get',
+                data: {
+                    "id": id,
+                    "catstatus": catstatus,
+                },
                 success: function(result1) {
                     Swal.fire({
                         position: 'top-end',
@@ -749,8 +797,12 @@
             }
             $.ajax({
                 dataType: "json",
-                url: '/users/financial/' + id + '/' + catstatus,
+                url: "{{ URL::route('user.financial', '') }}/" + id,
                 method: 'get',
+                data: {
+                    "id": id,
+                    "catstatus": catstatus,
+                },
                 success: function(result1) {
                     Swal.fire({
                         position: 'top-end',
@@ -784,8 +836,12 @@
             }
             $.ajax({
                 dataType: "json",
-                url: '/users/report_g/' + id + '/' + catstatus,
+                url: "{{ URL::route('user.report_g', '') }}/" + id,
                 method: 'get',
+                data: {
+                    "id": id,
+                    "catstatus": catstatus,
+                },
                 success: function(result1) {
                     Swal.fire({
                         position: 'top-end',
@@ -819,8 +875,12 @@
             }
             $.ajax({
                 dataType: "json",
-                url: '/users/inventory/' + id + '/' + catstatus,
+                url: "{{ URL::route('user.inventory', '') }}/" + id,
                 method: 'get',
+                data: {
+                    "id": id,
+                    "catstatus": catstatus,
+                },
                 success: function(result1) {
                     Swal.fire({
                         position: 'top-end',
@@ -845,39 +905,43 @@
             });
         });
 
-        $(document).on('change', '#patitents', function() {
-            var id = $(this).attr('data-id');
-            if (this.checked) {
-                var catstatus = '1';
-            } else {
-                var catstatus = '0';
-            }
-            $.ajax({
-                dataType: "json",
-                url: '/users/patitents/' + id + '/' + catstatus,
-                method: 'get',
-                success: function(result1) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Permission Given In Patient',
-                        text: "The user's Permission has been updated",
-                        showConfirmButton: false,
-                        timerProgressBar: true,
-                        timer: 1800
-                    });
-                },
-                error: function(error) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'We have some error',
-                        showConfirmButton: false,
-                        timerProgressBar: true,
-                        timer: 1800
-                    });
-                }
-            });
-        });
+        // $(document).on('change', '#patitents', function() {
+        //     var id = $(this).attr('data-id');
+        //     if (this.checked) {
+        //         var catstatus = '1';
+        //     } else {
+        //         var catstatus = '0';
+        //     }
+        //     $.ajax({
+        //         dataType: "json",
+        //         url: "{{ URL::route('user.patitents', '') }}/" + id,
+        //         method: 'get',
+        //         data: {
+        //             "id": id,
+        //             "catstatus": catstatus,
+        //         },
+        //         success: function(result1) {
+        //             Swal.fire({
+        //                 position: 'top-end',
+        //                 icon: 'success',
+        //                 title: 'Permission Given In Patient',
+        //                 text: "The user's Permission has been updated",
+        //                 showConfirmButton: false,
+        //                 timerProgressBar: true,
+        //                 timer: 1800
+        //             });
+        //         },
+        //         error: function(error) {
+        //             Swal.fire({
+        //                 position: 'top-end',
+        //                 icon: 'error',
+        //                 title: 'We have some error',
+        //                 showConfirmButton: false,
+        //                 timerProgressBar: true,
+        //                 timer: 1800
+        //             });
+        //         }
+        //     });
+        // });
     </script>
 @endsection

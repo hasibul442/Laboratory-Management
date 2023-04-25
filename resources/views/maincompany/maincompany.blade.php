@@ -92,7 +92,7 @@
                 var myformData = new FormData($('#ConpanyForm')[0]);
                 $.ajax({
                     type: "post",
-                    url: "/labdetails/add",
+                    url: "{{ route('labdetails.add') }}",
                     data: myformData,
                     cache: false,
                     processData: false,

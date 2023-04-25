@@ -203,7 +203,7 @@
                 var myformData = new FormData($('#LabTestForm')[0]);
                 $.ajax({
                     type: "post",
-                    url: "/labtest/add",
+                    url: "{{ route('labtest.add') }}",
                     data: myformData,
                     cache: false,
                     processData: false,
@@ -248,7 +248,7 @@
                         var token = $("meta[name='csrf-token']").attr("content");
                         $.ajax({
                             type: "DELETE",
-                            url: "/labtest/" + id,
+                            url: "{{ URL::route('labtest.destroy', '') }}/" + id,,
                             data: {
                                 "id": id,
                                 "_token": token,

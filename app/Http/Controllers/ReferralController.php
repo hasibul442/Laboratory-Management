@@ -17,8 +17,7 @@ class ReferralController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Referrals::get();
-            // $data = ;
+            $data = Referrals::query()->orderBy('id', 'desc');
             return DataTables::of($data)
                 ->addIndexColumn()
 
@@ -28,7 +27,8 @@ class ReferralController extends Controller
                     return $btn;
                 })
                 ->rawColumns(['action'])
-                ->make(true);
+                // ->make(true);
+                ->toJson();
         }
         return view('referrel.referrel');
     }

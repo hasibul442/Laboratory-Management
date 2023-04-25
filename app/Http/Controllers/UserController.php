@@ -83,102 +83,106 @@ class UserController extends Controller
         return view('user.user');
     }
 
-    public function statuschange($id, $status)
+    public function statuschange($id, Request $requst)
     {
+       try{
         $user = User::find($id);
-        $user->status = $status;
+        $user->status = $requst->status;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
+       } catch (\Exception $e) {
+        return response()->json(['error' => $e->getMessage()]);
+       }
     }
 
-    public function employeeschange($id, $status)
+    public function employeeschange($id, Request $request)
     {
         $user = User::find($id);
-        $user->employees = $status;
+        $user->employees = $request->catstatus;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
-    public function patitentschange($id, $status)
+    public function patitentschange($id, Request $request)
     {
         $user = User::find($id);
-        $user->patitents = $status;
+        $user->patitents = $request->catstatus;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
-    public function testcategory($id, $status)
+    public function testcategory($id, Request $request)
     {
         $user = User::find($id);
-        $user->testcategory = $status;
+        $user->testcategory = $request->catstatus;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
-    public function referral($id, $status)
+    public function referral($id, Request $request)
     {
         $user = User::find($id);
-        $user->referral = $status;
+        $user->referral = $request->catstatus;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
-    public function billing($id, $status)
+    public function billing($id, Request $request)
     {
         $user = User::find($id);
-        $user->billing = $status;
+        $user->billing = $request->catstatus;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
-    public function pathology($id, $status)
+    public function pathology($id, Request $request)
     {
         $user = User::find($id);
-        $user->pathology = $status;
+        $user->pathology = $request->catstatus;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
-    public function radiology($id, $status)
+    public function radiology($id, Request $request)
     {
         $user = User::find($id);
-        $user->radiology = $status;
+        $user->radiology = $request->catstatus;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
-    public function electrocardiography($id, $status)
+    public function electrocardiography($id, Request $request)
     {
         $user = User::find($id);
-        $user->electrocardiography = $status;
+        $user->electrocardiography = $request->catstatus;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
-    public function ultrasonography($id, $status)
+    public function ultrasonography($id, Request $request)
     {
         $user = User::find($id);
-        $user->ultrasonography = $status;
+        $user->ultrasonography = $request->catstatus;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
-    public function reportbooth($id, $status)
+    public function reportbooth($id, Request $request)
     {
         $user = User::find($id);
-        $user->reportbooth = $status;
+        $user->reportbooth = $request->catstatus;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
-    public function financial($id, $status)
+    public function financial($id, Request $request)
     {
         $user = User::find($id);
-        $user->financial = $status;
+        $user->financial = $request->catstatus;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
-    public function report_g($id, $status)
+    public function report_g($id, Request $request)
     {
         $user = User::find($id);
-        $user->report_g = $status;
+        $user->report_g = $request->catstatus;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }
-    public function inventory($id, $status)
+    public function inventory($id, Request $request)
     {
         $user = User::find($id);
-        $user->inventory = $status;
+        $user->inventory = $request->catstatus;
         $user->update();
         return response()->json(['success' => 'Status changed successfully.']);
     }

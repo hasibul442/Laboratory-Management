@@ -244,7 +244,8 @@
             var table = $('.ref_datatable').DataTable({
                 processing: true,
                 serverSide: false,
-                // paging:"<? $data->links() ?>",
+                pageLength: 25,
+
                 ajax: {
                     url: "{{ route('referrels.list') }}",
                 },
@@ -280,6 +281,7 @@
                     searchable: true
                 }]
             });
+            console.log(table);
 
             $('#ReferrelForm').on('submit', function(e) {
                 e.preventDefault();
@@ -290,15 +292,14 @@
                 });
                 var myformData = new FormData($('#ReferrelForm')[0]);
                 $.ajax({
-                    type: "post",
-                    url: "/referrals/add",
+                    type: "POST",
+                    url: "{{ route('referrals.store') }}",
                     data: myformData,
                     cache: false,
                     processData: false,
                     contentType: false,
                     dataType: "json",
                     success: function(response) {
-                        console.log(response);
                         $("#ReferrelForm").find('input').val('');
                         $('#Referrelmodel').modal('hide');
                         $('#ReferrelForm')[0].reset();
@@ -342,7 +343,7 @@
                         var token = $("meta[name='csrf-token']").attr("content");
                         $.ajax({
                             type: "DELETE",
-                            url: "/referrals/" + id,
+                            url: "{{ URL::route('referrals.destroy', '') }}/" + id,
                             data: {
                                 "id": id,
                                 "_token": token,
@@ -378,7 +379,7 @@
                 var id = $(this).data('id');
                 $.ajax({
                     dataType: "json",
-                    url: '/referrals/edit/' + id,
+                    url: "{{ URL::route('referrals.edit', '') }}/" + id,
                     method: 'get',
                     success: function(result) {
                         $('#id').val(result.id);
@@ -417,7 +418,7 @@
                 var _token = $('input[name=_token]').val();
                 $.ajax({
                     type: "PUT",
-                    url: "/referrals/update",
+                    url: "{{ URL::route('referrals.update') }}",
                     data: {
                         'id': id,
                         'name1': name1,
@@ -431,7 +432,6 @@
                     },
                     dataType: "json",
                     success: function(response) {
-                        // console.log(response);
                         $('#ReferrelEditmodel').modal('toggle');
                         $('#ReferrelEditmodel').modal('hide');
                         Swal.fire({
@@ -442,7 +442,7 @@
                             timerProgressBar: true,
                             timer: 1800
                         });
-                        table.draw();
+                        table.ajax.reload();
                         $('#ReferrelEditForm')[0].reset();
                     },
                     error: function(error) {
