@@ -248,7 +248,7 @@
                         var token = $("meta[name='csrf-token']").attr("content");
                         $.ajax({
                             type: "DELETE",
-                            url: "{{ URL::route('labtest.destroy', '') }}/" + id,,
+                            url: "{{ URL::route('labtest.destroy', '') }}/" + id,
                             data: {
                                 "id": id,
                                 "_token": token,
@@ -281,7 +281,7 @@
                 var id = $(this).data('id');
                 $.ajax({
                     dataType: "json",
-                    url: '/labtest/edit/' + id,
+                    url: "{{ URL::route('labtest.edit', '') }}/" + id,
                     method: 'get',
                     success: function(labtest) {
                         $('#id').val(labtest.id);
@@ -314,7 +314,7 @@
 
                 $.ajax({
                     type: "PUT",
-                    url: "/labtest/update",
+                    url: "{{ route('labtest.update') }}",
                     data: {
                         id: id,
                         cat_name1: cat_name1,
