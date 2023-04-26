@@ -348,7 +348,7 @@
             console.log(myformData);
             $.ajax({
                 type: "post",
-                url: "/billing/add",
+                url: "{{ route('billing.add') }}",
                 data: myformData,
                 cache: false,
                 processData: false,

@@ -82,7 +82,7 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::get('/billing', 'App\Http\Controllers\BillsController@index')->name('billing');
             Route::get('/allbilling', 'App\Http\Controllers\BillsController@allbills')->name('allbills');
             Route::get('/all/billing', 'App\Http\Controllers\BillsController@allbills')->name('all.bills');
-            Route::post('/billing/add','App\Http\Controllers\BillsController@store');
+            Route::post('/billing/add','App\Http\Controllers\BillsController@store')->name('billing.add');
             Route::get('/billing/details/{id}','App\Http\Controllers\BillsController@show')->name('billing.details');
 
             // Billing System Route
@@ -130,11 +130,11 @@ Route::middleware(['auth:sanctum', 'verified'])
 
             //Attendance Route
             Route::get('/Attendance','App\Http\Controllers\AttendancesController@index')->name('Attendance');
-            Route::post('/Attendance/add','App\Http\Controllers\AttendancesController@store');
-            Route::put('/Attendance/update','App\Http\Controllers\AttendancesController@update');
+            Route::post('/Attendance/add','App\Http\Controllers\AttendancesController@store')->name('Attendance.add');
+            Route::put('/Attendance/update','App\Http\Controllers\AttendancesController@update')->name('Attendance.update');
 
             //Activities Route
             Route::get('/activities','App\Http\Controllers\DaityActivitiesController@index')->name('activities');
-            Route::post('/activities/add','App\Http\Controllers\DaityActivitiesController@store');
-            Route::put('/activities/update','App\Http\Controllers\DaityActivitiesController@update');
+            Route::post('/activities/add','App\Http\Controllers\DaityActivitiesController@store')->name('activities.add');
+            Route::put('/activities/update','App\Http\Controllers\DaityActivitiesController@update')->name('activities.update');
 });
