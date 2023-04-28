@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Lab Test Category')
 @section('content')
     <div class="container-fluid">
@@ -43,7 +43,7 @@
     </div>
 
     <script>
-        $(function(){
+        $(function() {
             var table = $('.allbill_datatable').DataTable({
                 processing: true,
                 serverSide: true,

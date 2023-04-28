@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Patient Details')
 @section('content')
 
@@ -73,7 +73,9 @@
                     </div>
 
                     <div class="col-md-4">
-                        <img src="{{ asset('assets/HMS/patient/'.$patient->users->profile_photo_path) }}" alt="{{ $patient->users->profile_photo_path }}" class="img-fluid rounded-circle" style="width: 200px; height: 200px" />
+                        <img src="{{ asset('assets/HMS/patient/' . $patient->users->profile_photo_path) }}"
+                            alt="{{ $patient->users->profile_photo_path }}" class="img-fluid rounded-circle"
+                            style="width: 200px; height: 200px" />
 
                         <table class="table display table-borderless mt-3">
                             <tbody>
@@ -86,7 +88,7 @@
                                     <td class="font-weight-bold">Referred By</td>
                                     <td class="text-center">:</td>
                                     <td>
-                                        @if($patient->referred_by == 'none')
+                                        @if ($patient->referred_by == 'none')
                                             None
                                         @else
                                             {{ $patient->referral->name }}
@@ -96,13 +98,13 @@
                                 <tr>
                                     <td class="font-weight-bold">Register By</td>
                                     <td class="text-center">:</td>
-                                    <td>{{ $patient->registerd_by  }}</td>
+                                    <td>{{ $patient->registerd_by }}</td>
                                 </tr>
                                 {{-- <tr>
                                     <td class="font-weight-bold">Approved By</td>
                                     <td class="text-center">:</td>
                                     <td>
-                                        @if ( $patient->aprrovel_by == null)
+                                        @if ($patient->aprrovel_by == null)
                                             Not Approved Yet
 
                                         @else

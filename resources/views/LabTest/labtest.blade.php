@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Lab Test Category')
 @section('content')
 
@@ -133,8 +133,8 @@
 
     {{-- Data Edit Model Start --}}
 
-    <div class="modal fade modal-demo2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true"
-        style="display: none;">
+    <div class="modal fade modal-demo2" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+        aria-hidden="true" style="display: none;">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">

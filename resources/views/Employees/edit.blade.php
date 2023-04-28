@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Employees Details Update')
 
 @section('content')
@@ -24,14 +24,15 @@
                 <h3 class="text-center mt-5">{{ $employee->users->name }}</h3>
                 <div class="row mt-5">
                     <div class="col-md-8">
-                        <form role="form" class="parsley-examples" action="{{ url('/employees/edit/'.$employee->id) }}"  method="POST" enctype="multipart/form-data">
+                        <form role="form" class="parsley-examples" action="{{ url('/employees/edit/' . $employee->id) }}"
+                            method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
                                 <label for="name" class="col-sm-4 col-form-label">Full Name<span
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-7">
-                                    <input type="text"  parsley-type="text" class="form-control" id="name"
+                                    <input type="text" parsley-type="text" class="form-control" id="name"
                                         name="name" value="{{ $employee->users->name }}">
                                 </div>
                             </div>
@@ -39,7 +40,7 @@
                                 <label for="name" class="col-sm-4 col-form-label">Email<span
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-7">
-                                    <input type="text"  parsley-type="text" class="form-control" id="email"
+                                    <input type="text" parsley-type="text" class="form-control" id="email"
                                         name="email" value="{{ $employee->users->email }}">
                                 </div>
                             </div>
@@ -69,7 +70,8 @@
                                 <label for="dob" class="col-sm-4 col-form-label">Date of Birth(DOB)<span
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-7">
-                                    <input type="date" value="{{ $employee->dob }}" class="form-control" id="dob" name="dob">
+                                    <input type="date" value="{{ $employee->dob }}" class="form-control" id="dob"
+                                        name="dob">
                                 </div>
                             </div>
 
@@ -77,8 +79,8 @@
                                 <label for="join_of_date" class="col-sm-4 col-form-label">Join of Date<span
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-7">
-                                    <input type="date" value="{{ $employee->join_of_date }}" class="form-control" id="join_of_date"
-                                        name="join_of_date">
+                                    <input type="date" value="{{ $employee->join_of_date }}" class="form-control"
+                                        id="join_of_date" name="join_of_date">
                                 </div>
                             </div>
 
@@ -87,7 +89,7 @@
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-7">
                                     <input type="text" required class="form-control" id="position" name="position"
-                                    value="{{ $employee->position }}">
+                                        value="{{ $employee->position }}">
                                 </div>
                             </div>
 
@@ -96,7 +98,7 @@
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-7">
                                     <input type="text" required class="form-control" id="salary" name="salary"
-                                    value="{{ $employee->salary }}">
+                                        value="{{ $employee->salary }}">
                                 </div>
                             </div>
 
@@ -112,8 +114,7 @@
                                 <label for="salary" class="col-sm-4 col-form-label">Image<span
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-7">
-                                    <input type="file" class="form-control border-0" id="image"
-                                        name="image">
+                                    <input type="file" class="form-control border-0" id="image" name="image">
                                 </div>
                             </div>
 
@@ -126,7 +127,9 @@
                         </form>
                     </div>
                     <div class="col-md-4">
-                        <img src="{{ asset('assets/HMS/employees/'.$employee->users->profile_photo_path) }}" alt="{{ $employee->users->profile_photo_path }}" class="img-fluid rounded-circle" style="width: 200px; height: 200px" />
+                        <img src="{{ asset('assets/HMS/employees/' . $employee->users->profile_photo_path) }}"
+                            alt="{{ $employee->users->profile_photo_path }}" class="img-fluid rounded-circle"
+                            style="width: 200px; height: 200px" />
                     </div>
                 </div>
             </div>

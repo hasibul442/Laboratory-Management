@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Employees')
 
 @section('content')
@@ -60,7 +60,8 @@
                                         <input type="checkbox" class="status" id="status" data-toggle="toggle"
                                             data-on="Active" data-off="Pending" data-onstyle="success"
                                             data-offstyle="danger" data-id="{{ $item->users->id }}"
-                                            {{ $item->users->status == 'Active' ? 'checked' : '' }}></td>
+                                            {{ $item->users->status == 'Active' ? 'checked' : '' }}>
+                                    </td>
                                     <td>
                                         <a href="{{ route('employees.edit', $item->id) }}" class="btn btn-primary btn-sm">
                                             <i class="fas fa-edit"></i>
@@ -346,7 +347,8 @@
             $.ajax({
                 dataType: "json",
                 url: url,
-                method: 'get',\
+                method: 'get',
+                \
                 data: {
                     "id": id,
                     "status": catstatus,

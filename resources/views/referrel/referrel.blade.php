@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Referrel')
 @section('content')
 
@@ -114,8 +114,8 @@
                             <label for="account_number" class="col-sm-4 col-form-label">Account Number<span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-7">
-                                <input type="text" required class="form-control" id="account_number" name="account_number"
-                                    placeholder="ex.5052535126">
+                                <input type="text" required class="form-control" id="account_number"
+                                    name="account_number" placeholder="ex.5052535126">
                             </div>
                         </div>
 
@@ -146,8 +146,8 @@
     {{-- Referral System Add End --}}
 
     {{-- Referral System Edit Start --}}
-    <div class="modal fade" id="ReferrelEditmodel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true">
+    <div class="modal fade" id="ReferrelEditmodel" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -211,7 +211,8 @@
                             <label for="account_number1" class="col-sm-4 col-form-label">Account Number<span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-7">
-                                <input type="text" required class="form-control" id="account_number1" name="account_number1">
+                                <input type="text" required class="form-control" id="account_number1"
+                                    name="account_number1">
                             </div>
                         </div>
 
@@ -250,36 +251,37 @@
                     url: "{{ route('referrels.list') }}",
                 },
                 columns: [{
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                }, {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'hospitalname',
-                    name: 'hospitalname'
-                },{
-                    data: 'email',
-                    name: 'email'
-                }, {
-                    data: 'phone',
-                    name: 'phone'
-                }, {
-                    data: 'bank_name',
-                    name: 'bank_name'
-                }, {
-                    data: 'account_number',
-                    name: 'account_number'
-                }, {
-                    data: 'address',
-                    name: 'address'
-                }, {
-                    data: 'action',
-                    name: 'action',
-                    orderable: true,
-                    searchable: true
-                }]
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    }, {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'hospitalname',
+                        name: 'hospitalname'
+                    }, {
+                        data: 'email',
+                        name: 'email'
+                    }, {
+                        data: 'phone',
+                        name: 'phone'
+                    }, {
+                        data: 'bank_name',
+                        name: 'bank_name'
+                    }, {
+                        data: 'account_number',
+                        name: 'account_number'
+                    }, {
+                        data: 'address',
+                        name: 'address'
+                    }, {
+                        data: 'action',
+                        name: 'action',
+                        orderable: true,
+                        searchable: true
+                    }
+                ]
             });
             console.log(table);
 
@@ -375,7 +377,7 @@
                 });
             });
 
-            $('body').on('click','.editbtn',function(){
+            $('body').on('click', '.editbtn', function() {
                 var id = $(this).data('id');
                 $.ajax({
                     dataType: "json",
@@ -405,7 +407,7 @@
                 });
             });
 
-            $('#ReferrelEditForm').submit(function(e){
+            $('#ReferrelEditForm').submit(function(e) {
                 e.preventDefault();
                 var id = $('#id').val();
                 var email1 = $('#email1').val();

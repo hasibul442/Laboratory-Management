@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Activities')
 @section('content')
 
@@ -44,17 +44,28 @@
     </div>
 
     <script>
-        $(function(){
+        $(function() {
             $('.activities_datatable').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: '{{ route('activities') }}',
-                columns: [
-                    { data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                    { data: 'date', name: 'date' },
-                    { data: 'user_name', name: 'user_name' },
+                columns: [{
+                        data: 'DT_RowIndex',
+                        name: 'DT_RowIndex'
+                    },
+                    {
+                        data: 'date',
+                        name: 'date'
+                    },
+                    {
+                        data: 'user_name',
+                        name: 'user_name'
+                    },
                     // { data: 'employeesid', name: 'employeesid' },
-                    { data: 'activity', name: 'activity' },
+                    {
+                        data: 'activity',
+                        name: 'activity'
+                    },
                 ]
             });
         });

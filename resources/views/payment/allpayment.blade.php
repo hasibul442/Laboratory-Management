@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Transection History')
 @section('content')
     <div class="container-fluid">
@@ -21,7 +21,7 @@
         <div class="card">
             <div class="card-body">
 
-                <table class="table-hover table allpayment_datatables" >
+                <table class="table-hover table allpayment_datatables">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -38,30 +38,30 @@
     </div>
 
     <script>
-        $(function(){
+        $(function() {
             var table = $('.allpayment_datatables').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: "{{ route('transection.record') }}",
-            },
-            columns: [{
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex'
-            }, {
-                data: 'date',
-                name: 'date'
-            }, {
-                data: 'account_head',
-                name: 'account_head'
-            }, {
-                data: 'type',
-                name: 'type'
-            }, {
-                data: 'amount',
-                name: 'amount'
-            }]
-        });
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    url: "{{ route('transection.record') }}",
+                },
+                columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                }, {
+                    data: 'date',
+                    name: 'date'
+                }, {
+                    data: 'account_head',
+                    name: 'account_head'
+                }, {
+                    data: 'type',
+                    name: 'type'
+                }, {
+                    data: 'amount',
+                    name: 'amount'
+                }]
+            });
         });
     </script>
 @endsection

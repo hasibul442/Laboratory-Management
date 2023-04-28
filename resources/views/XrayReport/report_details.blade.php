@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Report Collection')
 @section('content')
 
@@ -42,10 +42,10 @@
                             <div class="col-sm-6">
                                 <div class="text-right">
                                     @foreach (App\Models\MainCompanys::where('id', 1)->get() as $item)
-                                    <span class="h3">{{ $item->lab_name }}</span><br>
-                                    <span class="h5">{{ $item->lab_address }}</span><br>
-                                    <span class="h5">{{ $item->lab_phone }}</span><br>
-                                    <span class="h5">{{ $item->lab_email }}</span><br>
+                                        <span class="h3">{{ $item->lab_name }}</span><br>
+                                        <span class="h5">{{ $item->lab_address }}</span><br>
+                                        <span class="h5">{{ $item->lab_phone }}</span><br>
+                                        <span class="h5">{{ $item->lab_email }}</span><br>
                                     @endforeach
                                 </div>
                             </div>
@@ -63,11 +63,11 @@
                                     <h5 class="border-top border-dark text-dark">Signature</h5>
                                 </div>
                             @else
-                            <div class="float-right">
-                                <img src="{{ asset('/assets/HMS/signature/' . $testreport->signeture) }}" alt="Signeture"
-                                    style="width: 100px; height: 50px" class="img-fluid">
-                                <h5 class="border-top border-dark text-dark">Signature</h5>
-                            </div>
+                                <div class="float-right">
+                                    <img src="{{ asset('/assets/HMS/signature/' . $testreport->signeture) }}"
+                                        alt="Signeture" style="width: 100px; height: 50px" class="img-fluid">
+                                    <h5 class="border-top border-dark text-dark">Signature</h5>
+                                </div>
                             @endif
                         </div>
 

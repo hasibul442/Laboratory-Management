@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Electrocardiography')
 @section('content')
 
@@ -38,24 +38,24 @@
                         </thead>
                         <tbody>
                             @php
-                            $i = 0;
-                        @endphp
+                                $i = 0;
+                            @endphp
                             @foreach (App\Models\TestReport::orderBy('id', 'DESC')->get() as $item)
-
                                 @if ($item->test->department == 'Electrocardiography' && $item->status == 'Pending')
-                                <tr>
-                                    <td>{{ ++$i }}</td>
-                                    <td>{{ $item->patients->patient_id }}</td>
-                                    <td>{{ $item->users->name }}</td>
-                                    <td>{{ $item->invoice->bill_no }}</td>
-                                    <td>{{ $item->test->cat_name }}</td>
-                                    <td>{{ $item->status }}</td>
-                                    <td>
-                                        <a href="{{ route('pathologyedit', $item->id) }}" class="btn btn-primary btn-sm">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td>{{ ++$i }}</td>
+                                        <td>{{ $item->patients->patient_id }}</td>
+                                        <td>{{ $item->users->name }}</td>
+                                        <td>{{ $item->invoice->bill_no }}</td>
+                                        <td>{{ $item->test->cat_name }}</td>
+                                        <td>{{ $item->status }}</td>
+                                        <td>
+                                            <a href="{{ route('pathologyedit', $item->id) }}"
+                                                class="btn btn-primary btn-sm">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                 @endif
                             @endforeach
                         </tbody>

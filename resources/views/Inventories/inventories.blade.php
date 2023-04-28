@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Inventory Management')
 @section('content')
     <div class="container-fluid">
@@ -210,8 +210,8 @@
                             <label for="dateofpurches_" class="col-sm-4 col-form-label">Purchase Date <span
                                     class="text-danger">*</span></label>
                             <div class="col-sm-7">
-                                <input type="date" required parsley-type="text" class="form-control" id="dateofpurches_"
-                                    name="dateofpurches_">
+                                <input type="date" required parsley-type="text" class="form-control"
+                                    id="dateofpurches_" name="dateofpurches_">
                             </div>
                         </div>
 

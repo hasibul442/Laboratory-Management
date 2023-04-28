@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Referral List')
 @section('content')
     <div class="container-fluid">

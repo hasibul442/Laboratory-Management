@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Other Transaction')
 @section('content')
     <div class="container-fluid">
@@ -21,23 +21,22 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="text-center">Other Transaction</h4>
-                <form  method="POST" class="mt-5" id="othertrans" enctype="multipart/form-data">
+                <form method="POST" class="mt-5" id="othertrans" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group row">
                         <label for="name" class="col-sm-4 col-form-label">Account Head<span
                                 class="text-danger">*</span></label>
                         <div class="col-sm-7">
                             <input type="text" required parsley-type="text" class="form-control" id="name"
-                                name="account_head" >
+                                name="account_head">
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <label for="gender" class="col-sm-4 col-form-label">Type<span
-                                class="text-danger">*</span></label>
+                        <label for="gender" class="col-sm-4 col-form-label">Type<span class="text-danger">*</span></label>
                         <div class="col-sm-7">
                             <select class="form-control" id="type" required name="type">
-                                <option  disabled>Choose One Option</option>
+                                <option disabled>Choose One Option</option>
                                 <option value="Income">Income</option>
                                 <option value="Expense">Expense</option>
                             </select>
@@ -49,7 +48,7 @@
                                 class="text-danger">*</span></label>
                         <div class="col-sm-7">
                             <input type="text" required parsley-type="text" class="form-control" id="amount"
-                                name="amount" >
+                                name="amount">
                         </div>
                     </div>
 
@@ -68,47 +67,47 @@
 
     <script>
         $('#othertrans').on('submit', function(e) {
-                e.preventDefault();
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                var myformData = new FormData($('#othertrans')[0]);
-                $.ajax({
-                    type: "post",
-                    url: "{{ route('other.transection.store') }}",
-                    data: myformData,
-                    cache: false,
-                    processData: false,
-                    contentType: false,
-                    dataType: "json",
-                    success: function(response) {
-                        console.log(response);
-                        $("#othertrans").find('input').val('');
-                        Swal.fire({
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Transaction Done Successfully',
-                            showConfirmButton: false,
-                            timerProgressBar: true,
-                            timer: 1800
-                        });
-                        // table.draw();
-                        location.reload();
-                    },
-                    error: function(error) {
-                        console.log(error);
-                        Swal.fire({
-                            title: 'Opps...',
-                            text: "Something went wrong! Please try again!",
-                            icon: "warning",
-                            showCancelButton: false,
-                            confirmButtonColor: '#3085d6',
-                            confirmButtonText: 'Yes'
-                        });
-                    }
-                });
+            e.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
             });
+            var myformData = new FormData($('#othertrans')[0]);
+            $.ajax({
+                type: "post",
+                url: "{{ route('other.transection.store') }}",
+                data: myformData,
+                cache: false,
+                processData: false,
+                contentType: false,
+                dataType: "json",
+                success: function(response) {
+                    console.log(response);
+                    $("#othertrans").find('input').val('');
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Transaction Done Successfully',
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 1800
+                    });
+                    // table.draw();
+                    location.reload();
+                },
+                error: function(error) {
+                    console.log(error);
+                    Swal.fire({
+                        title: 'Opps...',
+                        text: "Something went wrong! Please try again!",
+                        icon: "warning",
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes'
+                    });
+                }
+            });
+        });
     </script>
 @endsection

@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Bill Details')
 @section('content')
 
@@ -22,8 +22,9 @@
         <div class="card">
             <div class="card-body">
                 <div class="text-center mt-3">
-                    @foreach (App\Models\MainCompanys::where('id',1)->get() as $item)
-                        <img src="{{ asset('/assets/HMS/lablogo/'.$item->lab_image) }}" alt="Lab Logo" style="width: 80px; height: 80px" class="img-fluid"> <br/>
+                    @foreach (App\Models\MainCompanys::where('id', 1)->get() as $item)
+                        <img src="{{ asset('/assets/HMS/lablogo/' . $item->lab_image) }}" alt="Lab Logo"
+                            style="width: 80px; height: 80px" class="img-fluid"> <br />
                     @endforeach
                 </div>
                 <div class="row">
@@ -37,7 +38,7 @@
 
                     <div class="col-sm-6">
                         <div class="text-right">
-                            @foreach (App\Models\MainCompanys::where('id',1)->get() as $item)
+                            @foreach (App\Models\MainCompanys::where('id', 1)->get() as $item)
                                 <span class="h4">{{ $item->lab_name }}</span><br>
                                 <span class="h6">{{ $item->lab_address }}</span><br>
                                 <span class="h6">{{ $item->lab_phone }}</span><br>
@@ -91,13 +92,13 @@
                                 <td>{{ number_format($bills->total_price, 2) }}</td>
                             </tr> --}}
 
-                            {{-- <tr>
+                        {{-- <tr>
                                 <td></td>
                                 <th>Paid By</th>
                                 <td>{{ $bills->payment_type }}</td>
                             </tr> --}}
 
-                            {{-- <tr>
+                        {{-- <tr>
                                 <td></td>
                                 <th>Paid Amount</th>
                                 <td>{{ number_format($bills->paid_amount, 2) }}</td>
@@ -107,12 +108,12 @@
                                 <th>Due/Return Amount</th>
                                 <td>{{ number_format($bills->due_amount, 2) }}</td>
                             </tr> --}}
-                            {{-- <tr>
+                        {{-- <tr>
                                 <th>Approved Code</th>
                                 <td>:</td>
                                 <td>{{ $bills->approved_code }}</td>
                             </tr> --}}
-                            {{-- <tr>
+                        {{-- <tr>
                                 <th>Bill Collected By</th>
                                 <td>:</td>
                                 <td>{{ $bills->employee_name }}</td>
@@ -139,7 +140,7 @@
                             <h4>Due/Return Amount :</h4>
                         </div>
 
-                      </div>
+                    </div>
                 </div>
 
                 <div class="row mt-5">

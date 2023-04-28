@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Inventory Management')
 @section('content')
     <div class="container-fluid">
@@ -46,94 +46,93 @@
     </div>
 
     <script>
-  $('.historydatatable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route('inventories.history') }}',
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex'
-                    },
-                    {
-                        data: 'itemname',
-                        name: 'itemname'
-                    },
-                    {
-                        data: 'dateofpurches',
-                        name: 'dateofpurches'
-                    },
-                    {
-                        data: 'brandname',
-                        name: 'brandname'
-                    },
-                    {
-                        data: 'shopname',
-                        name: 'shopname'
-                    },
-                    {
-                        data: 'quentity',
-                        name: 'quentity'
-                    },
-                    {
-                        data: 'amount',
-                        name: 'amount'
-                    },
-                    {
-                        data: 'document',
-                        name: 'document'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: true,
-                        searchable: true
-                    },
-                ]
+        $('.historydatatable').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ route('inventories.history') }}',
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'itemname',
+                    name: 'itemname'
+                },
+                {
+                    data: 'dateofpurches',
+                    name: 'dateofpurches'
+                },
+                {
+                    data: 'brandname',
+                    name: 'brandname'
+                },
+                {
+                    data: 'shopname',
+                    name: 'shopname'
+                },
+                {
+                    data: 'quentity',
+                    name: 'quentity'
+                },
+                {
+                    data: 'amount',
+                    name: 'amount'
+                },
+                {
+                    data: 'document',
+                    name: 'document'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: true,
+                    searchable: true
+                },
+            ]
+        });
+
+        $('body').on('click', '.deletebtn', function() {
+            var id = $(this).data("id");
+            Swal.fire({
+                title: 'Are you sure?',
+                // text: "If You Remove A Employee, This System Also Remove User ID. You Will Not Be Able To Recover It!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.value === true) {
+                    var token = $("meta[name='csrf-token']").attr("content");
+                    $.ajax({
+                        type: "DELETE",
+                        url: "/inventories/history/" + id,
+                        data: {
+                            "id": id,
+                            "_token": token,
+                        },
+                        success: function(data) {
+                            Swal.fire({
+                                title: 'Deleted!',
+                                text: 'Your file has been deleted.',
+                                icon: 'success',
+                                showConfirmButton: false,
+                            });
+                            location.reload();
+                        },
+                        error: function(data) {
+                            Swal.fire({
+                                title: 'Alert!',
+                                text: 'Something Wrong',
+                                icon: 'alert',
+                                showConfirmButton: false,
+                            });
+                            // console.log('Error:', data);
+                        }
+                    })
+
+                }
             });
-
-            $('body').on('click', '.deletebtn', function() {
-                var id = $(this).data("id");
-                Swal.fire({
-                    title: 'Are you sure?',
-                    // text: "If You Remove A Employee, This System Also Remove User ID. You Will Not Be Able To Recover It!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes'
-                }).then((result) => {
-                    if (result.value === true) {
-                        var token = $("meta[name='csrf-token']").attr("content");
-                        $.ajax({
-                            type: "DELETE",
-                            url: "/inventories/history/" + id,
-                            data: {
-                                "id": id,
-                                "_token": token,
-                            },
-                            success: function(data) {
-                                Swal.fire({
-                                    title: 'Deleted!',
-                                    text: 'Your file has been deleted.',
-                                    icon: 'success',
-                                    showConfirmButton: false,
-                                });
-                                location.reload();
-                            },
-                            error: function(data) {
-                                Swal.fire({
-                                    title: 'Alert!',
-                                    text: 'Something Wrong',
-                                    icon: 'alert',
-                                    showConfirmButton: false,
-                                });
-                                // console.log('Error:', data);
-                            }
-                        })
-
-                    }
-                });
-            });
-
+        });
     </script>
 @endsection

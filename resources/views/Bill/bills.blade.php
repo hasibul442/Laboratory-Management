@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Lab Test Category')
 @section('content')
 
@@ -27,7 +27,7 @@
                 $string = preg_replace('/[^0-9\.]/', '', $latest->bill_no);
                 $nextInvoiceNumber = '#' . str_pad($string + 1, 6, '0', STR_PAD_LEFT);
             }
-
+            
         @endphp
 
         <div class="card">
@@ -181,7 +181,7 @@
                 </div>
             </div>
 
-            <div class="text-dark hidden" style=" color: #000" >
+            <div class="text-dark hidden" style=" color: #000">
                 <div class="card" id="details" style="display: none">
                     <div class="card-body">
                         <p style="color: #000">Hospital Logo</p>
@@ -373,12 +373,12 @@
                 error: function(error) {
                     console.log(error.responseJSON.message);
                     Swal.fire({
-                            title: 'Alert!',
-                            text: 'Something went wrong!',
-                            // text: error.responseJSON.message,
-                            icon: 'warning',
-                            showConfirmButton: false,
-                        });
+                        title: 'Alert!',
+                        text: 'Something went wrong!',
+                        // text: error.responseJSON.message,
+                        icon: 'warning',
+                        showConfirmButton: false,
+                    });
                 }
             });
         });

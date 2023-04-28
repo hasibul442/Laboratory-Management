@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Ultrasonography Report')
 
 @section('content')
@@ -68,7 +68,8 @@
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <select class="form-control" name="status" id="status">
-                                        <option selected value="{{ $ultrasonography->status }}">{{ $ultrasonography->status }}
+                                        <option selected value="{{ $ultrasonography->status }}">
+                                            {{ $ultrasonography->status }}
                                         </option>
                                         <option value="Test Complete">Test Complete</option>
                                     </select>

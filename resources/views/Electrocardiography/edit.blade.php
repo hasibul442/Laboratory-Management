@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Electrocardiography Report')
 
 @section('content')
@@ -24,8 +24,9 @@
                 <h3 class="text-center">{{ $Electrocardiography->test->cat_name }}</h3>
                 <div class="row mt-5">
                     <div class="col-md-12">
-                        <form class="form-horizontal" action="{{ url('/Electrocardiography/result/' . $Electrocardiography->id) }}"
-                            method="POST" enctype="multipart/form-data">
+                        <form class="form-horizontal"
+                            action="{{ url('/Electrocardiography/result/' . $Electrocardiography->id) }}" method="POST"
+                            enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                             <div class="form-group row">
@@ -68,7 +69,8 @@
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <select class="form-control" name="status" id="status">
-                                        <option selected value="{{ $Electrocardiography->status }}">{{ $Electrocardiography->status }}
+                                        <option selected value="{{ $Electrocardiography->status }}">
+                                            {{ $Electrocardiography->status }}
                                         </option>
                                         <option value="Test Complete">Test Complete</option>
                                     </select>

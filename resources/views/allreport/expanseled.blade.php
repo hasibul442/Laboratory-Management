@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('Layout.master')
 @section('title', 'Lab Test Category')
 @section('content')
     <div class="container-fluid">
@@ -18,7 +18,7 @@
 
         <div class="card">
             <div class="card-body">
-                
+
             </div>
         </div>
     </div>
