@@ -60,7 +60,7 @@ Laboratory Management System is a web application that helps to manage the labor
 - Login with other user
 
 ## Want to See Live👉👉
-- Go To www.lms.evatech.org
+- 
 
 ## Want to Know More 
 - Email Me

@@ -336,8 +336,8 @@
                     <p class="text-center font-weight-bold">If You Face Any Error Please Inform Us</p>
                 </div>
 
-                <h4>Email: info@evatech.org</h4>
-                <h4>Web: www.evatech.org</h4>
+                <h4>Email: hasibulhasan442@gmail.com</h4>
+                <h4>Whatsup: +8801311210119</h4>
 
             </div>
         </div>

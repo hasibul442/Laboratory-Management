@@ -138,3 +138,4 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::post('/activities/add','App\Http\Controllers\DaityActivitiesController@store')->name('activities.add');
             Route::put('/activities/update','App\Http\Controllers\DaityActivitiesController@update')->name('activities.update');
 });
+skmksdmkscc
