@@ -317,7 +317,6 @@
                         // location.reload();
                     },
                     error: function(error) {
-                        console.log(error);
                         Swal.fire({
                             title: 'Opps...',
                             text: "Look Like We Have Some Probelms",

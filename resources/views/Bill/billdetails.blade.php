@@ -33,9 +33,8 @@
                             <div class="col-sm-6">
                                 <span class="h4">Invoice Number : {{ $bills->bill_no }}</span><br>
                                 <span class="h6">Patient Id : {{ $bills->patients->patient_id }}</span><br>
-                                <span class="h6">Patient Name : {{ $bills->users->name }}</span><br>
-                                <span class="h6">Mobile Number : {{ $bills->patients->home_phone }}</span><br>
-                                <span class="h6">Email : {{ $bills->users->email }}</span><br>
+                                <span class="h6">Patient Name : {{ $bills->patients->name }}</span><br>
+                                <span class="h6">Mobile Number : {{ $bills->patients->mobile_number }}</span><br>
                             </div>
 
                             <div class="col-sm-6">

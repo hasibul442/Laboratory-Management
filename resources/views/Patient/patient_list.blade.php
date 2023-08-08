@@ -33,12 +33,10 @@
                                 <th>#</th>
                                 <th>Patient ID</th>
                                 <th>Name</th>
-                                <th>Email</th>
                                 <th>Phone</th>
                                 <th>Age</th>
                                 <th>Gender</th>
                                 <th>Blood Group</th>
-                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -68,14 +66,11 @@
                     data: 'patient_id',
                     name: 'patient_id'
                 }, {
-                    data: 'user_name',
-                    name: 'user_name'
-                }, {
-                    data: 'email',
-                    name: 'email'
-                }, {
-                    data: 'home_phone',
-                    name: 'home_phone'
+                    data: 'name',
+                    name: 'name'
+                },  {
+                    data: 'mobile_phone',
+                    name: 'mobile_phone'
                 }, {
                     data: 'age',
                     name: 'age'
@@ -85,9 +80,6 @@
                 }, {
                     data: 'blood_group',
                     name: 'blood_group'
-                }, {
-                    data: 'status',
-                    name: 'status'
                 }, {
                     data: 'action',
                     name: 'action',

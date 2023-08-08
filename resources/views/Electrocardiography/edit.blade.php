@@ -34,7 +34,7 @@
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control border-0 bg-white" id="patient_name"
-                                        value="{{ $Electrocardiography->users->name }}" name="patient_name" disabled>
+                                        value="{{ $Electrocardiography->patients->name }}" name="patient_name" disabled>
                                 </div>
                             </div>
 

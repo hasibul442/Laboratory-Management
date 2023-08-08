@@ -9,8 +9,6 @@ class LabTestCat extends Model
 {
     use HasFactory;
     public $table = "labtest";
-    public $fillable = [ 'cat_name','department',
-    'price',
-    'status'];
+   
 
 }

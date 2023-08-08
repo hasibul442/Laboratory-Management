@@ -9,7 +9,7 @@
                     <div class="page-title-right">
                         <ol class="breadcrumb m-0">
                             <li class="breadcrumb-item"><a href="javascript: void(0);">Home</a></li>
-                            <li class="breadcrumb-item active">Insert Lab Information</li>
+                            <li class="breadcrumb-item active">Lab Information</li>
                         </ol>
                     </div>
                     <h4 class="page-title">Lab Information</h4>
@@ -20,7 +20,7 @@
 
         <div class="card">
             <div class="card-body">
-                <h3 class="text-center">Lab Details</h3>
+                <h3 class="text-center">Lab Information</h3>
 
                 <div class="row">
                     @foreach (App\Models\MainCompanys::where('id', 1)->get() as $lab)

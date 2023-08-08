@@ -24,7 +24,7 @@
                 <h3 class="text-center mt-5">{{ $employee->users->name }}</h3>
                 <div class="row mt-5">
                     <div class="col-md-8">
-                        <form role="form" class="parsley-examples" action="{{ url('/employees/edit/' . $employee->id) }}"
+                        <form role="form" class="parsley-examples" action="{{ route('employees.update' , $employee->id) }}"
                             method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')

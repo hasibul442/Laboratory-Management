@@ -45,7 +45,7 @@
                                     <tr>
                                         <td>{{ ++$i }}</td>
                                         <td>{{ $item->patients->patient_id }}</td>
-                                        <td>{{ $item->users->name }}</td>
+                                        <td>{{ $item->patients->name }}</td>
                                         <td>{{ $item->invoice->bill_no }}</td>
                                         <td>{{ $item->test->cat_name }}</td>
                                         <td>{{ $item->status }}</td>

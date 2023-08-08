@@ -15,9 +15,9 @@ class CreatePatientsTable extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id');
+            // $table->unsignedInteger('user_id');
             $table->string('patient_id')->nullable();
-            $table->string('home_phone')->nullable();
+            $table->string('name')->nullable();
             $table->string('mobile_phone')->nullable();
             $table->string('lmp')->nullable();
             $table->string('age')->nullable();
@@ -32,7 +32,7 @@ class CreatePatientsTable extends Migration
             $table->string('registerd_by')->nullable();
             $table->string('aprrovel_by')->nullable();
 
-            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            // $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();
         });

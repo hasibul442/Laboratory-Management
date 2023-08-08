@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DailyActivities extends Model
 {
     use HasFactory;
-    protected $fillable = ['user_id', 'date', 'activity'];
+    
     protected $table = 'dailyactivities';
     public function users(){
         return $this->belongsTo(User::class, 'user_id','id');

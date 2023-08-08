@@ -9,15 +9,6 @@ class TestReport extends Model
 {
     use HasFactory;
     public $table = "testreports";
-    public $fillable = [ 'patient_id','invoice_id',
-    'test_id',
-    'image',
-    'upload_by',
-    'status',
-    'testresult',
-    'signeture',
-    'elementuse'
-    ];
 
     public function users(){
         return $this->belongsTo(User::class, 'patient_id');
@@ -29,6 +20,6 @@ class TestReport extends Model
         return $this->belongsTo(Bills::class, 'invoice_id','id');
     }
     public function patients(){
-        return $this->belongsTo(Patients::class, 'patient_id','user_id');
+        return $this->belongsTo(Patients::class, 'patient_id','id');
     }
 }

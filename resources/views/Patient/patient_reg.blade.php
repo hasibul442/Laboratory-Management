@@ -37,22 +37,22 @@
                                         name="name" placeholder="Mr. Jon Rechard">
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label for="email" class="col-sm-4 col-form-label">Email<span
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-7">
                                     <input type="email" required parsley-type="text" class="form-control" id="email"
                                         name="email" placeholder="example@example.com">
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label for="home_phone" class="col-sm-4 col-form-label">Home Phone </label>
                                 <div class="col-sm-7">
                                     <input type="phone" parsley-type="text" class="form-control" id="home_phone"
                                         name="home_phone" placeholder="Phone Number">
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group row">
                                 <label for="mobile_phone" class="col-sm-4 col-form-label">Mobile Number<span
@@ -143,20 +143,20 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label for="salary" class="col-sm-4 col-form-label">Image</label>
                                 <div class="col-sm-7">
                                     <input type="file" class="form-control border-0" id="image" name="image">
                                 </div>
-                            </div>
+                            </div> --}}
 
-                            <div class="form-group row">
+                            {{-- <div class="form-group row">
                                 <label for="password" class="col-sm-4 col-form-label">Password<span
                                         class="text-danger">*</span></label>
                                 <div class="col-sm-7">
                                     <input type="password" required class="form-control" id="password" name="password">
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="form-group row">
                                 <label for="referred_by" class="col-sm-4 col-form-label">Referred By<span

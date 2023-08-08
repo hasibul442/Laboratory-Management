@@ -106,7 +106,7 @@
                     var token = $("meta[name='csrf-token']").attr("content");
                     $.ajax({
                         type: "DELETE",
-                        url: "/inventories/history/" + id,
+                        url: "{{ URL::route('inventories.history.destroy', '') }}/" + id,
                         data: {
                             "id": id,
                             "_token": token,

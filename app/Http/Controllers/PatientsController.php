@@ -22,32 +22,19 @@ class PatientsController extends Controller
             $data = Patients::orderBy('id', 'DESC')->get();
             return DataTables::of($data)
                 ->addIndexColumn()
-                ->addColumn('user_name', function ($item) {
-                    $user_name = $item->users->name;
-                    return $user_name;
-                })
-                ->addColumn('email', function ($item) {
-                    $email = $item->users->email;
-                    return $email;
-                })
-                ->addColumn('home_phone', function ($item) {
-                    $home_phone = '<h5>Home Phone</h5>'.$item->home_phone;
-                    $home_phone .= '<br><h5>Mobile Phone</h5>'. $item->mobile_phone;
-                    return $home_phone;
-                })
-                ->addColumn('status', function ($item) {
-                    $togolebutton = '<input ' . ($item->users->status == "Active" ? "checked" : "") .' type="checkbox" class="status" id="status" data-id="'.$item->user_id.'" />';
-                    $togolebutton .= '<script>
-                                        $(".status").bootstrapToggle({
-                                            on: "Active",
-                                            off: "Pending",
-                                            onstyle: "success",
-                                            offstyle: "danger",
-                                            size: "small"
-                                        });
-                                    </script>';
-                    return $togolebutton;
-                })
+                // ->addColumn('status', function ($item) {
+                //     $togolebutton = '<input ' . ($item->users->status == "Active" ? "checked" : "") .' type="checkbox" class="status" id="status" data-id="'.$item->user_id.'" />';
+                //     $togolebutton .= '<script>
+                //                         $(".status").bootstrapToggle({
+                //                             on: "Active",
+                //                             off: "Pending",
+                //                             onstyle: "success",
+                //                             offstyle: "danger",
+                //                             size: "small"
+                //                         });
+                //                     </script>';
+                //     return $togolebutton;
+                // })
                 ->addColumn('action', function ($row) {
                     $btn = '<a href="javascript:void(0);" class="btn btn-warning btn-sm editbtn" data-id="' . $row->id . '"><i class="fas fa-edit"></i></a>';
                     $btn .= '&nbsp&nbsp<a href='.(route("patients.profile", $row->id)).' class="btn btn-info btn-sm detailsview" data-id="' . $row->id . '"><i class="fas fa-eye"></i></a>';
@@ -78,24 +65,24 @@ class PatientsController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-        $user->user_type = 'patient';
-        $user->status = 'Pending';
-        if($request->hasFile('image')){
-            $image = $request->file('image');
-            $image_name = rand(0,100).'_'.$image->getClientOriginalName();
-            $image->move(public_path().'/assets/HMS/patient/',$image_name);
-            $user->profile_photo_path = $image_name;
-        }
-        $user->save();
+        // $user = new User;
+        // $user->name = $request->name;
+        // $user->email = $request->email;
+        // $user->password = Hash::make($request->password);
+        // $user->user_type = 'patient';
+        // $user->status = 'Pending';
+        // if($request->hasFile('image')){
+        //     $image = $request->file('image');
+        //     $image_name = rand(0,100).'_'.$image->getClientOriginalName();
+        //     $image->move(public_path().'/assets/HMS/patient/',$image_name);
+        //     $user->profile_photo_path = $image_name;
+        // }
+        // $user->save();
         $patientcount = Patients::get()->count();
         $patient = new Patients;
-        $patient->user_id = $user->id;
-        $patient->patient_id = date('Ym').'0'.$patientcount + $user->id;
-        $patient->home_phone = $request->home_phone;
+        // $patient->user_id = 0;
+        $patient->patient_id = date('Ym').'0'.$patientcount + 1;
+        $patient->name = $request->name;
         $patient->mobile_phone = $request->mobile_phone;
         $patient->address = $request->address;
         $patient->gender = $request->gender;
@@ -164,22 +151,7 @@ class PatientsController extends Controller
     public function destroy($id)
     {
         $employees = Patients::find($id);
-        $user = User::find($employees->user_id);
-        if (!is_null($user)) {
-            if(!is_null($user->profile_photo_path)){
-                $image_path = public_path().'/assets/HMS/patient/'.$user->profile_photo_path;
-                unlink($image_path);
-                // $user = User::find($employees->user_id);
                 $employees->delete();
-                $user->delete();
                 return response()->json(['success'=>'Data Delete successfully.']);
-            }
-            else{
-                // $user = User::find($employees->user_id);
-                $employees->delete();
-                $user->delete();
-                return response()->json(['success'=>'Data Delete successfully.']);
-            }
-        }
     }
 }

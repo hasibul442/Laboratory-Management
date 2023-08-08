@@ -34,7 +34,7 @@
                             <div class="col-sm-6">
                                 <span class="h3">Invoice Number : {{ $testreport->invoice->bill_no }}</span><br>
                                 <span class="h5">Patient Id : {{ $testreport->patients->patient_id }}</span><br>
-                                <span class="h5">Patient Name : {{ $testreport->users->name }}</span><br>
+                                <span class="h5">Patient Name : {{ $testreport->patients->name }}</span><br>
                                 <span class="h5">Mobile Number : {{ $testreport->patients->home_phone }}</span><br>
                                 <span class="h5">Email : {{ $testreport->users->email }}</span><br>
                             </div>

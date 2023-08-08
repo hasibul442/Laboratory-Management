@@ -274,14 +274,13 @@
                 var myformData = new FormData($('#inventoryForm')[0]);
                 $.ajax({
                     type: "post",
-                    url: "/inventories/add",
+                    url: "{{ route('inventories.add') }}",
                     data: myformData,
                     cache: false,
                     processData: false,
                     contentType: false,
                     dataType: "json",
                     success: function(response) {
-                        console.log(response);
                         $("#inventoryForm").find('input').val('');
                         $('.newinventory').modal('hide');
                         $('#inventoryForm')[0].reset();
@@ -325,7 +324,7 @@
                         var token = $("meta[name='csrf-token']").attr("content");
                         $.ajax({
                             type: "DELETE",
-                            url: "/inventories/" + id,
+                            url: "{{ URL::route('inventories.destroy', '') }}/" + id,
                             data: {
                                 "id": id,
                                 "_token": token,
@@ -364,14 +363,13 @@
                 var myformData = new FormData($('#updateinventoryForm')[0]);
                 $.ajax({
                     type: "post",
-                    url: "/inventories/update",
+                    url: "{{ route('inventories.update') }}",
                     data: myformData,
                     cache: false,
                     processData: false,
                     contentType: false,
                     dataType: "json",
                     success: function(response) {
-                        console.log(response);
                         $("#updateinventoryForm").find('input').val('');
                         $('.updateinventory').modal('hide');
                         $('#updateinventoryForm')[0].reset();

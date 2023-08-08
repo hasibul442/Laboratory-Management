@@ -26,6 +26,7 @@ class BillsController extends Controller
 
     public function allbills(Request $request){
 
+        // dd($request);
         if($request->ajax()){
             $data = Bills::orderBy('id', 'DESC')->get();
             return DataTables::of($data)
@@ -35,7 +36,7 @@ class BillsController extends Controller
                 return $patient_id;
             })
             ->addColumn('patient_name', function ($item) {
-                $patient_name = $item->users->name;
+                $patient_name = $item->patients->name;
                 return $patient_name;
             })
             ->addColumn('billing_date', function ($item) {
@@ -72,7 +73,7 @@ class BillsController extends Controller
                 return $patient_id;
             })
             ->addColumn('patient_name', function ($item) {
-                $patient_name = $item->users->name;
+                $patient_name = $item->patients->name;
                 return $patient_name;
             })
             ->addColumn('billing_date', function ($item) {

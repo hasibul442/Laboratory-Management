@@ -165,8 +165,6 @@
 
             $(document).on('change', '#status', function() {
                 var id = $(this).attr('data-id');
-
-                console.log(url);
                 if (this.checked) {
                     var catstatus = 'Active';
                 } else {

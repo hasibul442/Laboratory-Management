@@ -81,7 +81,7 @@
                                 <th>#</th>
                                 <th>Patient ID</th>
                                 <th>Name</th>
-                                <th>Email</th>
+                                {{-- <th>Email</th> --}}
                                 <th>Phone</th>
                                 <th>Age</th>
                                 <th>Gender</th>
@@ -95,9 +95,8 @@
                                 <tr>
                                     <td></td>
                                     <td>{{ $item->patient_id }}</td>
-                                    <td>{{ $item->users->name }}</td>
-                                    <td>{{ $item->users->email }}</td>
-                                    <td>{{ $item->home_phone }}<br>{{ $item->mobile_phone }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ $item->mobile_phone }}</td>
                                     <td>{{ $item->age }}</td>
                                     <td>{{ $item->gender }}</td>
                                     <td>{{ $item->blood_group }}</td>

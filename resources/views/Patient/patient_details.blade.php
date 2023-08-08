@@ -21,7 +21,7 @@
 
         <div class="card">
             <div class="card-body">
-                <h3 class="text-center mt-3">{{ $patient->users->name }}</h3>
+                <h3 class="text-center mt-3">{{ $patient->name }}</h3>
 
                 <div class="row mt-5">
                     <div class="col-md-8">
@@ -31,11 +31,6 @@
                                     <td class="font-weight-bold">Patient Id</td>
                                     <td class="text-center">:</td>
                                     <td>{{ $patient->patient_id }}</td>
-                                </tr>
-                                <tr>
-                                    <td class="font-weight-bold">Email</td>
-                                    <td class="text-center">:</td>
-                                    <td>{{ $patient->users->email }}</td>
                                 </tr>
                                 <tr>
                                     <td class="font-weight-bold">Home Phone</td>
@@ -73,17 +68,17 @@
                     </div>
 
                     <div class="col-md-4">
-                        <img src="{{ asset('assets/HMS/patient/' . $patient->users->profile_photo_path) }}"
+                        {{-- <img src="{{ asset('assets/HMS/patient/' . $patient->users->profile_photo_path) }}"
                             alt="{{ $patient->users->profile_photo_path }}" class="img-fluid rounded-circle"
-                            style="width: 200px; height: 200px" />
+                            style="width: 200px; height: 200px" /> --}}
 
                         <table class="table display table-borderless mt-3">
                             <tbody>
-                                <tr>
+                                {{-- <tr>
                                     <td class="font-weight-bold">Account Status</td>
                                     <td class="text-center">:</td>
                                     <td>{{ $patient->users->status }}</td>
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                     <td class="font-weight-bold">Referred By</td>
                                     <td class="text-center">:</td>

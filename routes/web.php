@@ -123,10 +123,10 @@ Route::middleware(['auth:sanctum', 'verified'])
             //Inventories Route
             Route::get('/inventories', 'App\Http\Controllers\InventoriesController@index')->name('inventories');
             Route::get('/inventories/history', 'App\Http\Controllers\InventoriesController@getInventories')->name('inventories.history');
-            Route::post('/inventories/add','App\Http\Controllers\InventoriesController@store');
-            Route::post('/inventories/update','App\Http\Controllers\InventoriesController@storeinventoryhistory');
-            Route::delete('/inventories/{id}','App\Http\Controllers\InventoriesController@destroy');
-            Route::delete('/inventories/history/{id}','App\Http\Controllers\InventoriesController@historydestroy');
+            Route::post('/inventories/add','App\Http\Controllers\InventoriesController@store')->name('inventories.add');
+            Route::post('/inventories/update','App\Http\Controllers\InventoriesController@storeinventoryhistory')->name('inventories.update');
+            Route::delete('/inventories/{id}','App\Http\Controllers\InventoriesController@destroy')->name('inventories.destroy');
+            Route::delete('/inventories/history/{id}','App\Http\Controllers\InventoriesController@historydestroy')->name('inventories.history.destroy');
 
             //Attendance Route
             Route::get('/Attendance','App\Http\Controllers\AttendancesController@index')->name('Attendance');

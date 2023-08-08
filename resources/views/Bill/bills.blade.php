@@ -27,7 +27,7 @@
                 $string = preg_replace('/[^0-9\.]/', '', $latest->bill_no);
                 $nextInvoiceNumber = '#' . str_pad($string + 1, 6, '0', STR_PAD_LEFT);
             }
-            
+
         @endphp
 
         <div class="card">
@@ -77,7 +77,7 @@
                                 <select class="form-control" id="patient_id" name="patient_id" required>
                                     <option selected disabled>Choose One</option>
                                     @foreach (App\Models\Patients::get() as $patient)
-                                        <option value="{{ $patient->user_id }}">{{ $patient->users->name }} >>
+                                        <option value="{{ $patient->id }}">{{ $patient->name }} >>
                                             {{ $patient->patient_id }}</option>
                                     @endforeach
                                 </select>
@@ -246,6 +246,9 @@
             // console.log(labtest_id);
             let n = ($('#items tr').length - 0) + 1;
             let n1 = ($('#items1 tr').length - 0) + 1;
+            var routeurl = "{{ route('labtest.edit', ':labtest_id') }}";
+            routeurl = routeurl.replace(':labtest_id', labtest_id);
+
             // console.log(n);
             if ($(".item-in-cart").toArray().map(el => el.getAttribute("data-id")).includes(labtest_id)) {
                 Swal.fire({
@@ -257,7 +260,7 @@
                     timer: 1800
                 });
             } else {
-                $.get("/labtest/edit/" + labtest_id, function(data) {
+                $.get(routeurl, function(data) {
                     var tr = $('#items').append(`<tr class="item-in-cart" data-id="${labtest_id}">
                         <td>${n}<input type="hidden"  value="${data.id}" class="id" name="id[]" id="id"/><input type="hidden"  value="${data.department}" class="department" name="department[]" id="department"/></td>
                         <td>${data.cat_name} <input type="hidden" value="${data.cat_name}" class="form-control cat_name border-0 bg-white" id="cat_name" name="cat_name[]" readonly></td>
