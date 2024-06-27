@@ -83,7 +83,7 @@
         </div>
 
 
-    </div> <!-- container -->
+    </div>
 
 
     {{-- Employees Add Models Start --}}
@@ -238,8 +238,8 @@
                         </div>
                     </form>
                 </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
+            </div>
+        </div>
     </div>
     {{-- Employees Add Models End --}}
 
@@ -348,7 +348,6 @@
                 dataType: "json",
                 url: url,
                 method: 'get',
-                \
                 data: {
                     "id": id,
                     "status": catstatus,

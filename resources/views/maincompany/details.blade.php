@@ -69,7 +69,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
-                    <form class="forms-sample" id="lab_infoForm" enctype="multipart/form-data">
+                    <form class="forms-sample labinfo_update" method="post" id="lab_infoForm" enctype="multipart/form-data">
                         @csrf
 
                         {{-- <ul class="alert alert-warning d-none" id="save_errorList"></ul> --}}
@@ -121,7 +121,7 @@
 
                         <div class="text-center pb-2">
                             <button type="button" class="btn btn-secondary"
-                                onclick="Custombox.modal.close()";>Close</button>
+                                data-dismiss="modal">Close</button>
                             <input type="submit" class="btn btn-success" name="submit" id="submit"
                                 value="Submit" />
                         </div>
@@ -161,29 +161,21 @@
             });
         });
 
-        $('#lab_infoForm').submit(function(e) {
+        $('#lab_infoForm').on('submit', function(e) {
             e.preventDefault();
-
-            let id = $('#id').val();
-            let lab_name = $('#lab_name').val();
-            let lab_phone = $('#lab_phone').val();
-            let lab_email = $('#lab_email').val();
-            let lab_address = $('#lab_address').val();
-            let lab_image = $('#lab_image').val();
-            let _token = $('input[name=_token]').val();
-
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var formData = new FormData(this);
             $.ajax({
-                type: "PUT",
+                type: "POST",
                 url: "{{ route('labdetails.update') }}",
-                data: {
-                    id: id,
-                    lab_name: lab_name,
-                    lab_phone: lab_phone,
-                    lab_email: lab_email,
-                    lab_address: lab_address,
-                    lab_image: lab_image,
-                    _token: _token,
-                },
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
                 dataType: "json",
                 success: function(response) {
 
