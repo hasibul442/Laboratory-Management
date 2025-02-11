@@ -24,7 +24,7 @@ Route::middleware(['auth:sanctum', 'verified'])
             Route::post('/labdetails/add', 'App\Http\Controllers\DashboardController@store')->name('labdetails.add');
             Route::get('/labdetails/show', 'App\Http\Controllers\DashboardController@details')->name('labdetails.show');
             Route::get('/labdetails/edit/{id}', 'App\Http\Controllers\MainCompanysController@edit')->name('labdetails.edit');
-            Route::PUT('/labdetails/update', 'App\Http\Controllers\MainCompanysController@update')->name('labdetails.update');
+            Route::post('/labdetails/update', 'App\Http\Controllers\MainCompanysController@update')->name('labdetails.update');
 
             // Users Route
             Route::get('user', 'App\Http\Controllers\UserController@index')->name('user');
