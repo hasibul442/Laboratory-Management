@@ -118,9 +118,6 @@ class BillsController extends Controller
      */
     public function store(Request $request)
     {
-
-
-        // $billcount = Bills::get()->count();
         $bills = new Bills;
         $bills->bill_no = $request->bill_no;
         $bills->patient_id = $request->patient_id;
@@ -155,7 +152,7 @@ class BillsController extends Controller
 
         $payments = new Payments;
         $payments->type = 'Income';
-        $payments->account_head = $bills->bill_no.'/'.$bills->users->name;
+        $payments->account_head = $bills->bill_no.'/'. optional($bills->users)->name;
         $payments->amount = $request->pay;
         $payments->date = date('y-m-d');
         $payments->employee_name = Auth::user()->name;
